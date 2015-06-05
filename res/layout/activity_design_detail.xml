@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/design_detail_cloth_background_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/design_detail_cloth_style_iv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitCenter" />
+
+    <!-- android:src="@drawable/design_source_cloth"   android:background="@drawable/design_view_border" -->
+
+    <RelativeLayout
+        android:id="@+id/design_detail_cloth_border_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+        <com.chuangmeng.fashiondiy.view.svg.SvgImageView
+            android:id="@+id/design_detail_design_template_cssiv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:scaleType="fitXY" />
+    </RelativeLayout>
+    
+     <LinearLayout
+        android:id="@+id/design_bottom_operate_font_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/design_bottom_operate_text_style_hide_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/design_bottom_pull_selected"
+            android:scaleType="fitCenter" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/design_layout_bg"
+            android:orientation="vertical" >
+            
+            <RelativeLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                >
+                <Button 
+                    android:id="@+id/design_model_operate_text_for_left_bt"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/design_model_operate_textforleft_selected"/>
+                <Button 
+                    android:id="@+id/design_model_operate_text_for_center_bt"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_toRightOf="@id/design_model_operate_text_for_left_bt"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/design_model_operate_textforcenter_selected"/>
+                <Button 
+                    android:id="@+id/design_model_operate_text_for_right_bt"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_toRightOf="@id/design_model_operate_text_for_center_bt"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/design_model_operate_textforright_selected"/>
+                <Button 
+                    android:id="@+id/design_model_operate_add_text_bt"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="5dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/design_model_operate_add_text_selected"/>
+            </RelativeLayout>
+
+            <com.chuangmeng.fashiondiy.view.HorizontalListView
+                android:id="@+id/design_model_operate_text_style_listview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" >
+            </com.chuangmeng.fashiondiy.view.HorizontalListView>
+            
+             <com.chuangmeng.fashiondiy.view.HorizontalListView
+                android:id="@+id/design_model_operate_text_color_listview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" >
+            </com.chuangmeng.fashiondiy.view.HorizontalListView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 轮播image -->
+    <declare-styleable name="CarouselImageViewPager">
+        <attr name="dotsViewHeight" format="dimension" />
+        <attr name="dotsSpacing" format="dimension" />
+        <attr name="dotsFocusImage" format="reference" />
+        <attr name="dotsBlurImage" format="reference" />
+        <attr name="android:scaleType" />
+        <attr name="android:gravity" />
+        <attr name="dotsBackground" format="reference|color" />
+        <attr name="dotsBgAlpha" format="float" />
+        <attr name="changeInterval" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="CustomShapeImageView">
+        <attr name="shape" format="integer">
+            <enum name="circle" value="1" />
+            <enum name="rectangle" value="2" />
+            <enum name="svg" value="3" />
+        </attr>
+        <attr name="svg_raw_resource" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="FlipViewController">
+        <attr name="orientation" format="enum">
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
+        </attr>
+        <attr name="animationBitmapFormat" format="enum">
+            <enum name="ARGB_8888" value="0" />
+            <enum name="ARGB_4444" value="1" />
+            <enum name="RGB_565" value="2" />
+        </attr>
+    </declare-styleable>
+    
+    <!-- 带导航点的viewFlow -->
+    <declare-styleable name="ViewFlow">
+        <attr name="sidebuffer" format="integer" />
+    </declare-styleable>
+    
+    <declare-styleable name="CircleFlowIndicator">
+        <attr name="activeColor" format="color" />
+        <attr name="inactiveColor" format="color" />
+        <attr name="radius" format="dimension" />
+        <attr name="spacing" format="dimension" />
+        <attr name="centered" format="boolean" />
+        <attr name="fadeOut" format="integer" />
+        <attr name="inactiveType">
+            <flag name="stroke" value="0" />
+            <flag name="fill" value="1" />
+        </attr>
+        <attr name="activeType">
+            <flag name="stroke" value="0" />
+            <flag name="fill" value="1" />
+        </attr>
+        <attr name="snap" format="boolean" />
+    </declare-styleable>
+    
+
+</resources>

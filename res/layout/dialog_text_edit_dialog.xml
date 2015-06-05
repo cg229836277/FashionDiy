@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ef3294"
+            android:orientation="horizontal">
+            <Button 
+                android:id="@+id/dialog_design_layout_delete_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="删除"
+                />
+            <Button 
+                android:id="@+id/dialog_design_layout_ok_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="确定"/>
+        </RelativeLayout>
+        <EditText 
+            android:id="@+id/dialog_design_layout_edit_et"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="全民DIY"
+           android:gravity="top"/>
+    </LinearLayout>
+
+</LinearLayout>

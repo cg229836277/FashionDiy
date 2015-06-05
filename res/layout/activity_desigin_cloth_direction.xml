@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:id="@+id/design_cloth_child_title"
+    android:weightSum="1" >
+
+    <ImageView
+        android:id="@+id/design_title_forward_iv"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.5"
+        android:scaleType="fitXY"
+        android:src="@drawable/design_choose_forward_normal" />
+
+    <ImageView
+        android:id="@+id/design_title_backward_iv"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="1dp"
+        android:layout_weight="0.5"
+        android:scaleType="fitXY"
+        android:src="@drawable/design_choose_back_normal" />
+
+</LinearLayout>

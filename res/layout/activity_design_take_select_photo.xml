@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="bottom"
+    android:id="@+id/design_take_select_photo_rl"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp" >
+    
+	<ImageView android:id="@+id/design_take_photo_iv"
+	    android:layout_width="0dp"
+	    android:layout_weight="1"
+	    android:layout_height="match_parent"
+	    android:background="@drawable/design_take_photo_selected"/>
+	
+	<ImageView android:id="@+id/design_select_local_photo_iv"
+	   android:layout_width="0dp"
+	    android:layout_weight="1"
+	    android:layout_height="match_parent"
+	    android:layout_below="@+id/design_take_photo_iv"
+	    android:background="@drawable/design_select_local_photo_selected"/>
+</LinearLayout>

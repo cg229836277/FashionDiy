@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="30dp" >
+
+    <!-- android:src="@drawable/design_white_normal" -->
+    <ImageView
+        android:id="@+id/design_cloth_white_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitCenter"
+         />
+
+    <!-- android:src="@drawable/design_black_normal" -->
+    <ImageView
+        android:id="@+id/design_cloth_black_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/design_cloth_white_iv"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitCenter"
+         />
+
+    <!-- android:src="@drawable/design_red_normal" -->
+    <ImageView
+        android:id="@+id/design_cloth_red_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/design_cloth_black_iv"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitCenter"
+         />
+
+    <!-- android:src="@drawable/design_yellow_normal" -->
+    <ImageView
+        android:id="@+id/design_cloth_yellow_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/design_cloth_red_iv"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitCenter"
+         />
+
+    <!-- android:src="@drawable/design_green_normal" -->
+    <ImageView
+        android:id="@+id/design_cloth_green_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/design_cloth_yellow_iv"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitCenter"
+         />
+
+    <!-- android:src="@drawable/design_blue_normal" -->
+    <ImageView
+        android:id="@+id/design_cloth_blue_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/design_cloth_green_iv"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitCenter"
+         />
+
+</RelativeLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/display_cloth_background"
+    android:visibility="invisible"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/display_cloth_image"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scaleType="fitCenter" />
+
+    <CheckBox
+        android:id="@+id/choose_state_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="8dp"
+		style="@style/CustomCheckboxTheme"/>
+
+</LinearLayout>

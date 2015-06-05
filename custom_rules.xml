@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    name="android_rules"
+    default="release" >
+
+    <property
+        name="generated.dir"
+        value=".apt_generated" />
+
+    <property
+        name="generated.absolute.dir"
+        location="${generated.dir}" />
+
+    <property
+        name="java.compilerargs"
+        value="-s &apos;${generated.absolute.dir}&apos;" />
+
+    <target name="-pre-compile" >
+
+        <mkdir dir="${generated.absolute.dir}" />
+    </target>
+ <!-- Compiles this project's .java files into .class files. -->
+
+    <target
+        name="-compile"
+        depends="-pre-build, -build-setup, -code-gen, -pre-compile" >
+
+        <do-only-if-manifest-hasCode elseText="hasCode = false. Skipping..." >
+
+            <!-- merge the project's own classpath and the tested project's classpath -->
+
+            <path id="project.javac.classpath" >
+
+                <fileset
+                    dir="compile_libs"
+                    includes="*.jar" />
+
+                <path refid="project.all.jars.path" />
+
+                <path refid="tested.project.classpath" />
+
+                <path path="${java.compiler.classpath}" />
+            </path>
+
+            <javac
+                bootclasspathref="project.target.class.path"
+                classpathref="project.javac.classpath"
+                debug="true"
+                destdir="${out.classes.absolute.dir}"
+                encoding="${java.encoding}"
+                extdirs=""
+                fork="${need.javac.fork}"
+                includeantruntime="false"
+                source="${java.source}"
+                target="${java.target}"
+                verbose="${verbose}" >
+
+                <src path="${source.absolute.dir}" />
+
+                <src path="${gen.absolute.dir}" />
+
+                <compilerarg line="${java.compilerargs}" />
+            </javac>
+
+            <!-- if the project is instrumented, intrument the classes -->
+
+            <if condition="${build.is.instrumented}" >
+
+                <then>
+
+                    <echo level="info" >
+Instrumenting classes from ${out.absolute.dir}/classes...
+
+   
+
+
+
+
+
+
+
+
+                        <!-- build the filter to remove R, Manifest, BuildConfig -->
+
+                        <getemmafilter
+                            appPackage="${project.app.package}"
+                            filterOut="emma.default.filter"
+                            libraryPackagesRefId="project.library.packages" />
+
+                        <!--
+                         define where the .em file is going. This may have been
+                         setup already if this is a library
+
+ 
+ 
+
+
+
+
+
+
+
+                        -->
+
+                        <property
+                            name="emma.coverage.absolute.file"
+                            location="${out.absolute.dir}/coverage.em" />
+
+                        <!-- It only instruments class files, not any external libs -->
+
+                        <emma enabled="true" >
+
+                            <instr
+                                instrpath="${out.absolute.dir}/classes"
+                                metadatafile="${emma.coverage.absolute.file}"
+                                mode="overwrite"
+                                outdir="${out.absolute.dir}/classes"
+                                verbosity="${verbosity}" >
+
+                                <filter excludes="${emma.default.filter}" />
+
+                                <filter value="${emma.filter}" />
+                            </instr>
+                        </emma>
+                    </echo>
+                </then>
+            </if>
+
+            <!-- if the project is a library then we generate a jar file -->
+
+            <if condition="${project.is.library}" >
+
+                <then>
+
+                    <echo level="info" >
+Creating library output jar file...
+
+  
+ 
+
+
+
+
+
+
+
+
+
+
+                    </echo>
+
+                    <property
+                        name="out.library.jar.file"
+                        location="${out.absolute.dir}/classes.jar" />
+
+                    <if>
+
+                        <condition>
+
+                            <length
+                                length="0"
+                                string="${android.package.excludes}"
+                                trim="true"
+                                when="greater" />
+                        </condition>
+
+                        <then>
+
+                            <echo level="info" >
+Custom jar packaging exclusion: ${android.package.excludes}
+
+  
+ 
+
+
+
+
+
+
+
+
+                            </echo>
+                        </then>
+                    </if>
+
+                    <propertybyreplace
+                        name="project.app.package.path"
+                        input="${project.app.package}"
+                        replace="."
+                        with="/" />
+
+                    <jar destfile="${out.library.jar.file}" >
+
+                        <fileset
+                            dir="${out.classes.absolute.dir}"
+                            excludes="${project.app.package.path}/R.class ${project.app.package.path}/R$*.class ${project.app.package.path}/BuildConfig.class"
+                            includes="**/*.class" />
+
+                        <fileset
+                            dir="${source.absolute.dir}"
+                            excludes="**/*.java ${android.package.excludes}" />
+                    </jar>
+                </then>
+            </if>
+        </do-only-if-manifest-hasCode>
+    </target>
+
+</project>

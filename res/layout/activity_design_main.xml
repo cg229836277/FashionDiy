@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/design_title_include"
+        layout="@layout/activity_design_title" />
+    
+    <include 
+        android:id="@+id/design_title_couple_include"
+        layout="@layout/activity_design_couple_title"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#ffffff"
+        android:layout_weight="1" >
+
+        <com.chuangmeng.fashiondiy.view.NOScrollViewPager
+            android:id="@+id/design_cloth_detail_viewpager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/design_main_background_chuck"
+            android:focusable="false" >
+        </com.chuangmeng.fashiondiy.view.NOScrollViewPager>
+
+        <include
+            layout="@layout/activity_design_model_operate"
+            android:visibility="gone" />
+
+        <!-- <include layout="@layout/activity_design_cloth_color" /> -->
+
+        <include
+            layout="@layout/activity_design_take_select_photo"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/design_bottom_detail_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/design_bottom_background"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/design_bottom_model_iv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/design_model_selected"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/design_bottom_camera_iv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/design_camera_selected"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/design_bottom_word_iv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/design_word_selected"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/design_bottom_pattern_iv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/design_pattern_selected"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/design_bottom_background_iv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/design_style_selected"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+</LinearLayout>

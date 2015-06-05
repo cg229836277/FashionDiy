@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/preview_title_temp_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ffffff" >
+
+    <RelativeLayout
+        android:id="@+id/title_operate_rl"
+        android:layout_width="fill_parent"
+        android:background="@drawable/design_top_background"
+        android:layout_height="48dp" >
+
+        <ImageView
+            android:id="@+id/preview_title_back_iv"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/design_back_selected"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="预览"
+            android:textColor="@color/color_white"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/preview_title_share_iv"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/preview_bottom_share_selected"
+            android:scaleType="fitCenter" />
+    </RelativeLayout>
+    
+    <include android:id="@+id/design_cloth_direction_rl"
+        layout="@layout/activity_desigin_cloth_direction"/>
+    
+    <include android:id="@+id/design_couple_cloth_direction_rl"
+        layout="@layout/activity_design_couple_cloth_direction"
+        android:visibility="gone"/>
+
+</LinearLayout>
