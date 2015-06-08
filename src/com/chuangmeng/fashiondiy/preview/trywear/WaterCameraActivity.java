@@ -13,6 +13,7 @@ import org.androidannotations.annotations.ViewById;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PixelFormat;
@@ -146,9 +147,9 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 		new AsyncTask<Void, Void, Bitmap>() {
 
 			@Override
-			protected Bitmap doInBackground(Void... arg0) {
+			protected Bitmap doInBackground(Void... arg0) {				
 				// 根据surfaceview的宽和高为标准获取到bitmap，作为照片的尺寸
-				Bitmap cameraBitmap = BitmapUtil.getBitmap(WaterCameraActivity.this , data, (int) surfaceW, (int) surfaceH);
+				Bitmap cameraBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 				Matrix matrix = new Matrix();
 
 				int height = cameraBitmap.getWidth();
