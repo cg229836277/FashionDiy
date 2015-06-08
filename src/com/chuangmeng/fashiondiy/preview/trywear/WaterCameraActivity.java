@@ -90,8 +90,8 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 		if(isSave){
 			if (camera != null) {
 				camera.takePicture(null, null, new MyPictureCallback());
-//				PlayMusic(R.raw.take_picture);
-				sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+				//PlayMusic(R.raw.take_picture);
+				//sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
 				isSave = false;
 			}
 		}
