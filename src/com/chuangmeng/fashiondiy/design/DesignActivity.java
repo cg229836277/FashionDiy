@@ -974,13 +974,13 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 			if (operateFlag.equals(Constant.CHANGE_CLOTH_STYLE)) {
 				if(isDesignCoupleCloth()){
 					if(isChooseFemale){
-						femalePositiveFragment.setClothStyleOrColor(chooseClothPositiveStyle[arg2]);
-						femaleNegativeFragment.setClothStyleOrColor(chooseClothNegativeStyle[arg2]);
+						femalePositiveFragment.setClothStyleOrColor(chooseClothPositiveStyle[arg2] , arg2);
+						femaleNegativeFragment.setClothStyleOrColor(chooseClothNegativeStyle[arg2] , arg2);
 					}else{					
-						setMaleClothStyle(chooseClothPositiveStyle[arg2], chooseClothNegativeStyle[arg2]);
+						setMaleClothStyle(chooseClothPositiveStyle[arg2], chooseClothNegativeStyle[arg2] , arg2);
 					}
 				}else{
-					setMaleClothStyle(chooseClothPositiveStyle[arg2], chooseClothNegativeStyle[arg2]);
+					setMaleClothStyle(chooseClothPositiveStyle[arg2], chooseClothNegativeStyle[arg2] , arg2);
 				}
 			} else if (operateFlag.equals(Constant.ADD_ICON_ON_CLOTH)) {
 				if(isDesignCoupleCloth()){
@@ -1015,17 +1015,6 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	}
 	
 	/**
-	 * 设置男士衣服的样式
-	 * 
-	 * @author Administrator
-	 * @date 2014-12-19 下午4:24:01
-	 */
-	public void setMaleClothStyle(int positiveStyleId , int negativeStyleId){
-		positiveFragment.setClothStyleOrColor(positiveStyleId);
-		negativeFragment.setClothStyleOrColor(negativeStyleId);
-	}
-	
-	/**
 	 * 在男士衣服上面添加图案
 	 * 
 	 * @author Administrator
@@ -1038,6 +1027,11 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 		} else {
 			positiveFragment.addIconOnCloth(BitmapFactory.decodeResource(getResources(), iconSourceId));
 		}
+	}
+	
+	public void setMaleClothStyle(int positiveStyleId , int negativeStyleId, int selectPos){
+		positiveFragment.setClothStyleOrColor(positiveStyleId,selectPos);
+		negativeFragment.setClothStyleOrColor(negativeStyleId,selectPos);
 	}
 	
 	/**

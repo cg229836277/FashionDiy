@@ -192,9 +192,16 @@ public class NegativeDesignFragment extends Fragment {
 	 * @author chengang
 	 * @date 2014-11-6 下午3:49:15
 	 */
-	public void setClothStyleOrColor(int drawable) {
+	public void setClothStyleOrColor(int drawable , int selectPos) {
+		if(selectPos <= 5){
+			clothNegativeView.setPaintingRegion(1, true);
+		}if(selectPos>5 && selectPos <= 11){
+			clothNegativeView.setPaintingRegion(2, true);
+		}else{
+			clothNegativeView.setPaintingRegion(3, true);
+		}
 		clothNegativeView.setDesignClothStyle(drawable);
-//		clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);
+		clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);
 	}
 
 	public Bitmap getBitmapNegativeView() {

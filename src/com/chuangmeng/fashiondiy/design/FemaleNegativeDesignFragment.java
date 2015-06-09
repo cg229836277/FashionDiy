@@ -187,7 +187,15 @@ public class FemaleNegativeDesignFragment extends Fragment {
 	 * @author chengang
 	 * @date 2014-11-6 下午3:49:15
 	 */
-	public void setClothStyleOrColor(int drawable) {
+	public void setClothStyleOrColor(int drawable , int selectPos) {
+		if(selectPos <= 5){
+			clothNegativeView.setPaintingRegion(1, false);
+		}if(selectPos>5 && selectPos <= 11){
+			clothNegativeView.setPaintingRegion(2, false);
+		}else{
+			clothNegativeView.setPaintingRegion(3, false);
+		}
+
 		clothNegativeView.setDesignClothStyle(drawable);
 		clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);
 	}

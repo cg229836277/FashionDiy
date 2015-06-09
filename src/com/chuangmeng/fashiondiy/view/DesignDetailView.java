@@ -106,26 +106,7 @@ public class DesignDetailView extends RelativeLayout {
 		
 		toastDialog = new MyToastDialog(context);
 
-		DisplayMetrics screenSize = FashionDiyApplication.getApplicationInstance().getScreenSize();
-
-		ViewGroup.LayoutParams designDetailRl = design_detail_cloth_border_rl.getLayoutParams();
-		// 添加图案和文字的边界长度是屏幕的三分之一
-		int clothBorderHeight = (int) (screenSize.heightPixels / 3);
-		// 添加图案和文字的边界宽度是屏幕的五分之二
-		int clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
-
-		// RelativeLayout.LayoutParams params = new
-		// RelativeLayout.LayoutParams(clothBorderWidth, clothBorderHeight);
-		// design_detail_design_template_cssiv.setLayoutParams(params);
-
-		borderWidth = clothBorderWidth;
-		borderHeight = clothBorderHeight;
-		// borderWidth = screenSize.widthPixels;
-		// borderHeight = screenSize.heightPixels;
-
-		designDetailRl.height = clothBorderHeight;
-		designDetailRl.width = clothBorderWidth;
-		design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
+		setPaintingRegion(1, true);
 	}
 
 	/**
@@ -251,6 +232,92 @@ public class DesignDetailView extends RelativeLayout {
 	public void setDesignClothBorderBackground(String photoPath) {
 		design_detail_design_template_cssiv.setVisibility(View.VISIBLE);
 		BitmapUtil.loadLocalImage(getContext(), design_detail_design_template_cssiv, photoPath);
+	}
+	
+	/**
+	 * @Title: setPaintingRegion
+	 * @Description: TODO 设置绘画区域大小
+	 * @author hechuang
+	 * @date 2015-6-9
+	 * @param @param mode 1T恤绘画区域 2长袖绘画区域 3卫衣绘画区域
+	 * @param @param boyOrGirl boy = true girl = false
+	 * @return void 返回类型
+	 */
+	public void setPaintingRegion(int mode, boolean boyOrGirl) {
+		DisplayMetrics screenSize = FashionDiyApplication
+				.getApplicationInstance().getScreenSize();
+		ViewGroup.LayoutParams designDetailRl = design_detail_cloth_border_rl
+				.getLayoutParams();
+		int clothBorderHeight = (int) (screenSize.heightPixels / 3);
+		int clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+		switch (mode) {
+		case 1:
+			if (boyOrGirl) {
+				// 添加图案和文字的边界长度是屏幕的二分之一
+				clothBorderHeight = (int) (screenSize.heightPixels / 2);
+				// 添加图案和文字的边界宽度是屏幕的五分之二
+				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+			} else {
+				// 添加图案和文字的边界长度是屏幕的三分之一
+				clothBorderHeight = (int) (screenSize.heightPixels / 2);
+				// 添加图案和文字的边界宽度是屏幕的五分之二
+				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+			}
+			borderWidth = clothBorderWidth;
+			borderHeight = clothBorderHeight;
+			designDetailRl.height = clothBorderHeight;
+			designDetailRl.width = clothBorderWidth;
+			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
+			break;
+		case 2:
+			if (boyOrGirl) {
+				// 添加图案和文字的边界长度是屏幕的三分之一
+				clothBorderHeight = (int) (screenSize.heightPixels * 2 / 5);
+				// 添加图案和文字的边界宽度是屏幕的五分之二
+				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+			} else {
+				// 添加图案和文字的边界长度是屏幕的三分之一
+				clothBorderHeight = (int) (screenSize.heightPixels / 3);
+				// 添加图案和文字的边界宽度是屏幕的五分之二
+				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+			}
+			borderWidth = clothBorderWidth;
+			borderHeight = clothBorderHeight;
+			designDetailRl.height = clothBorderHeight;
+			designDetailRl.width = clothBorderWidth;
+			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
+			break;
+		case 3:
+			if (boyOrGirl) {
+				// 添加图案和文字的边界长度是屏幕的三分之一
+				clothBorderHeight = (int) (screenSize.heightPixels / 3);
+				// 添加图案和文字的边界宽度是屏幕的五分之二
+				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+			} else {
+				// 添加图案和文字的边界长度是屏幕的三分之一
+				clothBorderHeight = (int) (screenSize.heightPixels / 3);
+				// 添加图案和文字的边界宽度是屏幕的五分之二
+				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+			}
+			borderWidth = clothBorderWidth;
+			borderHeight = clothBorderHeight;
+			designDetailRl.height = clothBorderHeight;
+			designDetailRl.width = clothBorderWidth;
+			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
+			break;
+
+		default:
+			// 添加图案和文字的边界长度是屏幕的三分之一
+			clothBorderHeight = (int) (screenSize.heightPixels / 3);
+			// 添加图案和文字的边界宽度是屏幕的五分之二
+			clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+			borderWidth = clothBorderWidth;
+			borderHeight = clothBorderHeight;
+			designDetailRl.height = clothBorderHeight;
+			designDetailRl.width = clothBorderWidth;
+			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
+			break;
+		}
 	}
 
 	/**

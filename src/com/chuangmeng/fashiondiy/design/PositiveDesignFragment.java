@@ -181,7 +181,14 @@ public class PositiveDesignFragment extends Fragment {
 	 * @author chengang
 	 * @date 2014-11-6 下午3:49:15
 	 */
-	public void setClothStyleOrColor(int drawable) {
+	public void setClothStyleOrColor(int drawable , int selectPos) {
+		if(selectPos <= 5){
+			clothPositiveView.setPaintingRegion(1, true);
+		}if(selectPos>5 && selectPos <= 11){
+			clothPositiveView.setPaintingRegion(2, true);
+		}else{
+			clothPositiveView.setPaintingRegion(3, true);
+		}
 		clothPositiveView.setDesignClothStyle(drawable);
 	}
 
