@@ -114,9 +114,16 @@ public class BitmapUtil {
 		}
 	}
 	
+	public static void loadPhotoPath(Context context ,SvgImageView view , String localPath){
+		if(!StringUtil.isEmpty(localPath)){
+			Drawable drawable = BitmapDrawable.createFromPath(localPath);
+			view.setImageDrawable(drawable);
+		}
+	}
+	
 	public static void loadLocalImage(Context context ,SvgImageView view , String localPath){
 		if(!StringUtil.isEmpty(localPath)){
-			Picasso.with(context).load(new File(localPath)).into(view);
+			Picasso.with(context).load(new File(localPath)).into	(view);
 		}
 	}
 	

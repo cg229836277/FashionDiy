@@ -231,7 +231,7 @@ public class DesignDetailView extends RelativeLayout {
 	
 	public void setDesignClothBorderBackground(String photoPath) {
 		design_detail_design_template_cssiv.setVisibility(View.VISIBLE);
-		BitmapUtil.loadLocalImage(getContext(), design_detail_design_template_cssiv, photoPath);
+		BitmapUtil.loadPhotoPath(getContext(), design_detail_design_template_cssiv, photoPath);
 	}
 	
 	/**
