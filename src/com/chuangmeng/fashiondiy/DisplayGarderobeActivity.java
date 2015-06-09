@@ -38,6 +38,7 @@ import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity_;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.IsListNotNull;
+import com.chuangmeng.fashiondiy.util.ShareAppUtil;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.chuangmeng.fashiondiy.view.flip.FlipViewController;
 import com.squareup.picasso.Picasso;
@@ -64,6 +65,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	private CheckBox actiity_garderobe_select_all_cb;// 衣服选择全选按钮
 	private LinearLayout titleLayout;// 标题
 	private ImageView titlebackImageView;
+	private ImageView titleShareImageView;
 	private ImageView tryWearImageView;
 	private TextView displayPageCountText;
 	private boolean mAllCheck = false;
@@ -71,9 +73,11 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	private boolean isTryWear = false;
 	
 	final int bitmapOffset = (int)(20 * screenMetric.density);
-	final int resWidth = screenMetric.widthPixels / 2 - bitmapOffset;
+	final int resWidth = (screenMetric.widthPixels / 3)*2 - bitmapOffset;
 	final int resHeight = screenMetric.heightPixels / 2 - bitmapOffset;
 	private ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
+	private ArrayList<String> manyImgPathArray = new ArrayList<String>();
+	private ShareAppUtil shareAppUtil;
 	
 	private final String fileDir = Environment.getExternalStorageDirectory() + File.separator + "fashion" + File.separator + "cloth";
 
@@ -84,6 +88,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		setContentView(R.layout.activity_display_garderobe);
 		initView();
 		bindEventForView();
+		shareAppUtil = new ShareAppUtil(DisplayGarderobeActivity.this);
 
 		File filesDir = new File(fileDir);
 		if (filesDir != null) {
@@ -108,6 +113,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	private void initView() {
 		clothContainerView = (RelativeLayout) findViewById(R.id.activity_garderobe_container);
 		titlebackImageView = (ImageView) findViewById(R.id.design_couple_back_iv);
+		titleShareImageView = (ImageView) findViewById(R.id.activity_garderobe_title_share_iv);
 		tryWearImageView = (ImageView)findViewById(R.id.display_try_wear_view);
 		displayPageCountText = (TextView)findViewById(R.id.diaplay_page_count);
 		activity_garderobe_edit_rl = (RelativeLayout) findViewById(R.id.activity_garderobe_edit_rl);
@@ -154,6 +160,18 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 				backImageClicked();
 			}
 		});
+		
+		titleShareImageView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(manyImgPathArray.size() <= 0){
+					toastDialog.show("请先选择图片！");
+				}else{
+					shareAppUtil.shareAppForManyImage(manyImgPathArray);
+				}
+			}
+		});
 
 		/**
 		 * 试穿按钮
@@ -192,6 +210,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 					clothAdapter.notifyDataSetChanged();
 					
 					if(IsListNotNull.isListNotNull(bitmapArray)){
+						manyImgPathArray.clear();
 						bitmapArray.clear();
 					}
 				}				
@@ -208,6 +227,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	public void selectedAllCloth(){
 		if(IsListNotNull.isListNotNull(files)){
 			if(bitmapArray.size() != 0){//如果在全选之前选择了衣服，要把之前选择的衣服清掉
+				manyImgPathArray.clear();
 				bitmapArray.clear();
 			}
 								
@@ -224,6 +244,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 					
 					for(File currentFile : files){
 						Bitmap currentBitmap = BitmapUtil.getBitmap(DisplayGarderobeActivity.this , currentFile.getAbsolutePath(), resWidth * 2, resHeight * 2);
+						manyImgPathArray.add(currentFile.getAbsolutePath());//把图片路径添加到列表里
 						bitmapArray.add(currentBitmap);
 					}
 					
@@ -351,8 +372,10 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 								}
 								Bitmap currentBitmap = BitmapUtil.getBitmap(DisplayGarderobeActivity.this , (String)currentCheckBox.getTag(), resWidth * 2, resHeight * 2);
 								if (isCheck) {
+									manyImgPathArray.add((String)currentCheckBox.getTag());
 									bitmapArray.add(currentBitmap);
 								} else {
+									manyImgPathArray.remove((String)currentCheckBox.getTag());
 									bitmapArray.remove(currentBitmap);
 								}
 							}
@@ -412,7 +435,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 
 		// 加载放大之后视图的控件
 		final ImageView expandedImageView = (ImageView) parentView.findViewById(R.id.expanded_image);
-		int resWid = (int)(screenMetric.widthPixels * 0.8);
+		int resWid = (int)(screenMetric.widthPixels * 1);
 		int resHei = (int)(screenMetric.heightPixels * 0.8);
 		BitmapUtil.loadLocalImage(this, expandedImageView, imageResPath, resWid, resHei);
 
@@ -520,6 +543,14 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			bitmapArray.clear();
 		}
 	}
+	public void clearBitmapArrayForImage(){
+		if(IsListNotNull.isListNotNull(manyImgPathArray)){
+			for(String currentBitmap : manyImgPathArray){
+				currentBitmap = null;
+			}
+			manyImgPathArray.clear();
+		}
+	}
 	
 	/**
 	 * 处理内存溢出,出现内存溢出循环解码
@@ -570,7 +601,8 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		
 		clearBitmapArray();
 		bitmapArray = null;
-		
+		clearBitmapArrayForImage();
+		manyImgPathArray = null;
 		super.onDestroy();
 	}
 }

@@ -13,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
-
-import com.chuangmeng.fashiondiy.bean.ClothImageViewSizeBean;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.StringUtil;
@@ -204,18 +202,6 @@ public class NegativeDesignFragment extends Fragment {
 			return BitmapUtil.getBitmapFromView(clothNegativeView);
 		}
 		return null;
-	}
-	
-	/**
-	 * 获取绘画区域的大小以缩放照片
-	 * 
-	 * @author chengang
-	 * @date 2014-11-19 下午4:53:17
-	 * @return
-	 */
-	public ClothImageViewSizeBean getBitmapSize(){
-		ClothImageViewSizeBean currentSize = clothNegativeView.getBorderSize();
-        return (currentSize == null) ? null : currentSize;
 	}
 	
 	public void hideControlView(){

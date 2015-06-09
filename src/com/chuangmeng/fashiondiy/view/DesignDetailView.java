@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
-import com.chuangmeng.fashiondiy.bean.ClothImageViewSizeBean;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.StringUtil;
@@ -193,16 +192,6 @@ public class DesignDetailView extends RelativeLayout {
 				setTextColor(Constant.designTextColor[position]);
 			}
 		});
-	}
-
-	public ClothImageViewSizeBean getBorderSize() {
-		if (borderWidth != 0 && borderHeight != 0) {
-			ClothImageViewSizeBean sizeBean = new ClothImageViewSizeBean();
-			sizeBean.setWidth(borderWidth);
-			sizeBean.setHeight(borderHeight);
-			return sizeBean;
-		}
-		return null;
 	}
 
 	/**

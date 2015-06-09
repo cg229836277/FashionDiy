@@ -35,11 +35,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
-import com.chuangmeng.fashiondiy.bean.ClothImageViewSizeBean;
 import com.chuangmeng.fashiondiy.preview.PreViewActivity_;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
@@ -784,21 +782,8 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 			if (uri == null) {
 				return;
 			}
-			//Bitmap localPhotoBitmap = loadUtils.getBitmap(getContentResolver().openInputStream(uri), getMatrixSize().width, getMatrixSize().height);
 			setDesignPictureOnCloth(uri , null);
 			break;
-		}
-	}
-
-	public ClothImageViewSizeBean getMatrixSize() {
-		if (positiveFragment == null || negativeFragment == null) {
-			initFragmentData();
-		}
-
-		if (isBack) {
-			return negativeFragment.getBitmapSize();
-		} else {
-			return positiveFragment.getBitmapSize();
 		}
 	}
 
