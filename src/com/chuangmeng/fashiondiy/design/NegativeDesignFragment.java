@@ -195,7 +195,7 @@ public class NegativeDesignFragment extends Fragment {
 	*/ 
 	public void initPaintingRegion() {
 		MLog.d("clothMode:"+clothMode);
-		clothNegativeView.setPaintingRegion(clothMode, false);
+		clothNegativeView.setPaintingRegion(clothMode, true);
 	}
 
 	/**
@@ -215,6 +215,7 @@ public class NegativeDesignFragment extends Fragment {
 			clothMode = 3;
 			clothNegativeView.setPaintingRegion(clothMode, true);
 		}
+		MLog.d("seleteClothMode"+clothMode);
 		clothNegativeView.setDesignClothStyle(drawable);
 		clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);
 	}

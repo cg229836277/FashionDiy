@@ -185,7 +185,7 @@ public class PositiveDesignFragment extends Fragment {
 	*/ 
 	public void initPaintingRegion() {
 		MLog.d("clothMode:"+clothMode);
-		clothPositiveView.setPaintingRegion(clothMode, false);
+		clothPositiveView.setPaintingRegion(clothMode, true);
 	}
 	
 	/**
@@ -205,6 +205,7 @@ public class PositiveDesignFragment extends Fragment {
 			clothMode = 3;
 			clothPositiveView.setPaintingRegion(clothMode, true);
 		}
+		MLog.d("seleteClothMode"+clothMode);
 		clothPositiveView.setDesignClothStyle(drawable);
 	}
 

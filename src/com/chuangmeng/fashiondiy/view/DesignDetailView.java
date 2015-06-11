@@ -246,7 +246,9 @@ public class DesignDetailView extends RelativeLayout {
 	public void setPaintingRegion(int mode, boolean boyOrGirl) {
 		DisplayMetrics screenSize = FashionDiyApplication
 				.getApplicationInstance().getScreenSize();
-		ViewGroup.LayoutParams designDetailRl = design_detail_cloth_border_rl
+//		ViewGroup.LayoutParams designDetailRl = design_detail_cloth_border_rl
+//				.getLayoutParams();
+		RelativeLayout.LayoutParams designDetailRl = (LayoutParams)design_detail_cloth_border_rl
 				.getLayoutParams();
 		int clothBorderHeight = (int) (screenSize.heightPixels / 3);
 		int clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
@@ -254,12 +256,12 @@ public class DesignDetailView extends RelativeLayout {
 		case 1:
 			if (boyOrGirl) {
 				// 添加图案和文字的边界长度是屏幕的二分之一
-				clothBorderHeight = (int) (screenSize.heightPixels* 2 / 5);
+				clothBorderHeight = (int) (screenSize.heightPixels* 3 / 7);
 				// 添加图案和文字的边界宽度是屏幕的五分之二
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
 			} else {
 				// 添加图案和文字的边界长度是屏幕的三分之一
-				clothBorderHeight = (int) (screenSize.heightPixels / 3);
+				clothBorderHeight = (int) (screenSize.heightPixels * 2 / 5);
 				// 添加图案和文字的边界宽度是屏幕的五分之二
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
 			}
@@ -267,6 +269,7 @@ public class DesignDetailView extends RelativeLayout {
 			borderHeight = clothBorderHeight;
 			designDetailRl.height = clothBorderHeight;
 			designDetailRl.width = clothBorderWidth;
+			designDetailRl.setMargins(0, 0, 0, 150);
 			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
 			break;
 		case 2:
@@ -285,6 +288,7 @@ public class DesignDetailView extends RelativeLayout {
 			borderHeight = clothBorderHeight;
 			designDetailRl.height = clothBorderHeight;
 			designDetailRl.width = clothBorderWidth;
+			designDetailRl.setMargins(0, 0, 0, 150);
 			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
 			break;
 		case 3:
@@ -303,6 +307,7 @@ public class DesignDetailView extends RelativeLayout {
 			borderHeight = clothBorderHeight;
 			designDetailRl.height = clothBorderHeight;
 			designDetailRl.width = clothBorderWidth;
+			designDetailRl.setMargins(0, 0, 0, 120);
 			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
 			break;
 

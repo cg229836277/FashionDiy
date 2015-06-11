@@ -17,7 +17,8 @@
         android:id="@+id/design_detail_cloth_border_rl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" >
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" >
 
         <com.chuangmeng.fashiondiy.view.svg.SvgImageView
             android:id="@+id/design_detail_design_template_cssiv"
