@@ -2,6 +2,7 @@ package com.chuangmeng.fashiondiy.design;
 
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
+import com.chuangmeng.fashiondiy.util.MLog;
 import com.chuangmeng.fashiondiy.view.DesignDetailView;
 import android.support.v4.app.Fragment;
 import android.graphics.Bitmap;
@@ -13,17 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
- /**
- * @Title：FashionDIY
- * @Description：
- * @date 2014-12-17 下午2:45:13
- * @author Administrator
- * @version 1.0
- */
-
+/**
+* @ClassName: FemalePositiveDesignFragment
+* @Description: TODO  女前fragment
+* @author hechuang
+* @date 2015-6-11 上午9:51:08
+*
+*/             
 public class FemalePositiveDesignFragment extends Fragment {
 
 	private DesignDetailView clothPositiveView;
+	private int clothMode = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -173,6 +174,19 @@ public class FemalePositiveDesignFragment extends Fragment {
 	}
 	
 	/**
+	* @Title: initPaintingRegion
+	* @Description: TODO 初始化绘画区域
+	* @author hechuang 
+	* @date 2015-6-10
+	* @param @param boyOrGirl    设定文件
+	* @return void    返回类型
+	*/ 
+	public void initPaintingRegion() {
+		MLog.d("clothMode:"+clothMode);
+		clothPositiveView.setPaintingRegion(clothMode, false);
+	}
+	
+	/**
 	 * 更改衣服的款式或者颜色
 	 * 
 	 * @author chengang
@@ -180,11 +194,14 @@ public class FemalePositiveDesignFragment extends Fragment {
 	 */
 	public void setClothStyleOrColor(int drawable , int selectPos) {
 		if(selectPos <= 5){
-			clothPositiveView.setPaintingRegion(1, false);
+			clothMode = 1;
+			clothPositiveView.setPaintingRegion(clothMode, false);
 		}if(selectPos>5 && selectPos <= 11){
-			clothPositiveView.setPaintingRegion(2, false);
+			clothMode = 2;
+			clothPositiveView.setPaintingRegion(clothMode, false);
 		}else{
-			clothPositiveView.setPaintingRegion(3, false);
+			clothMode = 3;
+			clothPositiveView.setPaintingRegion(clothMode, false);
 		}
 		clothPositiveView.setDesignClothStyle(drawable);
 	}

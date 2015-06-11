@@ -41,6 +41,7 @@ import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.preview.PreViewActivity_;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
+import com.chuangmeng.fashiondiy.util.MLog;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.chuangmeng.fashiondiy.view.DesignDetailPagerAdapter;
 import com.chuangmeng.fashiondiy.view.HorizontalListView;
@@ -175,7 +176,7 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 		initFragmentData();
 		setOperateViewHeight();
 
-		initClothStyle();
+		initClothStyle();  
 
 		String designFlag = null;
 		if(isDesignCoupleCloth()){
@@ -447,32 +448,6 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	}
 	
 	/**
-	 * 情侣页的男士按钮点击
-	 * 
-	 * @author Administrator
-	 * @date 2014-12-18 下午4:21:00
-	 */
-	@Click
-	public void design_couple_title_male_front_iv(){
-		isBack = false;
-		setCoupleTitleSexBtn(false);		
-		setCurrentDesignView(false);
-	}
-	
-	/**
-	 * 情侣页的女士点击
-	 * 
-	 * @author Administrator
-	 * @date 2014-12-18 下午4:21:39
-	 */
-	@Click
-	public void design_couple_title_male_back_iv(){
-		isBack = true;
-		setCoupleTitleSexBtn(false);		
-		setCurrentDesignView(true);
-	}
-	
-	/**
 	 * 设置情侣页面男女按钮的状态
 	 * 
 	 * @author Administrator
@@ -510,6 +485,34 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	}
 	
 	/**
+	 * 情侣页的男士按钮点击
+	 * 
+	 * @author Administrator
+	 * @date 2014-12-18 下午4:21:00
+	 */
+	@Click
+	public void design_couple_title_male_front_iv(){
+		MLog.d("---------男前");
+		isBack = false;
+		setCoupleTitleSexBtn(false);		
+		setCurrentDesignView(false);
+	}
+	
+	/**
+	 * 情侣页的女士点击
+	 * 
+	 * @author Administrator
+	 * @date 2014-12-18 下午4:21:39
+	 */
+	@Click
+	public void design_couple_title_male_back_iv(){
+		MLog.d("---------男后");
+		isBack = true;
+		setCoupleTitleSexBtn(false);		
+		setCurrentDesignView(true);
+	}
+	
+	/**
 	 * 情侣页的前按钮点击
 	 * 
 	 * @author Administrator
@@ -517,6 +520,7 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	 */
 	@Click
 	public void design_couple_title_female_front_iv(){
+		MLog.d("---------女前");
 		isBack = false;
 		setCoupleTitleSexBtn(true);		
 		setCurrentDesignView(false);
@@ -530,11 +534,11 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	 */
 	@Click
 	public void design_couple_title_female_back_iv(){
+		MLog.d("---------女后");
 		isBack = true;
 		setCoupleTitleSexBtn(true);		
 		setCurrentDesignView(true);
 	}
-	
 	
 	@Click
 	public void design_title_back_iv(){
@@ -678,19 +682,23 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	public void setCurrentDesignView(boolean isBack) {
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
+		initFragmentData();
 		if(isDesignCoupleCloth()){
 			if(isChooseFemale){
 				if(isBack){
 					design_cloth_detail_viewpager.setCurrentItem(3);
+					femaleNegativeFragment.initPaintingRegion();
 				}else{
 					design_cloth_detail_viewpager.setCurrentItem(2);
+					femalePositiveFragment.initPaintingRegion();
 				}
-				
 			}else{
 				if(isBack){
 					design_cloth_detail_viewpager.setCurrentItem(1);
+					negativeFragment.initPaintingRegion();
 				}else{
 					design_cloth_detail_viewpager.setCurrentItem(0);
+					positiveFragment.initPaintingRegion();
 				}			
 			}
 		}else{

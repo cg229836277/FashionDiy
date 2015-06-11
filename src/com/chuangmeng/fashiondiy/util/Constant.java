@@ -20,6 +20,11 @@ public class Constant {
 	public final static String COUPLE_STYLE = "couple";// 首页选择情侣装
 
 	public static String imei = "";
+	
+	/**
+	* @Fields debug : log开关
+	*/ 
+	public static boolean debug = true;
 
 	/**
 	 * QQ平台appid

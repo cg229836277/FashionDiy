@@ -15,21 +15,20 @@ import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
+import com.chuangmeng.fashiondiy.util.MLog;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.chuangmeng.fashiondiy.view.DesignDetailView;
 
 /**
- * 衣服反面 ， 针对情侣设计时，认为是男士反面
- * 
- * @Title：FashionDIY
- * @Description：
- * @date 2014-10-31 下午1:29:22
- * @author chengang
- * @version 1.0
- */
+* @ClassName: NegativeDesignFragment
+* @Description: TODO 衣服反面 ， 针对情侣设计时，认为是男士反面
+* @author hechuang
+* @date 2015-6-11 上午9:57:20
+*/             
 public class NegativeDesignFragment extends Fragment {
 
 	private DesignDetailView clothNegativeView;
+	private int clothMode = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -185,6 +184,19 @@ public class NegativeDesignFragment extends Fragment {
 	public void setDesignTemplateBackground(int thisSVG) {
 		clothNegativeView.setDesignTemplateBackground(thisSVG);
 	}
+	
+	/**
+	* @Title: initPaintingRegion
+	* @Description: TODO 初始化绘画区域
+	* @author hechuang 
+	* @date 2015-6-10
+	* @param @param boyOrGirl    设定文件
+	* @return void    返回类型
+	*/ 
+	public void initPaintingRegion() {
+		MLog.d("clothMode:"+clothMode);
+		clothNegativeView.setPaintingRegion(clothMode, false);
+	}
 
 	/**
 	 * 更改衣服的款式或者颜色
@@ -194,11 +206,14 @@ public class NegativeDesignFragment extends Fragment {
 	 */
 	public void setClothStyleOrColor(int drawable , int selectPos) {
 		if(selectPos <= 5){
-			clothNegativeView.setPaintingRegion(1, true);
+			clothMode = 1;
+			clothNegativeView.setPaintingRegion(clothMode, true);
 		}if(selectPos>5 && selectPos <= 11){
-			clothNegativeView.setPaintingRegion(2, true);
+			clothMode = 2;
+			clothNegativeView.setPaintingRegion(clothMode, true);
 		}else{
-			clothNegativeView.setPaintingRegion(3, true);
+			clothMode = 3;
+			clothNegativeView.setPaintingRegion(clothMode, true);
 		}
 		clothNegativeView.setDesignClothStyle(drawable);
 		clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);

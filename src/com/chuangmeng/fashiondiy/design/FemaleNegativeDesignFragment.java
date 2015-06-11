@@ -1,20 +1,20 @@
 package com.chuangmeng.fashiondiy.design;
 
-import com.chuangmeng.fashiondiy.R;
-import com.chuangmeng.fashiondiy.util.BitmapUtil;
-import com.chuangmeng.fashiondiy.view.DesignDetailView;
-import android.support.v4.app.Fragment;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
 
+import com.chuangmeng.fashiondiy.R;
+import com.chuangmeng.fashiondiy.util.BitmapUtil;
+import com.chuangmeng.fashiondiy.util.MLog;
+import com.chuangmeng.fashiondiy.view.DesignDetailView;
 
- /**
+/**
  * @Title：FashionDIY
  * @Description：
  * @date 2014-12-17 下午2:44:34
@@ -24,6 +24,7 @@ import android.view.View.OnFocusChangeListener;
 
 public class FemaleNegativeDesignFragment extends Fragment {
 	private DesignDetailView clothNegativeView;
+	private int clothMode = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,38 +33,43 @@ public class FemaleNegativeDesignFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		// 衣服反面
-		View negativeView = inflater.inflate(R.layout.fragment_negative_design, null);
-		clothNegativeView = (DesignDetailView) negativeView.findViewById(R.id.design_cloth_detail_negative);
-//		clothNegativeView.setDesignViewBackgroundDrawable(R.drawable.design_main_background);
+		View negativeView = inflater.inflate(R.layout.fragment_negative_design,
+				null);
+		clothNegativeView = (DesignDetailView) negativeView
+				.findViewById(R.id.design_cloth_detail_negative);
+		// clothNegativeView.setDesignViewBackgroundDrawable(R.drawable.design_main_background);
 
 		setDefaultImage();
 		negativeView.setOnFocusChangeListener(new OnFocusChangeListener() {
-			
+
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
-				
+
 				// TODO Auto-generated method stub
-				System.out.println("arg1::"+arg1);
+				System.out.println("arg1::" + arg1);
 			}
 		});
 		return negativeView;
 	}
 
 	public void setDefaultImage() {
-//		String clothStyle = getActivity().getIntent().getStringExtra(HomeActivity_.STYLE);
+		// String clothStyle =
+		// getActivity().getIntent().getStringExtra(HomeActivity_.STYLE);
 		int imageDrawable = R.drawable.design_source_female_ts_cloth_white_negative;
-//		if (!StringUtil.isEmpty(clothStyle)) {
-//			if (clothStyle.equals(DesignActivity_.MALE_STYLE)) {
-//				imageDrawable = R.drawable.design_source_cloth_white_negative;
-//			} else if (clothStyle.equals(DesignActivity_.FEMALE_STYLE)) {
-//				imageDrawable = R.drawable.design_source_female_ts_cloth_white_negative;
-//			} else {
-//
-//			}
-			clothNegativeView.setDefaultClothStyle(imageDrawable);
-//		}
+		// if (!StringUtil.isEmpty(clothStyle)) {
+		// if (clothStyle.equals(DesignActivity_.MALE_STYLE)) {
+		// imageDrawable = R.drawable.design_source_cloth_white_negative;
+		// } else if (clothStyle.equals(DesignActivity_.FEMALE_STYLE)) {
+		// imageDrawable =
+		// R.drawable.design_source_female_ts_cloth_white_negative;
+		// } else {
+		//
+		// }
+		clothNegativeView.setDefaultClothStyle(imageDrawable);
+		// }
 	}
 
 	/**
@@ -89,7 +95,7 @@ public class FemaleNegativeDesignFragment extends Fragment {
 	 * @since CodingExample　Ver 1.1
 	 */
 	public void setTextSize(float size) {
-//		clothNegativeView.setTextSize(size);
+		// clothNegativeView.setTextSize(size);
 	}
 
 	/**
@@ -129,6 +135,7 @@ public class FemaleNegativeDesignFragment extends Fragment {
 	public void hideTextDesignLayout() {
 		clothNegativeView.hideTextDesignLayout();
 	}
+
 	/**
 	 * hideTextDesignLayout:显示文字编辑框
 	 * 
@@ -140,7 +147,7 @@ public class FemaleNegativeDesignFragment extends Fragment {
 	public void showTextDesignLayout() {
 		clothNegativeView.showTextDesignLayout();
 	}
-	
+
 	/**
 	 * 在衣服上添加图案
 	 * 
@@ -162,13 +169,14 @@ public class FemaleNegativeDesignFragment extends Fragment {
 	 */
 	public void addClothDesignPicture(Uri uri) {
 		clothNegativeView.setDesignClothBorderBackground(uri);
-		//BitmapUtil.loadUriImageView(getActivity().getBaseContext(), clothNegativeView, uri);
+		// BitmapUtil.loadUriImageView(getActivity().getBaseContext(),
+		// clothNegativeView, uri);
 	}
-	
+
 	public void addClothDesignPicture(String photoPath) {
 		clothNegativeView.setDesignClothBorderBackground(photoPath);
 	}
-	
+
 	/**
 	 * setDesignTemplateBackground:设置绘画区域模板
 	 * 
@@ -182,18 +190,35 @@ public class FemaleNegativeDesignFragment extends Fragment {
 	}
 
 	/**
+	* @Title: initPaintingRegion
+	* @Description: TODO 初始化绘画区域
+	* @author hechuang 
+	* @date 2015-6-10
+	* @param @param boyOrGirl    设定文件
+	* @return void    返回类型
+	*/ 
+	public void initPaintingRegion() {
+		MLog.d("clothMode:"+clothMode);
+		clothNegativeView.setPaintingRegion(clothMode, false);
+	}
+
+	/**
 	 * 更改衣服的款式或者颜色
 	 * 
 	 * @author chengang
 	 * @date 2014-11-6 下午3:49:15
 	 */
-	public void setClothStyleOrColor(int drawable , int selectPos) {
-		if(selectPos <= 5){
-			clothNegativeView.setPaintingRegion(1, false);
-		}if(selectPos>5 && selectPos <= 11){
-			clothNegativeView.setPaintingRegion(2, false);
-		}else{
-			clothNegativeView.setPaintingRegion(3, false);
+	public void setClothStyleOrColor(int drawable, int selectPos) {
+		if (selectPos <= 5) {
+			clothMode = 1;
+			clothNegativeView.setPaintingRegion(clothMode, false);
+		}
+		if (selectPos > 5 && selectPos <= 11) {
+			clothMode = 2;
+			clothNegativeView.setPaintingRegion(clothMode, false);
+		} else {
+			clothMode = 3;
+			clothNegativeView.setPaintingRegion(clothMode, false);
 		}
 
 		clothNegativeView.setDesignClothStyle(drawable);
@@ -206,9 +231,9 @@ public class FemaleNegativeDesignFragment extends Fragment {
 		}
 		return null;
 	}
-	
-	public void hideControlView(){
-		if(clothNegativeView != null){
+
+	public void hideControlView() {
+		if (clothNegativeView != null) {
 			clothNegativeView.hideControlView();
 		}
 	}
