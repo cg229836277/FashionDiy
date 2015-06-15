@@ -195,16 +195,18 @@ public class PositiveDesignFragment extends Fragment {
 	 * @date 2014-11-6 下午3:49:15
 	 */
 	public void setClothStyleOrColor(int drawable , int selectPos) {
-		if(selectPos <= 5){
-			clothMode = 1;
-			clothPositiveView.setPaintingRegion(clothMode, true);
-		}if(selectPos>5 && selectPos <= 11){
-			clothMode = 2;
-			clothPositiveView.setPaintingRegion(clothMode, true);
-		}else{
-			clothMode = 3;
-			clothPositiveView.setPaintingRegion(clothMode, true);
-		}
+//		MLog.d("selectPos:"+selectPos);
+//		if(selectPos <= 5){
+//			clothMode = 1;
+//			clothPositiveView.setPaintingRegion(clothMode, true);
+//		}if(selectPos>5 && selectPos <= 11){
+//			clothMode = 2;
+//			clothPositiveView.setPaintingRegion(clothMode, true);
+//		}else{
+//			clothMode = 3;
+//			clothPositiveView.setPaintingRegion(clothMode, true);
+//		}
+		clothPositiveView.setPaintingRegion(selectPos, true);
 		MLog.d("seleteClothMode"+clothMode);
 		clothPositiveView.setDesignClothStyle(drawable);
 	}

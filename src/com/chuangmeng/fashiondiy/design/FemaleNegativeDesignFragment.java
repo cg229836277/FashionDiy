@@ -190,15 +190,15 @@ public class FemaleNegativeDesignFragment extends Fragment {
 	}
 
 	/**
-	* @Title: initPaintingRegion
-	* @Description: TODO 初始化绘画区域
-	* @author hechuang 
-	* @date 2015-6-10
-	* @param @param boyOrGirl    设定文件
-	* @return void    返回类型
-	*/ 
+	 * @Title: initPaintingRegion
+	 * @Description: TODO 初始化绘画区域
+	 * @author hechuang
+	 * @date 2015-6-10
+	 * @param @param boyOrGirl 设定文件
+	 * @return void 返回类型
+	 */
 	public void initPaintingRegion() {
-		MLog.d("clothMode:"+clothMode);
+		MLog.d("clothMode:" + clothMode);
 		clothNegativeView.setPaintingRegion(clothMode, false);
 	}
 
@@ -209,20 +209,21 @@ public class FemaleNegativeDesignFragment extends Fragment {
 	 * @date 2014-11-6 下午3:49:15
 	 */
 	public void setClothStyleOrColor(int drawable, int selectPos) {
-		if (selectPos <= 5) {
-			clothMode = 1;
-			clothNegativeView.setPaintingRegion(clothMode, false);
-		}
-		if (selectPos > 5 && selectPos <= 11) {
-			clothMode = 2;
-			clothNegativeView.setPaintingRegion(clothMode, false);
-		} else {
-			clothMode = 3;
-			clothNegativeView.setPaintingRegion(clothMode, false);
-		}
-
+		// MLog.d("selectPos:"+selectPos);
+		// if (selectPos <= 5) {
+		// clothMode = 1;
+		// clothNegativeView.setPaintingRegion(clothMode, false);
+		// }
+		// if (selectPos > 5 && selectPos <= 11) {
+		// clothMode = 2;
+		// clothNegativeView.setPaintingRegion(clothMode, false);
+		// } else {
+		// clothMode = 3;
+		// clothNegativeView.setPaintingRegion(clothMode, false);
+		// }
+		clothNegativeView.setPaintingRegion(selectPos, false);
 		clothNegativeView.setDesignClothStyle(drawable);
-		clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);
+		// clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);
 	}
 
 	public Bitmap getBitmapNegativeView() {

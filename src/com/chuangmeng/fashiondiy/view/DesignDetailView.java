@@ -18,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,6 +26,7 @@ import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
+import com.chuangmeng.fashiondiy.util.MLog;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.chuangmeng.fashiondiy.view.svg.SvgImageView;
 
@@ -80,7 +82,7 @@ public class DesignDetailView extends RelativeLayout {
 	 * @param context
 	 * @param attrs
 	 */
-
+ 
 	public DesignDetailView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
@@ -243,7 +245,8 @@ public class DesignDetailView extends RelativeLayout {
 	 * @param @param boyOrGirl boy = true girl = false
 	 * @return void 返回类型
 	 */
-	public void setPaintingRegion(int mode, boolean boyOrGirl) {
+	public void setPaintingRegion(int selectPos, boolean boyOrGirl) {
+		int mode = 1;
 		DisplayMetrics screenSize = FashionDiyApplication
 				.getApplicationInstance().getScreenSize();
 //		ViewGroup.LayoutParams designDetailRl = design_detail_cloth_border_rl
@@ -252,6 +255,15 @@ public class DesignDetailView extends RelativeLayout {
 				.getLayoutParams();
 		int clothBorderHeight = (int) (screenSize.heightPixels / 3);
 		int clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+		MLog.d("selectPos:"+selectPos);
+		if(selectPos <= 5){
+			mode = 1;
+		}else if(selectPos>5 && selectPos <= 11){
+			mode = 2;
+		}else{ 
+			mode = 3;
+		}
+		MLog.d("mode:"+mode);
 		switch (mode) {
 		case 1:
 			if (boyOrGirl) {

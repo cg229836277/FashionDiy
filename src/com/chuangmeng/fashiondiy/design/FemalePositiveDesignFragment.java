@@ -193,16 +193,18 @@ public class FemalePositiveDesignFragment extends Fragment {
 	 * @date 2014-11-6 下午3:49:15
 	 */
 	public void setClothStyleOrColor(int drawable , int selectPos) {
-		if(selectPos <= 5){
-			clothMode = 1;
-			clothPositiveView.setPaintingRegion(clothMode, false);
-		}if(selectPos>5 && selectPos <= 11){
-			clothMode = 2;
-			clothPositiveView.setPaintingRegion(clothMode, false);
-		}else{
-			clothMode = 3;
-			clothPositiveView.setPaintingRegion(clothMode, false);
-		}
+//		MLog.d("selectPos:"+selectPos);
+//		if(selectPos <= 5){
+//			clothMode = 1;
+//			clothPositiveView.setPaintingRegion(clothMode, false);
+//		}if(selectPos>5 && selectPos <= 11){
+//			clothMode = 2;
+//			clothPositiveView.setPaintingRegion(clothMode, false);
+//		}else{
+//			clothMode = 3;
+//			clothPositiveView.setPaintingRegion(clothMode, false);
+//		}
+		clothPositiveView.setPaintingRegion(selectPos, false);
 		clothPositiveView.setDesignClothStyle(drawable);
 	}
 

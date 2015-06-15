@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.MLog;
@@ -205,19 +207,22 @@ public class NegativeDesignFragment extends Fragment {
 	 * @date 2014-11-6 下午3:49:15
 	 */
 	public void setClothStyleOrColor(int drawable , int selectPos) {
-		if(selectPos <= 5){
-			clothMode = 1;
-			clothNegativeView.setPaintingRegion(clothMode, true);
-		}if(selectPos>5 && selectPos <= 11){
-			clothMode = 2;
-			clothNegativeView.setPaintingRegion(clothMode, true);
-		}else{
-			clothMode = 3;
-			clothNegativeView.setPaintingRegion(clothMode, true);
-		}
+//		MLog.d("selectPos:"+selectPos);
+//		Toast.makeText(getActivity(), "selectPos:"+selectPos, 1).show();
+//		if(selectPos <= 5){
+//			clothMode = 1;
+//			clothNegativeView.setPaintingRegion(clothMode, true);
+//		}if(selectPos>5 && selectPos <= 11){
+//			clothMode = 2;
+//			clothNegativeView.setPaintingRegion(clothMode, true);
+//		}else{
+//			clothMode = 3;
+//			clothNegativeView.setPaintingRegion(clothMode, true);
+//		}
+		clothNegativeView.setPaintingRegion(selectPos, true);
 		MLog.d("seleteClothMode"+clothMode);
 		clothNegativeView.setDesignClothStyle(drawable);
-		clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);
+//		clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);
 	}
 
 	public Bitmap getBitmapNegativeView() {
