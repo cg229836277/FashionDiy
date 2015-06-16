@@ -30,7 +30,7 @@ import com.chuangmeng.fashiondiy.view.DesignDetailView;
 public class NegativeDesignFragment extends Fragment {
 
 	private DesignDetailView clothNegativeView;
-	private int clothMode = 1;
+	private int selectThisPos = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -196,8 +196,7 @@ public class NegativeDesignFragment extends Fragment {
 	* @return void    返回类型
 	*/ 
 	public void initPaintingRegion() {
-		MLog.d("clothMode:"+clothMode);
-		clothNegativeView.setPaintingRegion(clothMode, true);
+		clothNegativeView.setPaintingRegion(selectThisPos, true);
 	}
 
 	/**
@@ -219,8 +218,8 @@ public class NegativeDesignFragment extends Fragment {
 //			clothMode = 3;
 //			clothNegativeView.setPaintingRegion(clothMode, true);
 //		}
+		selectThisPos = selectPos;
 		clothNegativeView.setPaintingRegion(selectPos, true);
-		MLog.d("seleteClothMode"+clothMode);
 		clothNegativeView.setDesignClothStyle(drawable);
 //		clothNegativeView.setDesignTemplateBackground(R.raw.design_model_flag);
 	}

@@ -26,7 +26,7 @@ import com.chuangmeng.fashiondiy.view.DesignDetailView;
 public class PositiveDesignFragment extends Fragment {
 
 	private DesignDetailView clothPositiveView;
-	private int clothMode = 1;
+	private int selectThisPos = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -184,8 +184,7 @@ public class PositiveDesignFragment extends Fragment {
 	* @return void    返回类型
 	*/ 
 	public void initPaintingRegion() {
-		MLog.d("clothMode:"+clothMode);
-		clothPositiveView.setPaintingRegion(clothMode, true);
+		clothPositiveView.setPaintingRegion(selectThisPos, true);
 	}
 	
 	/**
@@ -206,8 +205,8 @@ public class PositiveDesignFragment extends Fragment {
 //			clothMode = 3;
 //			clothPositiveView.setPaintingRegion(clothMode, true);
 //		}
+		selectThisPos = selectPos;
 		clothPositiveView.setPaintingRegion(selectPos, true);
-		MLog.d("seleteClothMode"+clothMode);
 		clothPositiveView.setDesignClothStyle(drawable);
 	}
 

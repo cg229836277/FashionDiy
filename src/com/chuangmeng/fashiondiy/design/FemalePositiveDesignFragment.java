@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 public class FemalePositiveDesignFragment extends Fragment {
 
 	private DesignDetailView clothPositiveView;
-	private int clothMode = 1;
+	private int selectThisPos = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -182,8 +182,7 @@ public class FemalePositiveDesignFragment extends Fragment {
 	* @return void    返回类型
 	*/ 
 	public void initPaintingRegion() {
-		MLog.d("clothMode:"+clothMode);
-		clothPositiveView.setPaintingRegion(clothMode, false);
+		clothPositiveView.setPaintingRegion(selectThisPos, false);
 	}
 	
 	/**
@@ -204,6 +203,7 @@ public class FemalePositiveDesignFragment extends Fragment {
 //			clothMode = 3;
 //			clothPositiveView.setPaintingRegion(clothMode, false);
 //		}
+		selectThisPos = selectPos;
 		clothPositiveView.setPaintingRegion(selectPos, false);
 		clothPositiveView.setDesignClothStyle(drawable);
 	}

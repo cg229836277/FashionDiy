@@ -292,7 +292,7 @@ public class DesignDetailView extends RelativeLayout {
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
 			} else {
 				// 添加图案和文字的边界长度是屏幕的三分之一
-				clothBorderHeight = (int) (screenSize.heightPixels / 3);
+				clothBorderHeight = (int) (screenSize.heightPixels * 2 / 5);
 				// 添加图案和文字的边界宽度是屏幕的五分之二
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
 			}

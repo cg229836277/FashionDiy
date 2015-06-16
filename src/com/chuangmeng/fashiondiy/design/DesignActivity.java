@@ -76,8 +76,11 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	private List<Integer> iconDrawableIdList = new ArrayList<Integer>();
 	private List<Integer> modelDrawableIdList = new ArrayList<Integer>();
 	private List<Integer> styleDrawableIdList = new ArrayList<Integer>();
+	private List<Integer> TempStyleDrawableIdList = new ArrayList<Integer>();
 	
 	private String DESIGN_STYLE = null;
+	
+	private ImageAdapter styleDrawableAdapter;
 	
 	private boolean isChooseFemale = false; //是否是选择了情侣的女装，默认不是
 
@@ -239,8 +242,10 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 				chooseClothPositiveStyle = Constant.femaleAllClothPositive;
 				chooseClothNegativeStyle = Constant.femaleAllClothNegative;
 			} else {//选择情侣装
-				chooseClothPositiveStyle = Constant.allClothPositive;
-				chooseClothNegativeStyle = Constant.allClothNegative;
+				chooseClothPositiveStyle = Constant.maleAllClothPositive;
+				chooseClothNegativeStyle = Constant.maleAllClothNegative;
+//				chooseClothPositiveStyle = Constant.allClothPositive;
+//				chooseClothNegativeStyle = Constant.allClothNegative;
 			}
 
 			initDrawableSource(DESIGN_STYLE);
@@ -285,8 +290,9 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 		}else{
 			if(chooseClothPositiveStyle != null){
 				for (int i = 0; i < chooseClothPositiveStyle.length; i++) {
-					styleDrawableIdList.add(chooseClothPositiveStyle[i]);
+					TempStyleDrawableIdList.add(chooseClothPositiveStyle[i]);
 				}
+				styleDrawableIdList.addAll(TempStyleDrawableIdList);
 			}
 		}
 
@@ -362,7 +368,8 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 		setOperateViewShowOrHide();
 		design_choose_operate_rl.setVisibility(View.VISIBLE);
 		design_bottom_operate_gridview_rl.setVisibility(View.VISIBLE);
-		design_model_operate_gridview.setAdapter(new ImageAdapter(getApplicationContext(), sourceList));
+		styleDrawableAdapter = new ImageAdapter(getApplicationContext(), sourceList);
+		design_model_operate_gridview.setAdapter(styleDrawableAdapter);
 	}
 
 	/**
@@ -485,7 +492,7 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	}
 	
 	/**
-	 * 情侣页的男士按钮点击
+	 * 情侣页的男士正面按钮点击
 	 * 
 	 * @author Administrator
 	 * @date 2014-12-18 下午4:21:00
@@ -493,13 +500,25 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	@Click
 	public void design_couple_title_male_front_iv(){
 		MLog.d("---------男前");
+		TempStyleDrawableIdList.clear();
+		styleDrawableIdList.clear();
+		chooseClothPositiveStyle = Constant.maleAllClothPositive;
+		if(chooseClothPositiveStyle != null){
+			for (int i = 0; i < chooseClothPositiveStyle.length; i++) {
+				TempStyleDrawableIdList.add(chooseClothPositiveStyle[i]);
+			}
+			styleDrawableIdList.addAll(TempStyleDrawableIdList);
+		}
+		if(styleDrawableAdapter != null){
+			styleDrawableAdapter.notifyDataSetChanged();
+		}
 		isBack = false;
 		setCoupleTitleSexBtn(false);		
 		setCurrentDesignView(false);
 	}
 	
 	/**
-	 * 情侣页的女士点击
+	 * 情侣页的男士背面按钮点击
 	 * 
 	 * @author Administrator
 	 * @date 2014-12-18 下午4:21:39
@@ -507,13 +526,14 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	@Click
 	public void design_couple_title_male_back_iv(){
 		MLog.d("---------男后");
+		chooseClothNegativeStyle = Constant.maleAllClothNegative;
 		isBack = true;
 		setCoupleTitleSexBtn(false);		
 		setCurrentDesignView(true);
 	}
 	
 	/**
-	 * 情侣页的前按钮点击
+	 * 情侣页的女士正面按钮点击
 	 * 
 	 * @author Administrator
 	 * @date 2014-12-18 下午4:23:40
@@ -521,13 +541,25 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	@Click
 	public void design_couple_title_female_front_iv(){
 		MLog.d("---------女前");
+		TempStyleDrawableIdList.clear();
+		styleDrawableIdList.clear();
+		chooseClothPositiveStyle = Constant.femaleAllClothPositive;
+		if(chooseClothPositiveStyle != null){
+			for (int i = 0; i < chooseClothPositiveStyle.length; i++) {
+				TempStyleDrawableIdList.add(chooseClothPositiveStyle[i]);
+			}
+			styleDrawableIdList.addAll(TempStyleDrawableIdList);
+		}
+		if(styleDrawableAdapter != null){
+			styleDrawableAdapter.notifyDataSetChanged();
+		}
 		isBack = false;
 		setCoupleTitleSexBtn(true);		
 		setCurrentDesignView(false);
 	}
 	
 	/**
-	 * 情侣页的后按钮点击
+	 * 情侣页的女士背面按钮点击
 	 * 
 	 * @author Administrator
 	 * @date 2014-12-18 下午4:24:36
@@ -535,6 +567,7 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	@Click
 	public void design_couple_title_female_back_iv(){
 		MLog.d("---------女后");
+		chooseClothNegativeStyle = Constant.femaleAllClothNegative;
 		isBack = true;
 		setCoupleTitleSexBtn(true);		
 		setCurrentDesignView(true);
