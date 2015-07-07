@@ -39,7 +39,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/preview_bottom_share_selected"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
     </RelativeLayout>
     
     <include android:id="@+id/design_cloth_direction_rl"

@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ImageView
+    <ImageView android:id="@+id/show_guide_last"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:adjustViewBounds="false"
-        android:background="@drawable/guide_two"
+        android:background="@drawable/guide_five"
         android:focusable="true"
         android:scaleType="centerCrop" />
 

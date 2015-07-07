@@ -25,7 +25,8 @@ public class GuideActivity extends BaseFragmentActivity implements OnPageChangeL
 			R.layout.activity_what_new_one,
 			R.layout.activity_what_new_two,
 			R.layout.activity_what_new_three,
-			R.layout.activity_what_new_four
+			R.layout.activity_what_new_four,
+			R.layout.activity_what_new_five
 	};
 
 	@Override
@@ -83,7 +84,7 @@ public class GuideActivity extends BaseFragmentActivity implements OnPageChangeL
 			container.addView(childView);	
 			
 			if(position == guideViewArray.length - 1){
-				ImageView childImageView = (ImageView)childView.findViewById(R.id.show_guide);
+				ImageView childImageView = (ImageView)childView.findViewById(R.id.show_guide_last);
 				childImageView.setOnTouchListener(new OnTouchListener() {
 					
 					@Override

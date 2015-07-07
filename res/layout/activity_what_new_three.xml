@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:adjustViewBounds="false"
-        android:background="@drawable/welcome_icon"
+        android:background="@drawable/guide_three"
         android:focusable="true"
         android:scaleType="centerCrop" />
 
