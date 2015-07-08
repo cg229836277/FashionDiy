@@ -98,7 +98,7 @@ public class HomeActivity extends BaseFragmentActivity {
 	 */
 	@Click
 	void view_home_about_us_iv() {
-
+		startActivity(new Intent(getApplicationContext(),AboutUsActivity.class));
 	}
 
 	/**

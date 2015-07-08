@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/view_home_background" >
+     <RelativeLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/design_top_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="关于我们"
+            android:textColor="@color/color_white"
+            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/click_back_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/design_back_selected"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+    </RelativeLayout>
+    
+    <TextView 
+        android:id="@+id/about2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@id/ll_title"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textColor="@color/color_333333"
+        android:text="如遇到什么问题请或者"/>
+    <TextView 
+        android:id="@+id/about3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about2"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textColor="@color/color_333333"
+        android:text="资助我们请与我们联系"/>
+    <TextView 
+        android:id="@+id/about4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+         android:layout_below="@id/about3"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textColor="@color/color_333333"
+        android:text="QQ：763121443或"/>
+    <TextView 
+        android:id="@+id/about5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@id/about4"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textColor="@color/color_333333"
+        android:text="邮件763121443@qq.com"/>
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_below="@id/about5"
+        android:layout_marginTop="30dp"
+        android:text="非常感谢！！！"
+        android:textColor="@color/color_333333"/>
+
+</RelativeLayout>

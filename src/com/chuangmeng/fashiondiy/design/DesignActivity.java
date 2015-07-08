@@ -10,6 +10,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -712,6 +713,7 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	 * @date 2014-10-31 下午2:12:28
 	 * @param isBack
 	 */
+	@SuppressLint("NewApi") 
 	public void setCurrentDesignView(boolean isBack) {
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();

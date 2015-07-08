@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chuangmeng.fashiondiy"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.0.1" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="10"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -44,7 +44,7 @@
         <!-- ###################umeng集成################### -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5451016efd98c5d195015869" />
+            android:value="559ce2ef67e58e40cc002277" />
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="Channel ID" />
@@ -120,6 +120,11 @@
         </activity>
 		<activity
             android:name="com.chuangmeng.fashiondiy.preview.buy.ToBuyActivity_"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        		<activity
+            android:name="com.chuangmeng.fashiondiy.AboutUsActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
