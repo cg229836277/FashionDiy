@@ -90,19 +90,4 @@ public class BaseFragmentActivity extends FragmentActivity {
         	FashionDiyApplication.getApplicationInstance().setScreenSize(screenMetric);  
         }
 	}
-	
-	/**
-	 * 点击页面顶部的返回按钮
-	 * 
-	 * @author Administrator
-	 * @date 2014-12-3 上午10:43:43
-	 */
-	public void backImageClicked(){
-		Runtime runtime = Runtime.getRuntime();
-		try {
-			runtime.exec("input keyevent " + KeyEvent.KEYCODE_BACK);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }

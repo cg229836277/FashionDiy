@@ -6,4 +6,7 @@
     -->
     <dimen name="activity_horizontal_margin">128dp</dimen>
 
+    <dimen name="text_size_18">40sp</dimen>
+    <dimen name="title_height_42">56dp</dimen>
+    <dimen name="style_height_36">48dp</dimen>
 </resources>

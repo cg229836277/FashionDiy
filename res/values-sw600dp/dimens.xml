@@ -4,5 +4,8 @@
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw600dp devices (e.g. 7" tablets) here.
     -->
+    <dimen name="text_size_18">27sp</dimen>
+    <dimen name="title_height_42">48dp</dimen>
+    <dimen name="style_height_36">42dp</dimen>
 
 </resources>

@@ -11,14 +11,13 @@
         android:background="@drawable/design_top_background"
         android:orientation="horizontal" >
 
-        <ImageView
+        <Button
             android:id="@+id/design_couple_back_iv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/design_back_selected"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/back_btn_selected" />
 
         <TextView
             android:layout_width="0dp"
@@ -34,10 +33,10 @@
         
         <ImageView
             android:id="@+id/activity_garderobe_title_share_iv"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical"
             android:background="@drawable/preview_bottom_share_selected"
             android:scaleType="fitCenter" />
     </LinearLayout>

@@ -49,5 +49,8 @@
     <dimen name="text_size_50">50sp</dimen>
     <dimen name="text_size_55">55sp</dimen>
     <dimen name="text_size_60">60sp</dimen>
+    
+    <dimen name="title_height_42">42dp</dimen>
+    <dimen name="style_height_36">36dp</dimen>
 
 </resources>

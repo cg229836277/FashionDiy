@@ -7,6 +7,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -64,7 +65,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	private RelativeLayout activity_garderobe_edit_rl;// 衣服选择编辑布局
 	private CheckBox actiity_garderobe_select_all_cb;// 衣服选择全选按钮
 	private LinearLayout titleLayout;// 标题
-	private ImageView titlebackImageView;
+	private Button titlebackImageView;
 	private ImageView titleShareImageView;
 	private ImageView tryWearImageView;
 	private TextView displayPageCountText;
@@ -112,7 +113,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 
 	private void initView() {
 		clothContainerView = (RelativeLayout) findViewById(R.id.activity_garderobe_container);
-		titlebackImageView = (ImageView) findViewById(R.id.design_couple_back_iv);
+		titlebackImageView = (Button) findViewById(R.id.design_couple_back_iv);
 		titleShareImageView = (ImageView) findViewById(R.id.activity_garderobe_title_share_iv);
 		tryWearImageView = (ImageView)findViewById(R.id.display_try_wear_view);
 		displayPageCountText = (TextView)findViewById(R.id.diaplay_page_count);
@@ -157,7 +158,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		titlebackImageView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				backImageClicked();
+				finish();
 			}
 		});
 		
@@ -420,6 +421,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	 * @param thumbView
 	 * @param imageResPath
 	 */
+	@SuppressLint("NewApi") 
 	private void zoomImageFromThumb(final View thumbView, String imageResPath) {
 		// 如果当前有动画正在运行，就迅速结束掉，运行现在这个动画
 		if (mCurrentAnimator != null) {

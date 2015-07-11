@@ -3,4 +3,10 @@
 
     <string name="app_name">全民DIY</string>
     <string name="design_detail_word">此处输入文字</string>
+    <string name="male_front">男前</string>
+    <string name="male_back">男后</string>
+    <string name="female_front">女前</string>
+    <string name="female_back">女后</string>
+    <string name="front">前</string>
+    <string name="back">后</string>
 </resources>

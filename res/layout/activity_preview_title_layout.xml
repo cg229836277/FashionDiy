@@ -10,17 +10,16 @@
         android:id="@+id/title_operate_rl"
         android:layout_width="fill_parent"
         android:background="@drawable/design_top_background"
-        android:layout_height="48dp" >
+        android:layout_height="@dimen/title_height_42" >
 
-        <ImageView
+        <Button
             android:id="@+id/preview_title_back_iv"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/design_back_selected"
-            android:scaleType="fitCenter" />
+            android:layout_margin="10dp"
+            android:background="@drawable/back_btn_selected" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,7 +28,7 @@
             android:gravity="center"
             android:text="预览"
             android:textColor="@color/color_white"
-            android:textSize="24sp" />
+            android:textSize="@dimen/text_size_18" />
 
         <ImageView
             android:id="@+id/preview_title_share_iv"

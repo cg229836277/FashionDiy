@@ -37,6 +37,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.chuangmeng.fashiondiy.R;
@@ -65,7 +66,7 @@ import com.umeng.socialize.weixin.media.WeiXinShareContent;
  * ClassName:PreViewActivity Function: TODO ADD FUNCTION Reason: TODO ADD REASON
  * 
  * @author hch
- * @version  
+ * @version 
  * @since Ver 1.1
  * @Date 2014年10月30日 下午9:33:11
  * 
@@ -83,31 +84,31 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	LinearLayout preview_bottom_detail_ll;
 	
 	@ViewById
-	ImageView preview_title_back_iv;
+	Button preview_title_back_iv;
 
 	//普通预览前
 	@ViewById
-	ImageView design_title_forward_iv;
+	Button design_title_forward_iv;
 
 	//普通预览后
 	@ViewById
-	ImageView design_title_backward_iv;
+	Button design_title_backward_iv;
 	
 	//情侣男预览前
 	@ViewById
-	ImageView design_couple_title_male_front_iv;
+	Button design_couple_title_male_front_iv;
 	
 	//情侣男预览后
 	@ViewById
-	ImageView design_couple_title_male_back_iv;
+	Button design_couple_title_male_back_iv;
 		
 	//情侣女预览前
 	@ViewById
-	ImageView design_couple_title_female_front_iv;
+	Button design_couple_title_female_front_iv;
 	
 	//情侣女预览后
 	@ViewById
-	ImageView design_couple_title_female_back_iv;
+	Button design_couple_title_female_back_iv;
 
 	@ViewById
 	ImageView preview_title_share_iv;
@@ -145,11 +146,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	
 	private File saveFileDir = new File(Constant.DIY_CLOTH_PICTURE_PATH);
 	
-	Integer[] resourceNormal = {R.drawable.design_couple_title_male_front_normal , R.drawable.design_couple_title_male_back_normal,
-			R.drawable.design_couple_title_female_front_normal , R.drawable.design_couple_title_female_back_normal};
-	Integer[] resourcePressed = {R.drawable.design_couple_title_male_front_pressed , R.drawable.design_couple_title_male_back_pressed,
-			R.drawable.design_couple_title_female_front_pressed , R.drawable.design_couple_title_female_back_pressed};
-
 	@AfterViews
 	void initData() {
 		mController = UMServiceFactory.getUMSocialService("com.umeng.share");
@@ -174,8 +170,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 
 		initFragmentAdapter();
 		// adjustViewForScreen();
-		// 初始化两个控件的状态
-		exchangeChooseState(false);
 
 		setPreviewBitmap();				
 	}
@@ -328,33 +322,13 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	
 	@Click
 	public void preview_title_back_iv(){
-		backImageClicked();
+		finish();
 	}
 
 	public void initFragmentAdapter() {
 		preview_cloth_detail_viewpager.setOffscreenPageLimit(4);
 		preview_cloth_detail_viewpager.setAdapter(new PreviewDetailPagerAdapter(getSupportFragmentManager() , designStyle));
 		preview_cloth_detail_viewpager.setOnPageChangeListener(this);
-	}
-	
-	/**
-	 * 处理情侣页面title按钮的状态
-	 * 
-	 * @author Administrator
-	 * @date 2014-12-31 上午11:41:26
-	 * @param position
-	 */
-	public void dealPageScrolled(int position){		
-		ImageView[] coupleImageView = {design_couple_title_male_front_iv , design_couple_title_male_back_iv ,
-				design_couple_title_female_front_iv , design_couple_title_female_back_iv};
-		
-		for(int i = 0 ; i < coupleImageView.length ; i++){
-			if(position == i){
-				coupleImageView[i].setImageResource(resourcePressed[i]);
-			}else{
-				coupleImageView[i].setImageResource(resourceNormal[i]);
-			}
-		}
 	}
 	
 	/**
@@ -374,13 +348,11 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 
 	@Click
 	void design_title_forward_iv() {
-		exchangeChooseState(false);
 		setCurrentDesignView(false);
 	}
 
 	@Click
 	void design_title_backward_iv() {
-		exchangeChooseState(true);
 		setCurrentDesignView(true);
 	}
 	
@@ -412,29 +384,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 		setCurrentDesignView(true);
 	}
 
-	/**
-	 * 对应变换前后按钮的状态
-	 * 
-	 * @author chengang
-	 * @date 2014-10-31 下午2:04:09
-	 */
-	public void exchangeChooseState(boolean isBack) {
-		if(isPreviewCoupleCloth()){
-			design_couple_title_female_front_iv.setImageResource(R.drawable.design_couple_title_female_front_normal);
-			design_couple_title_female_back_iv.setImageResource(R.drawable.design_couple_title_female_back_normal);		
-			design_couple_title_male_front_iv.setImageResource(R.drawable.design_couple_title_male_front_pressed);
-			design_couple_title_male_back_iv.setImageResource(R.drawable.design_couple_title_male_back_normal);
-			return;
-		}
-		
-		if (isBack) {
-			design_title_forward_iv.setImageResource(R.drawable.design_choose_forward_normal);
-			design_title_backward_iv.setImageResource(R.drawable.design_choose_back_pressed);
-		} else {
-			design_title_forward_iv.setImageResource(R.drawable.design_choose_forward_pressed);
-			design_title_backward_iv.setImageResource(R.drawable.design_choose_back_normal);
-		}
-	}
 	
 	public void setCoupleTitleSexBtn(boolean isBack){		
 		if(StringUtil.isEmpty(designStyle)){
@@ -442,26 +391,8 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 		}
 		
 		if(isChooseFemale){
-			if(isBack){
-				design_couple_title_female_back_iv.setImageResource(R.drawable.design_couple_title_female_back_pressed);
-				design_couple_title_female_front_iv.setImageResource(R.drawable.design_couple_title_female_front_normal);
-			}else{
-				design_couple_title_female_front_iv.setImageResource(R.drawable.design_couple_title_female_front_pressed);
-				design_couple_title_female_back_iv.setImageResource(R.drawable.design_couple_title_female_back_normal);
-			}			
-			design_couple_title_male_front_iv.setImageResource(R.drawable.design_couple_title_male_front_normal);
-			design_couple_title_male_back_iv.setImageResource(R.drawable.design_couple_title_male_back_normal);
 			isChooseFemale = true;
 		}else{
-			if(isBack){
-				design_couple_title_male_back_iv.setImageResource(R.drawable.design_couple_title_male_back_pressed);
-				design_couple_title_male_front_iv.setImageResource(R.drawable.design_couple_title_male_front_normal);
-			}else{
-				design_couple_title_male_front_iv.setImageResource(R.drawable.design_couple_title_male_front_pressed);
-				design_couple_title_male_back_iv.setImageResource(R.drawable.design_couple_title_male_back_normal);
-			}			
-			design_couple_title_female_front_iv.setImageResource(R.drawable.design_couple_title_female_front_normal);
-			design_couple_title_female_back_iv.setImageResource(R.drawable.design_couple_title_female_back_normal);
 			isChooseFemale = false;
 		}
 	}
@@ -613,16 +544,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	@Override
 	public void onPageSelected(int arg0) {
 		
-		if(isPreviewCoupleCloth()){
-			dealPageScrolled(arg0);
-			return;
-		}
-		
-		if (arg0 == 0) {
-			exchangeChooseState(false);
-		} else {
-			exchangeChooseState(true);
-		}
 	}
 	
 	public void getFragmentObject(){
@@ -636,14 +557,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
-		
-		if(resourcePressed != null){
-			resourcePressed = null;
-		}
-		
-		if(resourceNormal != null){
-			resourceNormal = null;
-		}		
+		super.onDestroy();		
 	}
 }

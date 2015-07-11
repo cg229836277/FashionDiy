@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"    
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_height="@dimen/style_height_36"
+    android:layout_margin="6dp"
     android:gravity="center"
     android:orientation="horizontal"
     android:weightSum="1" >
 
-    <ImageView
+    <Button
         android:id="@+id/design_couple_title_male_front_iv"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.25"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/design_couple_title_male_front_normal" />
+        style="@style/ButtonTextStyle"
+		android:text="@string/male_front"
+        android:background="@drawable/design_title_left_pressed" />
 
-    <ImageView
+    <Button
         android:id="@+id/design_couple_title_male_back_iv"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
         android:layout_weight="0.25"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/design_couple_title_male_back_normal" />
+        style="@style/ButtonTextStyle"
+		android:text="@string/male_back"
+        android:background="@drawable/design_title_middle_pressed" />
 
-    <ImageView
+    <Button
         android:id="@+id/design_couple_title_female_front_iv"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_marginRight="1dp"
+        android:layout_marginLeft="1dp"
         android:layout_weight="0.25"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/design_couple_title_female_front_normal" />
+        style="@style/ButtonTextStyle"
+		android:text="@string/female_front"
+        android:background="@drawable/design_title_middle_pressed" />
 
-    <ImageView
+    <Button
         android:id="@+id/design_couple_title_female_back_iv"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
+        android:layout_marginLeft="1dp"
         android:layout_weight="0.25"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/design_couple_title_female_back_normal" />
+        style="@style/ButtonTextStyle"
+		android:text="@string/female_back"
+        android:background="@drawable/design_title_right_pressed" />
 
 </LinearLayout>

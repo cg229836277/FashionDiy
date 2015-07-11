@@ -1,7 +1,6 @@
 package com.chuangmeng.fashiondiy.design;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,8 +16,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -32,6 +29,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -114,11 +112,11 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	ImageView design_bottom_background_iv;// 背景
 
 	@ViewById
-	ImageView design_title_preview_iv;// 预览
+	Button design_title_preview_iv;// 预览
 
-	ImageView design_title_forward_iv;// 衣服前面
+	Button design_title_forward_iv;// 衣服前面
 
-	ImageView design_title_backward_iv; // 衣服后面
+	Button design_title_backward_iv; // 衣服后面
 
 	GridView design_model_operate_gridview; // 操作按钮点击之后弹出的操作框
 
@@ -142,23 +140,23 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	HorizontalListView design_model_operate_text_color_listview;// 字体颜色展示list
 	
 	@ViewById
-	ImageView design_couple_title_back_iv;
+	Button design_couple_title_back_iv;
 	
-	ImageView design_title_back_iv;
+	Button design_title_back_iv;
 
-	ImageView design_couple_title_preview_iv;
+	Button design_couple_title_preview_iv;
 	
 	@ViewById
-	ImageView design_couple_title_male_front_iv;
+	Button design_couple_title_male_front_iv;
 	
 	@ViewById
-	ImageView design_couple_title_male_back_iv;
+	Button design_couple_title_male_back_iv;
 	
 	@ViewById
-	ImageView design_couple_title_female_front_iv;
+	Button design_couple_title_female_front_iv;
 	
 	@ViewById
-	ImageView design_couple_title_female_back_iv;
+	Button design_couple_title_female_back_iv;
 
 	private int textSize = 20;
 	
@@ -171,9 +169,6 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 		DESIGN_STYLE = getIntent().getStringExtra(Constant.STYLE);
 		
 		bindEvent();
-
-		// 初始化两个控件的状态
-		exchangeChooseState(isBack);
 		
 		setCoupleTitleSexBtn(isChooseFemale);
 		
@@ -209,18 +204,18 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	}
 	
 	public void bindEvent(){
-		design_title_backward_iv = (ImageView)findViewById(R.id.design_title_backward_iv);
+		design_title_backward_iv = (Button)findViewById(R.id.design_title_backward_iv);
 		design_title_include = (LinearLayout)findViewById(R.id.design_title_include);
-		design_title_back_iv = (ImageView)findViewById(R.id.design_title_back_iv);
+		design_title_back_iv = (Button)findViewById(R.id.design_title_back_iv);
 		design_select_local_photo_iv = (ImageView)findViewById(R.id.design_select_local_photo_iv);
 		design_model_operate_gridview = (GridView)findViewById(R.id.design_model_operate_gridview);
 		design_take_photo_iv = (ImageView)findViewById(R.id.design_take_photo_iv);
 		design_model_operate_text_style_listview = (HorizontalListView)findViewById(R.id.design_model_operate_text_style_listview);
 		design_bottom_background_iv = (ImageView)findViewById(R.id.design_bottom_background_iv);
 		design_choose_operate_rl = (RelativeLayout)findViewById(R.id.design_choose_operate_rl);
-		design_title_forward_iv = (ImageView)findViewById(R.id.design_title_forward_iv);
+		design_title_forward_iv = (Button)findViewById(R.id.design_title_forward_iv);
 		design_bottom_operate_gridview_rl = (RelativeLayout)findViewById(R.id.design_bottom_operate_gridview_rl);
-		design_couple_title_preview_iv  = (ImageView)findViewById(R.id.design_couple_title_preview_iv);
+		design_couple_title_preview_iv  = (Button)findViewById(R.id.design_couple_title_preview_iv);
 	}
 
 	/**
@@ -397,13 +392,11 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	
 	public void clickedForwardBtn(){
 		isBack = false;
-		exchangeChooseState(false);
 		setCurrentDesignView(false);
 	}
 	
 	public void clickedBackWardBtn(){
 		isBack = true;
-		exchangeChooseState(true);
 		setCurrentDesignView(true);
 	}
 
@@ -468,26 +461,8 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 		}
 		
 		if(isFemale){
-			if(isBack){
-				design_couple_title_female_back_iv.setImageResource(R.drawable.design_couple_title_female_back_pressed);
-				design_couple_title_female_front_iv.setImageResource(R.drawable.design_couple_title_female_front_normal);
-			}else{
-				design_couple_title_female_front_iv.setImageResource(R.drawable.design_couple_title_female_front_pressed);
-				design_couple_title_female_back_iv.setImageResource(R.drawable.design_couple_title_female_back_normal);
-			}			
-			design_couple_title_male_front_iv.setImageResource(R.drawable.design_couple_title_male_front_normal);
-			design_couple_title_male_back_iv.setImageResource(R.drawable.design_couple_title_male_back_normal);
 			isChooseFemale = true;
 		}else{
-			if(isBack){
-				design_couple_title_male_back_iv.setImageResource(R.drawable.design_couple_title_male_back_pressed);
-				design_couple_title_male_front_iv.setImageResource(R.drawable.design_couple_title_male_front_normal);
-			}else{
-				design_couple_title_male_front_iv.setImageResource(R.drawable.design_couple_title_male_front_pressed);
-				design_couple_title_male_back_iv.setImageResource(R.drawable.design_couple_title_male_back_normal);
-			}			
-			design_couple_title_female_front_iv.setImageResource(R.drawable.design_couple_title_female_front_normal);
-			design_couple_title_female_back_iv.setImageResource(R.drawable.design_couple_title_female_back_normal);
 			isChooseFemale = false;
 		}
 	}
@@ -576,12 +551,12 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	
 	@Click
 	public void design_title_back_iv(){
-		backImageClicked();
+		finish();
 	}
 	
 	@Click
 	public void design_couple_title_back_iv(){
-		backImageClicked();
+		finish();
 	}
 
 	/**
@@ -681,29 +656,6 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 		intent.putExtra(PreViewActivity_.PREVIEW_COUPLE, DESIGN_STYLE);
 		
 		startActivity(intent);
-	}
-
-	/**
-	 * 对应变换前后按钮的状态 
-	 * 
-	 * @author chengang
-	 * @date 2014-10-31 下午2:04:09
-	 */
-	public void exchangeChooseState(boolean isBack) {
-		if(isDesignCoupleCloth()){
-			design_couple_title_female_front_iv.setImageResource(R.drawable.design_couple_title_female_front_normal);
-			design_couple_title_female_back_iv.setImageResource(R.drawable.design_couple_title_female_back_normal);		
-			design_couple_title_male_front_iv.setImageResource(R.drawable.design_couple_title_male_front_pressed);
-			design_couple_title_male_back_iv.setImageResource(R.drawable.design_couple_title_male_back_normal);
-			return;
-		}
-		if (isBack) {
-			design_title_forward_iv.setImageResource(R.drawable.design_choose_forward_normal);
-			design_title_backward_iv.setImageResource(R.drawable.design_choose_back_pressed);
-		}else{
-			design_title_forward_iv.setImageResource(R.drawable.design_choose_forward_pressed);
-			design_title_backward_iv.setImageResource(R.drawable.design_choose_back_normal);
-		}
 	}
 
 	/**

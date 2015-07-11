@@ -8,20 +8,19 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/title_height_42"
         android:layout_gravity="center_vertical|center_horizontal"
         android:background="@drawable/design_top_background"
         android:orientation="horizontal" >
 
-        <ImageView
+        <Button
             android:id="@+id/design_couple_title_back_iv"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/design_back_selected"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:background="@drawable/back_btn_selected" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,17 +29,16 @@
             android:gravity="center"
             android:text="情侣页"
             android:textColor="@color/color_white"
-            android:textSize="24sp" />
+            android:textSize="@dimen/text_size_18" />
 
-        <ImageView
+        <Button
             android:id="@+id/design_couple_title_preview_iv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/design_preview_selected"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:background="@drawable/preview_btn_selected" />
     </RelativeLayout>
 
     <include layout="@layout/activity_design_couple_cloth_direction" />

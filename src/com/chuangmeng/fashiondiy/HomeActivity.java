@@ -3,13 +3,10 @@ package com.chuangmeng.fashiondiy;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.design.DesignActivity_;
 import com.chuangmeng.fashiondiy.util.Constant;
-import com.chuangmeng.fashiondiy.view.MyToastDialog;
-
 import android.content.Intent;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
-
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;

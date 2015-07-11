@@ -34,6 +34,7 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -49,7 +50,7 @@ import com.chuangmeng.fashiondiy.util.BitmapUtil;
 public class WaterCameraActivity extends BaseFragmentActivity {
 
 	@ViewById
-	ImageView preview_trywear_camear_back_iv;
+	Button preview_trywear_camear_back_iv;
 
 	@ViewById
 	SurfaceView preview_trywear_camear_surfaceView_sv;
@@ -108,7 +109,7 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 
 	@Click
 	public void preview_trywear_camear_back_iv() {
-		backImageClicked();
+		finish();
 	}
 
 	private void init() {

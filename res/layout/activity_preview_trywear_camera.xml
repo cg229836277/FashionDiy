@@ -10,14 +10,13 @@
         android:background="@drawable/design_top_background"
         android:orientation="horizontal" >
 
-        <ImageView
+        <Button
             android:id="@+id/preview_trywear_camear_back_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/design_back_selected"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+         	android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/back_btn_selected"/>
 
         <TextView
             android:layout_width="0dp"
@@ -30,14 +29,6 @@
             android:text="衣服试穿"
             android:textColor="@color/color_white"
             android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:src="@drawable/button_details_gohome"
-            android:visibility="gone" />
     </LinearLayout>
 
     <SurfaceView
@@ -91,7 +82,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/preview_trywear_picture_save"
-            android:text=""
+            android:visibility="gone"
             android:textSize="20sp" />
     </RelativeLayout>
 

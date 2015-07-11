@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_height="@dimen/style_height_36"
+    android:layout_margin="6dp"
     android:gravity="center"
     android:orientation="horizontal"
     android:id="@+id/design_cloth_child_title"
     android:weightSum="1" >
 
-    <ImageView
+    <Button
         android:id="@+id/design_title_forward_iv"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal"
         android:layout_weight="0.5"
-        android:scaleType="fitXY"
-        android:src="@drawable/design_choose_forward_normal" />
+        style="@style/ButtonTextStyle"
+        android:text="@string/front"
+        android:background="@drawable/design_title_left_pressed" />
 
-    <ImageView
+    <Button
         android:id="@+id/design_title_backward_iv"
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="1dp"
+        android:layout_height="fill_parent"
         android:layout_weight="0.5"
-        android:scaleType="fitXY"
-        android:src="@drawable/design_choose_back_normal" />
+        style="@style/ButtonTextStyle"
+        android:text="@string/back"
+        android:background="@drawable/design_title_right_pressed" />
 
 </LinearLayout>

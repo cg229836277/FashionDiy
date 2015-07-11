@@ -21,13 +21,14 @@
             android:text="关于我们"
             android:textColor="@color/color_white"
             android:textSize="16sp" />
-        <ImageView
+        <Button
             android:id="@+id/click_back_iv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/design_back_selected"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back_btn_selected" />
     </RelativeLayout>
     
     <TextView 
