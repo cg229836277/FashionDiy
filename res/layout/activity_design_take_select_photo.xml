@@ -5,16 +5,20 @@
     android:layout_width="fill_parent"
     android:layout_height="50dp" >
     
-	<ImageView android:id="@+id/design_take_photo_iv"
+	<Button android:id="@+id/design_take_photo_iv"
 	    android:layout_width="0dp"
-	    android:layout_weight="1"
+	    android:layout_weight="0.5"
 	    android:layout_height="match_parent"
-	    android:background="@drawable/design_take_photo_selected"/>
+	    android:text="@string/take_photo"
+	    style="@style/ButtonTextStyle"
+	    android:background="@drawable/design_select_picture_bg"/>
 	
-	<ImageView android:id="@+id/design_select_local_photo_iv"
+	<Button android:id="@+id/design_select_local_photo_iv"
 	   android:layout_width="0dp"
-	    android:layout_weight="1"
+	    android:layout_weight="0.5"
 	    android:layout_height="match_parent"
-	    android:layout_below="@+id/design_take_photo_iv"
-	    android:background="@drawable/design_select_local_photo_selected"/>
+	    android:text="@string/photo_sets"
+	    style="@style/ButtonTextStyle"
+	    android:layout_marginLeft="1dp"
+	    android:background="@drawable/design_select_picture_bg"/>
 </LinearLayout>

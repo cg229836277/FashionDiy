@@ -128,9 +128,9 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	@ViewById
 	LinearLayout design_take_select_photo_rl; // 相片选择方式的弹出框的视图父类
 
-	ImageView design_take_photo_iv; // 拍照
+	Button design_take_photo_iv; // 拍照
 
-	ImageView design_select_local_photo_iv; // 本地选取照片
+	Button design_select_local_photo_iv; // 本地选取照片
 
 	RelativeLayout design_bottom_operate_gridview_rl;// 设计元素展示框
 
@@ -207,9 +207,9 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 		design_title_backward_iv = (Button)findViewById(R.id.design_title_backward_iv);
 		design_title_include = (LinearLayout)findViewById(R.id.design_title_include);
 		design_title_back_iv = (Button)findViewById(R.id.design_title_back_iv);
-		design_select_local_photo_iv = (ImageView)findViewById(R.id.design_select_local_photo_iv);
+		design_select_local_photo_iv = (Button)findViewById(R.id.design_select_local_photo_iv);
 		design_model_operate_gridview = (GridView)findViewById(R.id.design_model_operate_gridview);
-		design_take_photo_iv = (ImageView)findViewById(R.id.design_take_photo_iv);
+		design_take_photo_iv = (Button)findViewById(R.id.design_take_photo_iv);
 		design_model_operate_text_style_listview = (HorizontalListView)findViewById(R.id.design_model_operate_text_style_listview);
 		design_bottom_background_iv = (ImageView)findViewById(R.id.design_bottom_background_iv);
 		design_choose_operate_rl = (RelativeLayout)findViewById(R.id.design_choose_operate_rl);
