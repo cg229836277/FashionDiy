@@ -7,5 +7,5 @@
     <dimen name="text_size_18">27sp</dimen>
     <dimen name="title_height_42">48dp</dimen>
     <dimen name="style_height_36">42dp</dimen>
-
+	<dimen name="display_cloth_size_64dp">44dp</dimen>
 </resources>

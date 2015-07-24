@@ -9,4 +9,5 @@
     <dimen name="text_size_18">40sp</dimen>
     <dimen name="title_height_42">56dp</dimen>
     <dimen name="style_height_36">48dp</dimen>
+    <dimen name="display_cloth_size_64dp">64dp</dimen>
 </resources>
