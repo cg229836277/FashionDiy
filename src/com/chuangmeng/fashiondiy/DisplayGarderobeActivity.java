@@ -2,6 +2,7 @@ package com.chuangmeng.fashiondiy;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -38,6 +39,7 @@ import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity_;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
+import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.IsListNotNull;
 import com.chuangmeng.fashiondiy.util.ShareAppUtil;
 import com.chuangmeng.fashiondiy.util.StringUtil;
@@ -55,12 +57,11 @@ import com.squareup.picasso.Picasso;
  */
 
 public class DisplayGarderobeActivity extends BaseFragmentActivity {
-
 	private DisplayClothImageAdapter clothAdapter;
 	private FlipViewController flipView;
 	private int mShortAnimationDuration;
 	private Animator mCurrentAnimator;
-	private List<File> files = new ArrayList<File>();
+	//private List<File> files = new ArrayList<File>();
 	private RelativeLayout clothContainerView;// 衣柜衣服的展示
 	private RelativeLayout activity_garderobe_edit_rl;// 衣服选择编辑布局
 	private CheckBox actiity_garderobe_select_all_cb;// 衣服选择全选按钮
@@ -76,8 +77,9 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	final int bitmapOffset = (int)(20 * screenMetric.density);
 	final int resWidth = (screenMetric.widthPixels / 3)*2 - bitmapOffset;
 	final int resHeight = screenMetric.heightPixels / 2 - bitmapOffset;
-	private ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
-	private ArrayList<String> manyImgPathArray = new ArrayList<String>();
+	//private ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
+	private ArrayList<String> allClothPathArray = new ArrayList<String>();
+	private ArrayList<String> choosedClothPathArray = new ArrayList<String>();
 	private ShareAppUtil shareAppUtil;
 	
 	private final String fileDir = Environment.getExternalStorageDirectory() + File.separator + "fashion" + File.separator + "cloth";
@@ -96,12 +98,12 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			File[] currentFiles = filesDir.listFiles();
 			if (currentFiles != null && currentFiles.length > 0) {
 				for (int i = 0; i < currentFiles.length; i++) {
-					files.add(currentFiles[i]);
+					allClothPathArray.add(currentFiles[i].getAbsolutePath());
 				}
 			}
 		}
 
-		if (files.size() <= 0) {
+		if (allClothPathArray.size() <= 0) {
 			toastDialog.show("您暂时还没有衣服，赶紧去DIY吧！");
 			return;
 		}
@@ -121,14 +123,13 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		actiity_garderobe_select_all_cb = (CheckBox) findViewById(R.id.actiity_garderobe_select_all_cb);
 	}
 
-	public void initGarderobeCloth() {
-		
+	public void initGarderobeCloth() {		
 		int pageSize = 0;
-		if(IsListNotNull.isListNotNull(files)){
-			if(files.size() % 4 != 0){
-				pageSize = files.size() / 4 + 1;
+		if(IsListNotNull.isListNotNull(allClothPathArray)){
+			if(allClothPathArray.size() % 4 != 0){
+				pageSize = allClothPathArray.size() / 4 + 1;
 			}else{
-				pageSize = files.size() / 4;
+				pageSize = allClothPathArray.size() / 4;
 			}
 		}
 
@@ -166,10 +167,8 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				if(manyImgPathArray.size() <= 0){
+				if(allClothPathArray.size() <= 0){
 					toastDialog.show("请先选择图片！");
-				}else{
-					shareAppUtil.shareAppForManyImage(manyImgPathArray);
 				}
 			}
 		});
@@ -181,13 +180,11 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			@Override
 			public void onClick(View arg0) {
 				
-				if(bitmapArray.size() == 0){
+				if(choosedClothPathArray.size() == 0){
 					toastDialog.show("先选择衣服然后再试穿");
 					return;
 				}				
-				
-				FashionDiyApplication.getApplicationInstance().setBitmaps(bitmapArray);
-				
+
 				isTryWear = true;
 								
 				startActivity(new Intent(DisplayGarderobeActivity.this, WaterCameraActivity_.class));
@@ -210,9 +207,8 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 					clothAdapter.setAllCheck(false);
 					clothAdapter.notifyDataSetChanged();
 					
-					if(IsListNotNull.isListNotNull(bitmapArray)){
-						manyImgPathArray.clear();
-						bitmapArray.clear();
+					if(IsListNotNull.isListNotNull(choosedClothPathArray)){
+						choosedClothPathArray.clear();
 					}
 				}				
 			}
@@ -226,40 +222,12 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	 * @date 2015-1-8 下午4:49:00
 	 */
 	public void selectedAllCloth(){
-		if(IsListNotNull.isListNotNull(files)){
-			if(bitmapArray.size() != 0){//如果在全选之前选择了衣服，要把之前选择的衣服清掉
-				manyImgPathArray.clear();
-				bitmapArray.clear();
+		if(IsListNotNull.isListNotNull(allClothPathArray)){
+			if(choosedClothPathArray.size() > 0){
+				choosedClothPathArray.clear();
 			}
-								
-			new AsyncTask<Void , Void, Void>() {
-				
-				@Override
-				protected void onPreExecute() {
-					progressDialog.show();
-					super.onPreExecute();
-				}
-				
-				@Override
-				protected Void doInBackground(Void... params) {
-					
-					for(File currentFile : files){
-						Bitmap currentBitmap = BitmapUtil.getBitmap(DisplayGarderobeActivity.this , currentFile.getAbsolutePath(), resWidth * 2, resHeight * 2);
-						manyImgPathArray.add(currentFile.getAbsolutePath());//把图片路径添加到列表里
-						bitmapArray.add(currentBitmap);
-					}
-					
-					return null;
-				}
-				
-				@Override
-				protected void onPostExecute(Void result) {
-					clothAdapter.notifyDataSetChanged();
-					progressDialog.dismiss();						
-					super.onPostExecute(result);
-				}
-			}.execute();
-		}
+			choosedClothPathArray.addAll(allClothPathArray);
+		}			
 	}
 
 	public class DisplayClothImageAdapter extends BaseAdapter {
@@ -271,6 +239,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		private List<ImageView> imageViews = new ArrayList<ImageView>();
 		private List<LinearLayout> parenntViews = new ArrayList<LinearLayout>();
 		private List<CheckBox> checkBoxs = new ArrayList<CheckBox>();
+		private List<Button> buttons = new ArrayList<Button>();
 
 		public DisplayClothImageAdapter() {
 			inflater = LayoutInflater.from(getApplicationContext());
@@ -278,11 +247,11 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 
 		@Override
 		public int getCount() {
-			if (files != null && files.size() > 0) {
-				if (files.size() % 4 != 0) {
-					return files.size() / 4 + 1;
+			if (!CollectionUtil.isArrayListNull(allClothPathArray)) {
+				if (allClothPathArray.size() % 4 != 0) {
+					return allClothPathArray.size() / 4 + 1;
 				} else {
-					return files.size() / 4;
+					return allClothPathArray.size() / 4;
 				}
 			}
 			return 0;
@@ -331,6 +300,8 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 				imageViews.add((ImageView) currentLayout.findViewById(R.id.display_cloth_image));
 				CheckBox currentCheckBox = (CheckBox)currentLayout.findViewById(R.id.choose_state_checkbox);
 				checkBoxs.add(currentCheckBox);
+				Button deleteClothBtn = (Button)currentLayout.findViewById(R.id.delete_cloth_checkbox);
+				buttons.add(deleteClothBtn);
 				if(mAllCheck){
 					currentCheckBox.setChecked(true);
 				}else{
@@ -341,19 +312,17 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			for (int i = flag; i < (flag + 4); i++) {
 				final ImageView currentImageView = imageViews.get(i % 4);
 				final CheckBox currentCheckBox = checkBoxs.get(i % 4);
-				if (i < files.size()) {
-					File currentFile = files.get(i);
-					if (currentFile != null) {
+				final Button currentButton = buttons.get(i % 4);
+				if (i < allClothPathArray.size()) {
+					String currentFilePath = allClothPathArray.get(i);
+					if (!StringUtil.isEmpty(currentFilePath)) {
 						
 						View parentView = (View)currentImageView.getParent();
 						parentView.setVisibility(View.VISIBLE);
 						
-						String filePath = currentFile.getAbsolutePath();
-						//Picasso.with(getApplicationContext()).load(filePath).into(currentImageView);
-						BitmapUtil.loadLocalImage(DisplayGarderobeActivity.this, currentImageView, filePath, resWidth, resHeight);
-						//Bitmap currentBitmap = BitmapUtil.getBitmap(getApplicationContext(), filePath, resWidth, resHeight);
-						//currentImageView.setImageBitmap(currentBitmap);
-						currentImageView.setTag(filePath);
+						Picasso.with(getApplicationContext()).load(new File(currentFilePath)).resize(resWidth, resHeight).into(currentImageView);
+//						BitmapUtil.loadLocalImage(DisplayGarderobeActivity.this, currentImageView, filePath, resWidth, resHeight);
+						currentImageView.setTag(currentFilePath);
 
 						currentImageView.setOnClickListener(new OnClickListener() {
 
@@ -363,7 +332,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 							}
 						});
 												
-						currentCheckBox.setTag(filePath);
+						currentCheckBox.setTag(currentFilePath);
 						currentCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 							@Override
@@ -371,14 +340,21 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 								if(mAllCheck || isTryWear){
 									return;
 								}
-								Bitmap currentBitmap = BitmapUtil.getBitmap(DisplayGarderobeActivity.this , (String)currentCheckBox.getTag(), resWidth * 2, resHeight * 2);
 								if (isCheck) {
-									manyImgPathArray.add((String)currentCheckBox.getTag());
-									bitmapArray.add(currentBitmap);
+									choosedClothPathArray.add((String)currentCheckBox.getTag());
 								} else {
-									manyImgPathArray.remove((String)currentCheckBox.getTag());
-									bitmapArray.remove(currentBitmap);
+									choosedClothPathArray.remove((String)currentCheckBox.getTag());
 								}
+							}
+						});
+						currentButton.setTag(currentFilePath);
+						currentButton.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								choosedClothPathArray.remove((String)currentButton.getTag());
+								allClothPathArray.remove((String)currentButton.getTag());
+								notifyDataSetChanged();
 							}
 						});
 					}
@@ -536,44 +512,18 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			}
 		});
 	}
-	
+
 	public void clearBitmapArray(){
-		if(IsListNotNull.isListNotNull(bitmapArray)){
-			for(Bitmap currentBitmap : bitmapArray){
-				currentBitmap = null;
-			}
-			bitmapArray.clear();
+		if(IsListNotNull.isListNotNull(choosedClothPathArray)){
+			choosedClothPathArray.clear();
+			choosedClothPathArray = null;
+		}
+		
+		if(IsListNotNull.isListNotNull(allClothPathArray)){
+			allClothPathArray.clear();
+			allClothPathArray = null;
 		}
 	}
-	public void clearBitmapArrayForImage(){
-		if(IsListNotNull.isListNotNull(manyImgPathArray)){
-			for(String currentBitmap : manyImgPathArray){
-				currentBitmap = null;
-			}
-			manyImgPathArray.clear();
-		}
-	}
-	
-	/**
-	 * 处理内存溢出,出现内存溢出循环解码
-	 * 
-	 * @author Administrator
-	 * @date 2015-1-9 下午1:26:38
-	 */
-//	public Bitmap dealWithOOM(String sourcePath , int resWid , int resHei){
-//		
-//		if(StringUtil.isEmpty(sourcePath)){
-//			return null;
-//		}
-//		
-//		Bitmap currentBitmap = null;
-//		try{
-//			currentBitmap = BitmapUtil.getBitmap(sourcePath, resWid, resHei);
-//		}catch(OutOfMemoryError e){
-//			dealWithOOM(sourcePath, resWid, resHei);
-//		}
-//		return currentBitmap;
-//	}
 	
 	@Override
 	protected void onPause() {
@@ -596,15 +546,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 
 	@Override
 	public void onDestroy() {
-		if (files != null && files.size() > 0) {
-			files.clear();
-			files = null;
-		}
-		
 		clearBitmapArray();
-		bitmapArray = null;
-		clearBitmapArrayForImage();
-		manyImgPathArray = null;
 		super.onDestroy();
 	}
 }

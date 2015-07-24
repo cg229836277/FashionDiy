@@ -10,9 +10,9 @@
         android:id="@+id/display_cloth_image"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="2dp"
         android:layout_weight="1"
-        android:scaleType="fitCenter" />
+        android:scaleType="center" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
