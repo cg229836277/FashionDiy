@@ -66,6 +66,9 @@ public class IndexActivity extends BaseFragmentActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		if(splashTimer == null){
+			return;
+		}
 		if (scheduled){
 			splashTimer.cancel();
 		}

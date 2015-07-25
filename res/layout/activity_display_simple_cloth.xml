@@ -17,7 +17,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp" >
+        android:layout_margin="4dp" >
 
         <CheckBox
             android:id="@+id/choose_state_checkbox"

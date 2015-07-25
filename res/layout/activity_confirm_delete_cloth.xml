@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@null"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/show_detail_text"
+        style="@style/ButtonTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:gravity="center"
+        android:text="xldhfglh" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/show_detail_text"
+        android:layout_margin="12dp"
+        android:weightSum="1" >
+
+        <Button
+            android:id="@+id/confrim_delete"
+            style="@style/ButtonTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:layout_marginRight="0.5dp"
+            android:background="@drawable/design_title_middle_pressed"
+            android:text="Confirm" />
+
+        <Button
+            android:id="@+id/quit_delete"
+            style="@style/ButtonTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="0.5dp"
+            android:background="@drawable/design_title_middle_pressed"
+            android:text="Quit" />
+    </LinearLayout>
+
+</RelativeLayout>

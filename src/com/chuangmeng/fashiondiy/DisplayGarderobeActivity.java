@@ -33,6 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
@@ -69,14 +71,15 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	private Button titlebackImageView;
 	private ImageView titleShareImageView;
 	private ImageView tryWearImageView;
+	
 	private TextView displayPageCountText;
 	private boolean mAllCheck = false;
 	
 	private boolean isTryWear = false;
 	
-	final int bitmapOffset = (int)(20 * screenMetric.density);
-	final int resWidth = (screenMetric.widthPixels / 3)*2 - bitmapOffset;
-	final int resHeight = screenMetric.heightPixels / 2 - bitmapOffset;
+	final int bitmapOffset = (int)(30 * screenMetric.density);
+	final int resWidth = (screenMetric.widthPixels / 2) - bitmapOffset;
+	final int resHeight = (screenMetric.heightPixels / 3) - bitmapOffset;
 	//private ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
 	private ArrayList<String> allClothPathArray = new ArrayList<String>();
 	private ArrayList<String> choosedClothPathArray = new ArrayList<String>();
@@ -104,7 +107,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		}
 
 		if (allClothPathArray.size() <= 0) {
-			toastDialog.show("您暂时还没有衣服，赶紧去DIY吧！");
+			Toast.makeText(this, "您暂时还没有衣服，赶紧去DIY吧！" , Toast.LENGTH_LONG).show();
 			return;
 		}
 
@@ -167,8 +170,10 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				if(allClothPathArray.size() <= 0){
-					toastDialog.show("请先选择图片！");
+				if(choosedClothPathArray.size() <= 0){
+					Toast.makeText(DisplayGarderobeActivity.this,"请先选择图片！",Toast.LENGTH_LONG).show();
+				}else{
+					shareAppUtil.shareAppForManyImage(choosedClothPathArray);
 				}
 			}
 		});
@@ -181,7 +186,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			public void onClick(View arg0) {
 				
 				if(choosedClothPathArray.size() == 0){
-					toastDialog.show("先选择衣服然后再试穿");
+					Toast.makeText(DisplayGarderobeActivity.this,"先选择衣服然后再试穿",Toast.LENGTH_LONG).show();
 					return;
 				}				
 
@@ -204,13 +209,12 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 					selectedAllCloth();
 				} else {		
 					mAllCheck = false;
-					clothAdapter.setAllCheck(false);
-					clothAdapter.notifyDataSetChanged();
-					
+					clothAdapter.setAllCheck(false);										
 					if(IsListNotNull.isListNotNull(choosedClothPathArray)){
 						choosedClothPathArray.clear();
 					}
-				}				
+				}	
+				clothAdapter.notifyDataSetChanged();
 			}
 		});
 	}
@@ -352,6 +356,16 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 							
 							@Override
 							public void onClick(View v) {
+								String clothPath = (String)currentButton.getTag();
+								if(!StringUtil.isEmpty(clothPath)){
+									File file = new File(clothPath);
+									if(file.exists()){
+										boolean result = file.delete();
+										if(result){
+											Log.e("Display", "删除成功！");
+										}
+									}
+								}
 								choosedClothPathArray.remove((String)currentButton.getTag());
 								allClothPathArray.remove((String)currentButton.getTag());
 								notifyDataSetChanged();
@@ -413,10 +427,10 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 
 		// 加载放大之后视图的控件
 		final ImageView expandedImageView = (ImageView) parentView.findViewById(R.id.expanded_image);
-		int resWid = (int)(screenMetric.widthPixels * 1);
-		int resHei = (int)(screenMetric.heightPixels * 0.8);
-		BitmapUtil.loadLocalImage(this, expandedImageView, imageResPath, resWid, resHei);
-
+//		int resWid = (int)(screenMetric.widthPixels);
+//		int resHei = (int)(screenMetric.heightPixels * 0.9);
+		//BitmapUtil.loadLocalImage(this, expandedImageView, imageResPath, resWid, resHei);
+		Picasso.with(this).load(new File(imageResPath)).into(expandedImageView);
 		// 开始略缩图的开始边界和放大视图的结束边界
 		final Rect startBounds = new Rect();
 		final Rect finalBounds = new Rect();
