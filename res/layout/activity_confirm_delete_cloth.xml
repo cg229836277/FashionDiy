@@ -1,23 +1,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@null"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/toast" >
 
     <TextView
         android:id="@+id/show_detail_text"
         style="@style/ButtonTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_margin="6dp"
         android:gravity="center"
         android:text="xldhfglh" />
 
     <LinearLayout
+        android:id="@+id/space"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/show_detail_text"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:background="@color/color_blue"
+        android:orientation="horizontal" />
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/show_detail_text"
-        android:layout_margin="12dp"
+        android:layout_below="@+id/space"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="18dp"
         android:weightSum="1" >
 
         <Button
@@ -25,20 +38,20 @@
             style="@style/ButtonTextStyle"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="0.5"
             android:layout_marginRight="0.5dp"
-            android:background="@drawable/design_title_middle_pressed"
-            android:text="Confirm" />
+            android:layout_weight="0.5"
+            android:background="@drawable/btn_background_selected"
+            android:text="确认" />
 
         <Button
             android:id="@+id/quit_delete"
             style="@style/ButtonTextStyle"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="0.5"
             android:layout_marginLeft="0.5dp"
-            android:background="@drawable/design_title_middle_pressed"
-            android:text="Quit" />
+            android:layout_weight="0.5"
+            android:background="@drawable/btn_background_selected"
+            android:text="取消" />
     </LinearLayout>
 
 </RelativeLayout>

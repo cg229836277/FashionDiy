@@ -48,6 +48,8 @@ import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.chuangmeng.fashiondiy.view.flip.FlipViewController;
 import com.squareup.picasso.Picasso;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * 展示衣柜的衣服
  * 
@@ -87,11 +89,16 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	
 	private final String fileDir = Environment.getExternalStorageDirectory() + File.separator + "fashion" + File.separator + "cloth";
 
+	private String currentDeleteCloth = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_display_garderobe);
+		
+		EventBus.getDefault().register(this);
+		
 		initView();
 		bindEventForView();
 		shareAppUtil = new ShareAppUtil(DisplayGarderobeActivity.this);
@@ -134,6 +141,9 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			}else{
 				pageSize = allClothPathArray.size() / 4;
 			}
+		}else{
+			Toast.makeText(this, "您暂时还没有衣服，赶紧去DIY吧！" , Toast.LENGTH_LONG).show();
+			return;
 		}
 
 		titleLayout = (LinearLayout) findViewById(R.id.ll_title);
@@ -358,17 +368,12 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 							public void onClick(View v) {
 								String clothPath = (String)currentButton.getTag();
 								if(!StringUtil.isEmpty(clothPath)){
-									File file = new File(clothPath);
-									if(file.exists()){
-										boolean result = file.delete();
-										if(result){
-											Log.e("Display", "删除成功！");
-										}
-									}
+									currentDeleteCloth = clothPath;	
+									
+									Intent intent = new Intent(DisplayGarderobeActivity.this , ConfirmDialog.class);
+									intent.putExtra(ConfirmDialog.DETAIL_MESSAGE, "确认删除？");
+									startActivity(intent);
 								}
-								choosedClothPathArray.remove((String)currentButton.getTag());
-								allClothPathArray.remove((String)currentButton.getTag());
-								notifyDataSetChanged();
 							}
 						});
 					}
@@ -557,9 +562,29 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			clothAdapter.notifyDataSetChanged();
 		}
 	}
+	
+	public void onEventMainThread(String tag){
+		if(!StringUtil.isEmpty(tag)){
+			
+			if(!StringUtil.isEmpty(currentDeleteCloth)){
+				File file = new File(currentDeleteCloth);
+				if(file.exists()){
+					boolean result = file.delete();
+					if(result){
+						Log.e("Display", "删除成功！");
+						
+						choosedClothPathArray.remove(currentDeleteCloth);
+						allClothPathArray.remove(currentDeleteCloth);
+					}
+				}
+			}						
+			initGarderobeCloth();
+		}
+	}
 
 	@Override
 	public void onDestroy() {
+		EventBus.getDefault().unregister(this);
 		clearBitmapArray();
 		super.onDestroy();
 	}
