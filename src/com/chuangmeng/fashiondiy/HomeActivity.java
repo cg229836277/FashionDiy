@@ -26,6 +26,7 @@ public class HomeActivity extends BaseFragmentActivity {
 
 	@ViewById
 	ImageView view_home_female_iv;
+	
 	@ViewById
 	ImageView view_home_clothespress_iv;
 

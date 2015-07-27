@@ -276,8 +276,7 @@ public class FlipCards {
         lastPosition = orientationVertical ? event.getY() : event.getX();
         return isOnTouchEvent;
       case MotionEvent.ACTION_MOVE:
-        float
-            delta = orientationVertical ? (lastPosition - event.getY()) : (lastPosition - event.getX());
+        float delta = orientationVertical ? (lastPosition - event.getY()) : (lastPosition - event.getX());
 
         if (Math.abs(delta) > controller.getTouchSlop()) {
           setState(STATE_TOUCH);
@@ -311,17 +310,12 @@ public class FlipCards {
           //Bounce the page for the first and the last page
           if (frontCards.getIndex() == maxIndex - 1) { //the last page
             if (accumulatedAngle > frontCards.getIndex() * 180) {
-              accumulatedAngle =
-                  Math.min(accumulatedAngle,
-                           controller.isOverFlipEnabled() ? (frontCards.getIndex() * 180
-                                                             + MAX_TIP_ANGLE)
-                                                          : (frontCards.getIndex() * 180));
+              accumulatedAngle = Math.min(accumulatedAngle,controller.isOverFlipEnabled() ? (frontCards.getIndex() * 180 + MAX_TIP_ANGLE) : (frontCards.getIndex() * 180));
             }
           }
 
           if (accumulatedAngle < 0) {
-            accumulatedAngle =
-                Math.max(accumulatedAngle, controller.isOverFlipEnabled() ? -MAX_TIP_ANGLE : 0);
+            accumulatedAngle = Math.max(accumulatedAngle, controller.isOverFlipEnabled() ? -MAX_TIP_ANGLE : 0);
           }
 
           int anglePageIndex = getPageIndexFromAngle(accumulatedAngle);

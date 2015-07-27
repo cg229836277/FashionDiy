@@ -18,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -91,6 +92,12 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 
 	private String currentDeleteCloth = null;
 	
+	private int currentPage = 0;
+	
+	public final static String DELETE_CLOTH = "delete";
+	public final static String PAGE_FORWARD = "forward";
+	public final static String PAGE_BACKWARD = "back";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -121,6 +128,8 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		clothAdapter = new DisplayClothImageAdapter();
 
 		initGarderobeCloth();
+		
+		setPageCount(0);
 	}
 
 	private void initView() {
@@ -132,20 +141,27 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		activity_garderobe_edit_rl = (RelativeLayout) findViewById(R.id.activity_garderobe_edit_rl);
 		actiity_garderobe_select_all_cb = (CheckBox) findViewById(R.id.actiity_garderobe_select_all_cb);
 	}
+	
+	private void setPageCount(int tempPage){
+		if(displayPageCountText != null){			
+			int pageSize = 0;
+			if(IsListNotNull.isListNotNull(allClothPathArray)){
+				if(allClothPathArray.size() % 4 != 0){
+					pageSize = allClothPathArray.size() / 4 + 1;
+				}else{
+					pageSize = allClothPathArray.size() / 4;
+				}
+				
+				String detail = "第" + (tempPage + 1) + "页" + "(" + "共" + pageSize + "页" + ")";
+				displayPageCountText.setText(detail);
+			}else{
+				Toast.makeText(this, "您暂时没有衣服，赶紧去DIY吧！" , Toast.LENGTH_LONG).show();
+				return;
+			}
+		}
+	}
 
 	public void initGarderobeCloth() {		
-		int pageSize = 0;
-		if(IsListNotNull.isListNotNull(allClothPathArray)){
-			if(allClothPathArray.size() % 4 != 0){
-				pageSize = allClothPathArray.size() / 4 + 1;
-			}else{
-				pageSize = allClothPathArray.size() / 4;
-			}
-		}else{
-			Toast.makeText(this, "您暂时还没有衣服，赶紧去DIY吧！" , Toast.LENGTH_LONG).show();
-			return;
-		}
-
 		titleLayout = (LinearLayout) findViewById(R.id.ll_title);
 
 		titleLayout.measure(0, 0);
@@ -402,6 +418,10 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			if (IsListNotNull.isListNotNull(checkBoxs)) {
 				checkBoxs.clear();
 			}
+			
+			if (IsListNotNull.isListNotNull(buttons)) {
+				buttons.clear();
+			}
 		}
 	}
 
@@ -563,22 +583,57 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	}
 	
 	public void onEventMainThread(String tag){
-		if(!StringUtil.isEmpty(tag)){
-			
-			if(!StringUtil.isEmpty(currentDeleteCloth)){
-				File file = new File(currentDeleteCloth);
-				if(file.exists()){
-					boolean result = file.delete();
-					if(result){
-						Log.e("Display", "删除成功！");
+		if(!StringUtil.isEmpty(tag)){					
+			if(tag.equals(DELETE_CLOTH)){
+				dealwithDeleteCloth();
+				return;
+			}
 						
-						choosedClothPathArray.remove(currentDeleteCloth);
-						allClothPathArray.remove(currentDeleteCloth);
-					}
-				}
-			}						
-			initGarderobeCloth();
+			dealwithPageCount("" + Integer.valueOf(tag), false);
 		}
+	}
+	
+	private void dealwithPageCount(String pageCount , boolean isDelete){
+		if(!CollectionUtil.isArrayListNull(allClothPathArray)){
+			int pageSize = allClothPathArray.size();
+			if(pageSize > 1 && currentPage >= 0){
+				
+				if(isDelete){
+					setPageCount(currentPage);
+					return;
+				}			
+				setPageCount(Integer.parseInt(pageCount));
+			}
+		}
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			if(flipView != null){
+				
+			}
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	private void dealwithDeleteCloth(){
+		if(!StringUtil.isEmpty(currentDeleteCloth)){
+			File file = new File(currentDeleteCloth);
+			if(file.exists()){
+				boolean result = file.delete();
+				if(result){
+					Log.e("Display", "删除成功！");
+					
+					choosedClothPathArray.remove(currentDeleteCloth);
+					allClothPathArray.remove(currentDeleteCloth);
+					
+					dealwithPageCount("" + currentPage, true);
+					
+					clothAdapter.notifyDataSetChanged();					
+				}
+			}
+		}						
 	}
 
 	@Override
