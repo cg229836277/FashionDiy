@@ -153,7 +153,6 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 
 		clothAdapter = new DisplayClothImageAdapter();
 		flipView = new FlipViewController(this, FlipViewController.HORIZONTAL);
-		flipView.setPageCountView(displayPageCountText , pageSize);
 		flipView.setAdapter(clothAdapter);
 		clothContainerView.addView(flipView);
 

@@ -104,7 +104,7 @@
             android:name="com.chuangmeng.fashiondiy.guide.GuideActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>       
+        </activity>
         <activity
             android:name="com.chuangmeng.fashiondiy.preview.PreViewActivity_"
             android:screenOrientation="portrait"
@@ -118,15 +118,20 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
-		<activity
+        <activity
             android:name="com.chuangmeng.fashiondiy.preview.buy.ToBuyActivity_"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
-        		<activity
+        <activity
             android:name="com.chuangmeng.fashiondiy.AboutUsActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.chuangmeng.fashiondiy.ConfirmDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomDialog" >
         </activity>
     </application>
 

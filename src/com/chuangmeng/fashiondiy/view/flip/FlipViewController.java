@@ -104,9 +104,6 @@ public class FlipViewController extends AdapterView<Adapter> {
   private boolean overFlipEnabled = true;
 
   private boolean flipByTouchEnabled = true;
-  
-  private TextView mPageCountView;
-  private int mPageCount = 0;
 
   @ViewDebug.ExportedProperty
   private Bitmap.Config animationBitmapFormat = Bitmap.Config.RGB_565;
@@ -279,13 +276,7 @@ public class FlipViewController extends AdapterView<Adapter> {
   @Override
   public void setAdapter(Adapter adapter) {
     setAdapter(adapter, 0);
-  }
-  
-  public void setPageCountView(TextView pageCountView , int pageCount){
-	  mPageCountView = pageCountView;
-	  mPageCount = pageCount;
-  }
-  
+  } 
 
   public void setAdapter(Adapter adapter, int initialPosition) {
     if (this.adapter != null) {
@@ -380,10 +371,6 @@ public class FlipViewController extends AdapterView<Adapter> {
         }   
         
         renderer.updateTexture(adapterIndex, frontView, backView == null ? -1 : adapterIndex + 1,backView);
-        
-        if(mPageCountView != null){
-        	mPageCountView.setText("第" + (bufferIndex + 1) + "页" + "(" + "共" + mPageCount + "页" + ")");
-        }
     }
   }
 
