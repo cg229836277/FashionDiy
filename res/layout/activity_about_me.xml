@@ -40,27 +40,17 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:textColor="@color/color_333333"
-        android:text="如遇到什么问题请或者"/>
-    <TextView 
-        android:id="@+id/about3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/about2"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:textColor="@color/color_333333"
-        android:text="资助我们请与我们联系"/>
+        android:text="如遇到什么问题请与我们联系"/>
     <TextView 
         android:id="@+id/about4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-         android:layout_below="@id/about3"
-        android:layout_marginTop="30dp"
+         android:layout_below="@id/about2"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:textColor="@color/color_333333"
-        android:text="QQ：763121443或"/>
+        android:text="QQ:763121443\nQQ:229836277"/>
     <TextView 
         android:id="@+id/about5"
         android:layout_width="match_parent"
@@ -70,7 +60,7 @@
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:textColor="@color/color_333333"
-        android:text="邮件763121443@qq.com"/>
+        android:text="或发邮件至邮件:\n763121443@qq.com\n229836277@qq.com"/>
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +68,7 @@
         android:gravity="center"
         android:layout_below="@id/about5"
         android:layout_marginTop="30dp"
-        android:text="非常感谢！！！"
+        android:text="谢谢！"
         android:textColor="@color/color_333333"/>
 
 </RelativeLayout>

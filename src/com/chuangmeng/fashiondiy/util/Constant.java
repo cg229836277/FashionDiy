@@ -82,6 +82,11 @@ public class Constant {
 	 * 完成diy之后作品存放路径
 	 */
 	public static String DIY_CLOTH_PICTURE_PATH = Environment.getExternalStorageDirectory() + File.separator + "fashion/cloth/";
+	
+	/**
+	 * 试穿拍照之后的文件路径
+	 */
+	public static String DIY_TRYWARE_PICTURE_PATH = Environment.getExternalStorageDirectory() + File.separator + "fashion/tryware/";
 
 	public final static String ADD_PICTURE_ON_CLOTH = "1"; // 在衣服上添加图片(拍照和本地获取照片)
 	public final static String ADD_ICON_ON_CLOTH = "2"; // 在衣服上添加图案

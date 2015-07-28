@@ -216,8 +216,9 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 				}				
 
 				isTryWear = true;
-								
-				startActivity(new Intent(DisplayGarderobeActivity.this, WaterCameraActivity_.class));
+				Intent intent = new Intent(DisplayGarderobeActivity.this, WaterCameraActivity_.class);			
+				intent.putStringArrayListExtra(WaterCameraActivity_.CHOOSED_CLOTH_LIST, choosedClothPathArray);
+				startActivity(intent);
 			}
 		});
 
@@ -628,7 +629,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 					choosedClothPathArray.remove(currentDeleteCloth);
 					allClothPathArray.remove(currentDeleteCloth);
 					
-					dealwithPageCount("" + currentPage, true);
+					dealwithPageCount("" + (currentPage - 1), true);
 					
 					clothAdapter.notifyDataSetChanged();					
 				}

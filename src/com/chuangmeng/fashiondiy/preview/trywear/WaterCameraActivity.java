@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.androidannotations.annotations.AfterViews;
@@ -16,8 +17,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.media.MediaPlayer;
@@ -45,6 +48,9 @@ import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
+import com.chuangmeng.fashiondiy.util.CollectionUtil;
+import com.chuangmeng.fashiondiy.util.Constant;
+import com.squareup.picasso.Picasso;
 
 @EActivity(R.layout.activity_preview_trywear_camera)
 public class WaterCameraActivity extends BaseFragmentActivity {
@@ -70,8 +76,8 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 	private Camera camera;
 	private Camera.Parameters parameters = null;
 	private List<View> views = new ArrayList<View>();
-	private ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
-	private final String SAVE_BASE_PATH = Environment.getExternalStorageDirectory() + "/Mydream/";
+	public static final String CHOOSED_CLOTH_LIST = "choosed_data";
+	private ArrayList<String> choosedList = new ArrayList<String>();
 	private int waterType = 0;
 
 	private float surfaceW, surfaceH; // surfaceview的宽和高
@@ -82,7 +88,7 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 
 	@AfterViews
 	void initData() {
-		bitmapList = FashionDiyApplication.getApplicationInstance().getBitmaps();
+		choosedList = getIntent().getStringArrayListExtra(CHOOSED_CLOTH_LIST);
 		init();
 	}
 
@@ -121,11 +127,12 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 		parms.topMargin = (int) (100 * screenMetric.density);
 		// viewPager
 		LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-		if (bitmapList != null) {
-			for (int i = 0; i < bitmapList.size(); i++) {
+		if (!CollectionUtil.isArrayListNull(choosedList)) {
+			for (int i = 0; i < choosedList.size(); i++) {
 				View view = inflater.inflate(R.layout.preview_trywear_water_forward_camera, null);
 				ImageView two_photo = (ImageView) view.findViewById(R.id.two_photo);
-				two_photo.setImageBitmap(bitmapList.get(i));
+//				two_photo.setImageBitmap(bitmapList.get(i));
+				Picasso.with(this).load(new File(choosedList.get(i))).into(two_photo);
 				two_photo.setLayoutParams(parms);
 				views.add(view);
 			}
@@ -145,10 +152,10 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 	}
 
 	public void processBitmapAsync(final byte[] data) {
-		new AsyncTask<Void, Void, Bitmap>() {
+		new AsyncTask<Void, Void, Void>() {
 
 			@Override
-			protected Bitmap doInBackground(Void... arg0) {				
+			protected Void doInBackground(Void... arg0) {				
 				// 根据surfaceview的宽和高为标准获取到bitmap，作为照片的尺寸
 				Bitmap cameraBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 				Matrix matrix = new Matrix();
@@ -161,28 +168,33 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 				cameraBitmap = Bitmap.createBitmap(cameraBitmap, 0, 0, height, width, matrix, true);
 
 				if (cameraBitmap != null) {
-					return cameraBitmap;
+					dealWithPhotos(cameraBitmap);	
 				}
 				return null;
 			}
-
+			
 			@Override
-			protected void onPostExecute(Bitmap result) {
-				super.onPostExecute(result);
-				if (result != null) {
-					// 以时间戳作为文件名
-					String photoName = System.currentTimeMillis() + ".png";
-					String fileName = SAVE_BASE_PATH + photoName;
-
-					File file = new File(SAVE_BASE_PATH);
-					if (!file.exists()) {
-						file.mkdirs();
-					}
-
-					generateImageWithWater(result, BitmapUtil.getBitmapFromView(views.get(waterType)), fileName);
-				}
-			}
+			protected void onPostExecute(Void result) {				
+							
+			};
 		}.execute();
+	}
+	
+	public void dealWithPhotos(Bitmap result){
+		if (result != null) {
+			// 以时间戳作为文件名
+			String photoName = System.currentTimeMillis() + ".png";
+			String fileName = Constant.DIY_TRYWARE_PICTURE_PATH + photoName;
+
+			File file = new File(Constant.DIY_TRYWARE_PICTURE_PATH);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			
+			Bitmap viewBitmap = BitmapUtil.getBitmapFromView(views.get(waterType));
+			//generateImageWithWater(result,viewBitmap, fileName);
+			anotherWayToDraw(result,viewBitmap, fileName);
+		}
 	}
 
 	private class MySurfaceViewCallback implements Callback {
@@ -252,9 +264,9 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 			views = null;
 		}
 
-		if (bitmapList != null && bitmapList.size() > 0) {
-			bitmapList.clear();
-			bitmapList = null;
+		if (!CollectionUtil.isArrayListNull(choosedList)) {
+			choosedList.clear();
+			choosedList = null;
 		}
 
 		FashionDiyApplication.getApplicationInstance().clearBitmapArray();
@@ -334,7 +346,11 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 		Matrix waterMatrix = new Matrix();
 		waterMatrix.postScale(scaleW, scaleH);
 		// 根据照片和预览视图的缩放比例，缩放水印
-		waterBitmap = Bitmap.createBitmap(waterBitmap, 0, 0, portrait_W, portrait_H, waterMatrix, false);
+		try{
+			waterBitmap = Bitmap.createBitmap(waterBitmap, 0, 0, portrait_W, portrait_H, waterMatrix, false);
+		}catch(Exception e){
+			Log.e(CHOOSED_CLOTH_LIST, "出错了");
+		}
 		portrait_W = waterBitmap.getWidth();
 		portrait_H = waterBitmap.getHeight();
 
@@ -357,6 +373,42 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 
 		saveImage(cameraBitmap, fileName);
 	}
+	
+	public void anotherWayToDraw(Bitmap sourceBitmap , Bitmap waterBitmap, String fileName){
+		int sourceWidth = sourceBitmap.getWidth();
+		int sourceHeight = sourceBitmap.getHeight();
+
+		// 水印图片的大小
+		int waterWidth = waterBitmap.getWidth();
+		int waterHeight = waterBitmap.getHeight();
+
+		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG | Paint.FILTER_BITMAP_FLAG);
+
+		// Copy the original bitmap into the new one
+		Canvas c = new Canvas(sourceBitmap);
+		c.drawBitmap(sourceBitmap, 0, 0, paint);
+
+		// Load the watermark
+		float scaleW = sourceWidth / waterWidth;// 宽度缩放比例
+		float scaleH = sourceHeight / waterHeight;// 高度缩放
+
+		// Create the matrix
+		Matrix matrix = new Matrix();
+		matrix.postScale(scaleW, scaleH);
+		// Determine the post-scaled size of the watermark
+		int left = (sourceWidth - waterWidth) / 2;
+		int top = (sourceHeight - waterHeight) / 2;
+		int right = left + waterWidth;
+		int bottom = top + waterHeight;
+		Rect rect1 = new Rect(left, top, right, bottom);
+		
+		Rect rect2 = new Rect(0, 0, waterWidth, waterHeight);
+
+		// Draw the watermark
+		c.drawBitmap(waterBitmap, rect2, rect1, paint);
+
+		saveImage(sourceBitmap, fileName);
+	}
 
 	/**
 	 * 保存添加水印的照片
@@ -367,7 +419,8 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 	 * @param imageName
 	 */
 	private void saveImage(Bitmap bitmap, String imageName) {
-		// //获取图片的名称就是该图片的序号的名称
+		boolean saveMistake = false;
+		//获取图片的名称就是该图片的序号的名称
 		File f = new File(imageName);
 		try {
 			f.createNewFile();
@@ -377,15 +430,27 @@ public class WaterCameraActivity extends BaseFragmentActivity {
 			fOut.flush();
 			fOut.close();
 		} catch (Exception e) {
+			showToast("保存出错！");
+			saveMistake = true;
+		}finally{
+			if (camera != null) {
+				camera.startPreview();
+			}
+		}	
+		if(saveMistake){
+			Log.e(CHOOSED_CLOTH_LIST, "保存出错");			
+		}else{
+			showToast("衣服图片保存在sd卡fashion/tryware文件夹中");		
 		}
-		Toast.makeText(this, "保存成功", 1).show();
-		Log.e("Water", "保存成功" + imageName);
-		
-		isSave = true;
-
-		if (camera != null) {
-			camera.startPreview();
-		}
+		isSave = true;	
+	}
+	
+	public void showToast(final String detail){
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Toast.makeText(WaterCameraActivity.this, detail, Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 
 	/**
