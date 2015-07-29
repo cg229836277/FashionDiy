@@ -132,7 +132,7 @@ public class Constant {
 			R.drawable.design_cloth_icon_59, R.drawable.design_cloth_icon_60, R.drawable.design_cloth_icon_61, R.drawable.design_cloth_icon_62, R.drawable.design_cloth_icon_63,
 			R.drawable.design_cloth_icon_64, R.drawable.design_cloth_icon_65, R.drawable.design_cloth_icon_66, R.drawable.design_cloth_icon_67, R.drawable.design_cloth_icon_68,
 			R.drawable.design_cloth_icon_69, R.drawable.design_cloth_icon_70, R.drawable.design_cloth_icon_71, R.drawable.design_cloth_icon_72, R.drawable.design_cloth_icon_73,
-			R.drawable.design_cloth_icon_74, R.drawable.design_cloth_icon_75, R.drawable.design_cloth_icon_76, R.drawable.design_cloth_icon_77, R.drawable.design_cloth_icon_78 };
+			R.drawable.design_cloth_icon_74, R.drawable.design_cloth_icon_76, R.drawable.design_cloth_icon_77, R.drawable.design_cloth_icon_78 };
 
 	/**
 	 * 男士所有衣服的正面
