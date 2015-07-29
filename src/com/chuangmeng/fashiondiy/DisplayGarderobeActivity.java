@@ -2,7 +2,6 @@ package com.chuangmeng.fashiondiy;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -10,11 +9,8 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -38,10 +34,7 @@ import android.widget.Toast;
 
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
-import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
-import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity_;
-import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.IsListNotNull;
 import com.chuangmeng.fashiondiy.util.ShareAppUtil;
@@ -151,7 +144,7 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 				}else{
 					pageSize = allClothPathArray.size() / 4;
 				}
-				
+				currentPage = tempPage;
 				String detail = "第" + (tempPage + 1) + "页" + "(" + "共" + pageSize + "页" + ")";
 				displayPageCountText.setText(detail);
 			}else{
@@ -611,8 +604,12 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK){
-			if(flipView != null){
-				
+			if(flipView != null && currentPage != 0){
+				flipView.setSelection(0);
+				setPageCount(currentPage - 1);
+				return true;
+			}else{
+				return super.onKeyDown(keyCode, event);
 			}
 		}
 		return super.onKeyDown(keyCode, event);
@@ -628,8 +625,6 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 					
 					choosedClothPathArray.remove(currentDeleteCloth);
 					allClothPathArray.remove(currentDeleteCloth);
-					
-					dealwithPageCount("" + (currentPage - 1), true);
 					
 					clothAdapter.notifyDataSetChanged();					
 				}

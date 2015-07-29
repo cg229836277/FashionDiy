@@ -82,6 +82,8 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	private ImageAdapter styleDrawableAdapter;
 	
 	private boolean isChooseFemale = false; //是否是选择了情侣的女装，默认不是
+	
+	private FashionDiyApplication appInstance = FashionDiyApplication.getApplicationInstance();
 
 	@ViewById
 	LinearLayout design_bottom_detail_ll;// 页面底部五个功能按钮视图父类
@@ -631,25 +633,29 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 		
 		hideTextDesignLayout();
 		hideControlView();
+		
+		ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();		
 		Bitmap positiveBitmap = positiveFragment.getBitmapPositiveView();
 		if (positiveBitmap != null) {
-			FashionDiyApplication.getApplicationInstance().setPositiveViewBitmap(positiveBitmap);
+			bitmapList.add(positiveBitmap);
 		}
 		Bitmap negativeBitmap = negativeFragment.getBitmapNegativeView();
 		if (negativeBitmap != null) {
-			FashionDiyApplication.getApplicationInstance().setNegativeViewBitmap(negativeBitmap);
+			bitmapList.add(negativeBitmap);
 		}
 		
 		if (isDesignCoupleCloth()) {
 			Bitmap femalePositiveBitmap = femalePositiveFragment.getBitmapPositiveView();
 			if (femalePositiveBitmap != null) {
-				FashionDiyApplication.getApplicationInstance().setFemalePositiveBitmap(femalePositiveBitmap);
+				bitmapList.add(femalePositiveBitmap);
 			}
 			Bitmap femaleNegativeBitmap = femaleNegativeFragment.getBitmapNegativeView();
 			if (femaleNegativeBitmap != null) {
-				FashionDiyApplication.getApplicationInstance().setFemaleNegativeBitmap(femaleNegativeBitmap);
+				bitmapList.add(femaleNegativeBitmap);
 			}
 		}
+		
+		appInstance.setBitmaps(bitmapList);
 		
 		Intent intent = new Intent(getApplicationContext(), PreViewActivity_.class);
 		

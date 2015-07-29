@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.chuangmeng.fashiondiy.CrashHandler;
 import com.chuangmeng.fashiondiy.util.IsListNotNull;
+import com.chuangmeng.fashiondiy.util.SavePictureBean;
 
 import android.app.Application;
 import android.graphics.Bitmap;
@@ -28,6 +29,8 @@ public class FashionDiyApplication extends Application {
 	public Bitmap femalePositiveBitmap;
 	public Bitmap femaleNegativeBitmap;
 	private ArrayList<Bitmap> bitmaplist;
+	
+	private SavePictureBean tryWearBeanData;
 
 	@Override
 	public void onCreate() {
@@ -111,5 +114,13 @@ public class FashionDiyApplication extends Application {
 			bitmaplist.clear();
 			bitmaplist = null;				
 		}
+	}
+	
+	public SavePictureBean getTryWearBeanData() {
+		return tryWearBeanData;
+	}
+
+	public void setTryWearBeanData(SavePictureBean tryWearBeanData) {
+		this.tryWearBeanData = tryWearBeanData;
 	}
 }

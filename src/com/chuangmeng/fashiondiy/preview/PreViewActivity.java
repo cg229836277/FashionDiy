@@ -45,6 +45,7 @@ import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.preview.buy.ToBuyActivity_;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity_;
+import com.chuangmeng.fashiondiy.service.SaveTrywearClothService;
 import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.chuangmeng.fashiondiy.view.PreviewDetailPagerAdapter;
@@ -196,95 +197,9 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	 */
 	@Click
 	void preview_bottom_save_iv() {
-		new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected void onPreExecute() {
-				super.onPreExecute();
-				
-				progressDialog.show();
-			}
-			
-			@Override
-			protected Void doInBackground(Void... params) {
-							
-				if(!saveFileDir.exists()){
-					saveFileDir.mkdirs();
-				}
-				
-				if(isPreviewCoupleCloth()){
-					saveCoupleCloth();
-				}
-				
-				for(int i = 0 ; i < 2 ; i++){
-					String fileName = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date()) + ".png";
-					try{
-						File diyClothImage = new File(saveFileDir + "/" + fileName);
-						if(diyClothImage.exists()){
-							diyClothImage.delete();
-						}
-						FileOutputStream out = new FileOutputStream(diyClothImage);
-						if(i == 0){
-							Bitmap currentBitmap = FashionDiyApplication.getApplicationInstance().getPositiveViewBitmap();
-							if(currentBitmap != null){
-								currentBitmap.compress(CompressFormat.PNG, 100, out);
-							}
-						}else{
-							Bitmap currentBitmap = FashionDiyApplication.getApplicationInstance().getNegativeViewBitmap();
-							if(currentBitmap != null){
-								currentBitmap.compress(CompressFormat.PNG, 100, out);
-							}
-						}	
-						out.flush();
-						out.close();
-					}catch(IOException e){
-						e.printStackTrace();
-					}
-				}
-				return null;
-			}
-			
-			@Override
-			protected void onPostExecute(Void result) {
-				super.onPostExecute(result);
-				progressDialog.dismiss();
-				
-				toastDialog.show("保存成功！");
-			}
-		}.execute();
-	}
-	
-	/**
-	 * 保存设计的情侣的衣服
-	 * 
-	 * @author Administrator
-	 * @date 2014-12-22 上午11:26:26
-	 */
-	public void saveCoupleCloth(){
-		for(int i = 0 ; i < 2 ; i++){
-			String fileName = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date()) + ".png";
-			try{
-				File diyClothImage = new File(saveFileDir + "/" + fileName);
-				if(diyClothImage.exists()){
-					diyClothImage.delete();
-				}
-				FileOutputStream out = new FileOutputStream(diyClothImage);
-				if(i == 0){
-					Bitmap currentBitmap = FashionDiyApplication.getApplicationInstance().getFemalePositiveBitmap();
-					if(currentBitmap != null){
-						currentBitmap.compress(CompressFormat.PNG, 100, out);
-					}
-				}else{
-					Bitmap currentBitmap = FashionDiyApplication.getApplicationInstance().getFemaleNegativeBitmap();
-					if(currentBitmap != null){
-						currentBitmap.compress(CompressFormat.PNG, 100, out);
-					}
-				}	
-				out.flush();
-				out.close();
-			}catch(IOException e){
-				e.printStackTrace();
-			}
-		}
+		Intent intent = new Intent(this , SaveTrywearClothService.class);
+		intent.putExtra(SaveTrywearClothService.SAVE_PICTURE_TYPE, "preview");
+		startService(intent);
 	}
 
 	/**
@@ -557,6 +472,8 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();		
+		super.onDestroy();	
+		
+		FashionDiyApplication.getApplicationInstance().clearBitmapArray();
 	}
 }
