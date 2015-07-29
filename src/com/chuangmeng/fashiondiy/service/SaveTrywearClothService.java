@@ -50,13 +50,12 @@ public class SaveTrywearClothService extends IntentService {
 		String tag = intent.getStringExtra(SAVE_PICTURE_TYPE);
 		if(!StringUtil.isEmpty(tag) && tag.equals("preview")){
 			saveDesignCloth();
-			return;
-		}
-		
-		beanData = appInstance.getTryWearBeanData();
-		if(beanData != null){
-			processBitmapAsync(beanData.getByteData());
-			appInstance.setTryWearBeanData(null);
+		}else{		
+			beanData = appInstance.getTryWearBeanData();
+			if(beanData != null){
+				processBitmapAsync(beanData.getByteData());
+				appInstance.setTryWearBeanData(null);
+			}
 		}
 	}
 	

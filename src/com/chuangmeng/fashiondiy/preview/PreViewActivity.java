@@ -30,6 +30,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Bitmap.CompressFormat;
 import android.os.AsyncTask;
 import android.support.v4.view.ViewPager;
@@ -40,10 +41,13 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.preview.buy.ToBuyActivity_;
+import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity_;
 import com.chuangmeng.fashiondiy.service.SaveTrywearClothService;
 import com.chuangmeng.fashiondiy.util.Constant;
@@ -200,6 +204,11 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 		Intent intent = new Intent(this , SaveTrywearClothService.class);
 		intent.putExtra(SaveTrywearClothService.SAVE_PICTURE_TYPE, "preview");
 		startService(intent);
+		
+		Toast.makeText(this, "保存的图片可以在衣柜里面查看哟", Toast.LENGTH_LONG).show();
+		
+		preview_bottom_save_iv.setBackgroundColor(Color.GRAY);
+		preview_bottom_save_iv.setEnabled(false);
 	}
 
 	/**
@@ -210,15 +219,9 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	 */
 	@Click
 	void preview_bottom_try_iv() {
-		ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
-		bitmapArray.add(FashionDiyApplication.getApplicationInstance().getPositiveViewBitmap());
-		bitmapArray.add(FashionDiyApplication.getApplicationInstance().getNegativeViewBitmap());
-		if(isPreviewCoupleCloth()){
-			bitmapArray.add(FashionDiyApplication.getApplicationInstance().getFemalePositiveBitmap());
-			bitmapArray.add(FashionDiyApplication.getApplicationInstance().getFemaleNegativeBitmap());
-		}
-		FashionDiyApplication.getApplicationInstance().setBitmaps(bitmapArray);						
-		startActivity(new Intent(PreViewActivity.this, WaterCameraActivity_.class));
+		Intent intent = new Intent(this , WaterCameraActivity_.class);
+		intent.putExtra(WaterCameraActivity.CHOOSED_DESIGN_CLOTH_LIST, "design");
+		startActivity(intent);
 	}
 
 	/**

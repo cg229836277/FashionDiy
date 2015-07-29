@@ -1,7 +1,10 @@
 package com.chuangmeng.fashiondiy.preview;
 
+import java.util.ArrayList;
+
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
+import com.chuangmeng.fashiondiy.util.CollectionUtil;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -22,7 +25,7 @@ import android.widget.ImageView;
 
 public class PreviewFemaleNegativeFragment extends Fragment{
 
-private ImageView previewPositiveIv;
+private ImageView previewNegativeIv;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,15 +37,18 @@ private ImageView previewPositiveIv;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		//衣服正面
 		View positiveView = inflater.inflate(R.layout.activity_preview_detail, null);
-		previewPositiveIv = (ImageView)positiveView.findViewById(R.id.preview_detail_iv);
+		previewNegativeIv = (ImageView)positiveView.findViewById(R.id.preview_detail_iv);
 		setPositivePreview();
 		return positiveView;
 	}
 	
 	public void setPositivePreview(){
-		Bitmap currentBitmap = FashionDiyApplication.getApplicationInstance().getFemaleNegativeBitmap();
-		if(previewPositiveIv != null && currentBitmap != null){
-			previewPositiveIv.setImageBitmap(currentBitmap);
+		FashionDiyApplication appInstace = FashionDiyApplication.getApplicationInstance();
+		if(!CollectionUtil.isArrayListNull(appInstace.getBitmaps())){
+			ArrayList<Bitmap> tempList = appInstace.getBitmaps();
+			if(previewNegativeIv != null && tempList.size() == 4){
+				previewNegativeIv.setImageBitmap(tempList.get(3));
+			}
 		}
 	}
 }

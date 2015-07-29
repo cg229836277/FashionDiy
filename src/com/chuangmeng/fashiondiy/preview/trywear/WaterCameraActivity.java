@@ -37,6 +37,7 @@ import com.chuangmeng.fashiondiy.service.SaveTrywearClothService;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.SavePictureBean;
+import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.jni.bitmap.operations.JniBitmapHolder;
 import com.squareup.picasso.Picasso;
 
@@ -65,14 +66,15 @@ public class WaterCameraActivity extends BaseFragmentActivity{
 	private Camera.Parameters parameters = null;
 	private List<View> views = new ArrayList<View>();
 	public static final String CHOOSED_CLOTH_LIST = "choosed_data";
+	public static final String CHOOSED_DESIGN_CLOTH_LIST = "dsign_data";
 	private ArrayList<String> choosedList = new ArrayList<String>();
 	private int waterType = 0;
 
 	private float surfaceW = 0f, surfaceH = 0f; // surfaceview的宽和高
-
-	private MediaPlayer music = null;// 播放器引用
 	
 	private boolean isSave = true;
+	
+	private boolean isDesignCloth = false;
 	
 	JniBitmapHolder bitmapHolder = new JniBitmapHolder();
 	
@@ -83,6 +85,10 @@ public class WaterCameraActivity extends BaseFragmentActivity{
 	@AfterViews
 	void initData() {			
 		choosedList = getIntent().getStringArrayListExtra(CHOOSED_CLOTH_LIST);
+		String chooseDesignCloth = getIntent().getStringExtra(CHOOSED_DESIGN_CLOTH_LIST);
+		if(!StringUtil.isEmpty(chooseDesignCloth)){
+			isDesignCloth = true;
+		}
 		init();
 	}
 
@@ -119,6 +125,18 @@ public class WaterCameraActivity extends BaseFragmentActivity{
 		parms.topMargin = (int) (100 * screenMetric.density);
 		// viewPager
 		LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+		
+		if(isDesignCloth && !CollectionUtil.isArrayListNull(appInstance.getBitmaps())){
+			ArrayList<Bitmap> bitmapList = appInstance.getBitmaps();
+			for(Bitmap tempData : bitmapList){
+				View view = inflater.inflate(R.layout.preview_trywear_water_forward_camera, null);
+				ImageView clothWaterPicture = (ImageView) view.findViewById(R.id.two_photo);
+				clothWaterPicture.setImageBitmap(tempData);
+				clothWaterPicture.setLayoutParams(parms);
+				views.add(view);
+			}
+		}
+		
 		if (!CollectionUtil.isArrayListNull(choosedList)) {
 			for (int i = 0; i < choosedList.size(); i++) {
 				View view = inflater.inflate(R.layout.preview_trywear_water_forward_camera, null);
@@ -248,6 +266,8 @@ public class WaterCameraActivity extends BaseFragmentActivity{
 			choosedList.clear();
 			choosedList = null;
 		}
+		
+		isDesignCloth = false;
 	}
 
 	// viewPager

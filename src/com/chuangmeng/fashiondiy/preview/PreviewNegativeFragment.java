@@ -1,7 +1,10 @@
 package com.chuangmeng.fashiondiy.preview;
 
+import java.util.ArrayList;
+
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
+import com.chuangmeng.fashiondiy.util.CollectionUtil;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -31,9 +34,12 @@ public class PreviewNegativeFragment extends Fragment {
 	}
 	
 	public void setNegativePreview(){
-		Bitmap currentBitmap = FashionDiyApplication.getApplicationInstance().getNegativeViewBitmap();
-		if(previewNegativeIv != null && currentBitmap != null){
-			previewNegativeIv.setImageBitmap(currentBitmap);
+		FashionDiyApplication appInstace = FashionDiyApplication.getApplicationInstance();
+		if(!CollectionUtil.isArrayListNull(appInstace.getBitmaps())){
+			ArrayList<Bitmap> tempList = appInstace.getBitmaps();
+			if(previewNegativeIv != null && tempList.size() >= 2){
+				previewNegativeIv.setImageBitmap(tempList.get(1));
+			}
 		}
 	}
 }
