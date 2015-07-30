@@ -30,16 +30,14 @@
             android:textColor="@color/color_white"
             android:textSize="@dimen/text_size_18" />
 
-        <ImageView
-            android:id="@+id/preview_title_share_iv"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+        <Button
+            android:id="@+id/preview_to_clothset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/preview_bottom_share_selected"
-            android:scaleType="fitCenter"
-            android:visibility="gone" />
+            android:layout_margin="10dp"
+            android:background="@drawable/preview_title_clothset_selected" />
     </RelativeLayout>
     
     <include android:id="@+id/design_cloth_direction_rl"

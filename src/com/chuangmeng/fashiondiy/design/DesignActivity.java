@@ -193,8 +193,6 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				hideTextDesignLayout();
-
-				// TODO Auto-generated method stub
 				design_choose_operate_rl.setVisibility(View.GONE);
 				design_take_select_photo_rl.setVisibility(View.GONE);
 				return false;
@@ -254,14 +252,6 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 			}else{
 				design_title_couple_include.setVisibility(View.GONE);
 				design_title_include.setVisibility(View.VISIBLE);
-				
-				LinearLayout.LayoutParams paras = new LinearLayout.LayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-				paras.width = screenMetric.widthPixels / 2;
-				paras.height = 50 * (int)screenMetric.density;
-				paras.topMargin = 8 * (int)screenMetric.density;
-				paras.bottomMargin = 8 * (int)screenMetric.density;
-				paras.gravity = Gravity.CENTER;
-				design_cloth_child_title.setLayoutParams(paras);
 			}
 		}
 	}

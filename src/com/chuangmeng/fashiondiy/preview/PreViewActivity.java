@@ -43,6 +43,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.chuangmeng.fashiondiy.DisplayGarderobeActivity;
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
@@ -116,7 +117,7 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	Button design_couple_title_female_back_iv;
 
 	@ViewById
-	ImageView preview_title_share_iv;
+	Button preview_to_clothset;
 
 	@ViewById
 	ImageView preview_bottom_save_iv;
@@ -135,6 +136,8 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	private String designStyle = null;
 	
 	private boolean isChooseFemale = false; 
+	
+	private boolean isSaved = false;
 	
 	@ViewById
 	ViewPager preview_cloth_detail_viewpager;
@@ -163,14 +166,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 		}else{
 			design_cloth_direction_rl.setVisibility(View.VISIBLE);
 			design_couple_cloth_direction_rl.setVisibility(View.GONE);
-			
-			LinearLayout.LayoutParams paras = new LinearLayout.LayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-			paras.width = screenMetric.widthPixels / 2;
-			paras.height = 50 * (int)screenMetric.density;
-			paras.topMargin = 8 * (int)screenMetric.density;
-			paras.bottomMargin = 8 * (int)screenMetric.density;
-			paras.gravity = Gravity.CENTER;
-			design_cloth_direction_rl.setLayoutParams(paras);
 		}
 
 		initFragmentAdapter();
@@ -180,10 +175,9 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	}
 
 	@Click
-	void preview_title_share_iv() {
-		//shareApp("test", "test", "test", "test");
-		String shareImageUrl = "http://d.hiphotos.baidu.com/image/pic/item/b3fb43166d224f4ae33532120bf790529822d107.jpg";
-		shareApp(Constant.shareContent, Constant.shareClickUrl, shareImageUrl, Constant.shareTitle);
+	void preview_to_clothset() {
+		Intent intent = new Intent(getApplicationContext(),DisplayGarderobeActivity.class);
+		startActivity(intent);
 	}
 	
 	public boolean isPreviewCoupleCloth(){
@@ -201,14 +195,18 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	 */
 	@Click
 	void preview_bottom_save_iv() {
+		
+		if(isSaved){
+			Toast.makeText(this, "衣服已经保存！", Toast.LENGTH_SHORT).show();
+		}
+		
 		Intent intent = new Intent(this , SaveTrywearClothService.class);
 		intent.putExtra(SaveTrywearClothService.SAVE_PICTURE_TYPE, "preview");
 		startService(intent);
 		
-		Toast.makeText(this, "保存的图片可以在衣柜里面查看哟", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "点击右上角到衣柜查看设计的衣服", Toast.LENGTH_SHORT).show();
 		
-		preview_bottom_save_iv.setBackgroundColor(Color.GRAY);
-		preview_bottom_save_iv.setEnabled(false);
+		isSaved = true;
 	}
 
 	/**
@@ -476,7 +474,7 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();	
-		
+		isSaved = false;
 		FashionDiyApplication.getApplicationInstance().clearBitmapArray();
 	}
 }

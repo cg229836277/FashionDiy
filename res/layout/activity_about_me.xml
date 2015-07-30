@@ -60,7 +60,7 @@
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:textColor="@color/color_333333"
-        android:text="或发邮件至邮件:\n763121443@qq.com\n229836277@qq.com"/>
+        android:text="或发邮件至邮箱:\n763121443@qq.com\n229836277@qq.com"/>
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

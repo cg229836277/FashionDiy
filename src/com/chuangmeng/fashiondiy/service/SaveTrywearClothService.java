@@ -153,7 +153,7 @@ public class SaveTrywearClothService extends IntentService {
 		}
 	}
 	
-	private void saveDesignCloth(){
+	private synchronized void saveDesignCloth(){
 		ArrayList<Bitmap> bitmapList = appInstance.getBitmaps();
 		if(CollectionUtil.isArrayListNull(bitmapList)){
 			return;
