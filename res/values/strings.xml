@@ -11,7 +11,4 @@
     <string name="back">后</string>
     <string name="take_photo">拍照</string>
     <string name="photo_sets">相册</string>
-    <string name="title_activity_confirm_delete_cloth">ConfirmDeleteClothActivity</string>
-    <string name="hello_world">Hello world!</string>
-
 </resources>

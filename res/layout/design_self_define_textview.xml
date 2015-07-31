@@ -10,9 +10,9 @@
 
     <com.chuangmeng.fashiondiy.view.AutoResizeTextView
         android:id="@+id/view"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|left"
+        android:gravity="left"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/design_icon_image_background"

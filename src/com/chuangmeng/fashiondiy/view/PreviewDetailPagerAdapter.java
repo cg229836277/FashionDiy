@@ -13,7 +13,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class PreviewDetailPagerAdapter extends FragmentPagerAdapter {
 	
-	private static boolean designCouple = false;
+	private boolean designCouple = false;
 
 	public PreviewDetailPagerAdapter(FragmentManager fm , String designStyle) {
 		super(fm);

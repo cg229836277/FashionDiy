@@ -13,41 +13,25 @@
 
 package com.chuangmeng.fashiondiy.preview;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
-
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Bitmap.CompressFormat;
-import android.os.AsyncTask;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.chuangmeng.fashiondiy.DisplayGarderobeActivity;
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
-import com.chuangmeng.fashiondiy.preview.buy.ToBuyActivity_;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity_;
 import com.chuangmeng.fashiondiy.service.SaveTrywearClothService;
@@ -128,9 +112,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	@ViewById
 	ImageView preview_bottom_buy_iv;
 	
-//	@ViewById
-//	ImageView design_title_back_iv;
-	
 	public final static String PREVIEW_COUPLE = "couple";
 	
 	private String designStyle = null;
@@ -143,16 +124,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	ViewPager preview_cloth_detail_viewpager;
 
 	private UMSocialService mController;
-	
-	private PreviewPositiveFragment previewPositiveFragment;
-	
-	private PreviewNegativeFragment previewNegativeFragment;
-	
-	private PreviewFemalePositiveFragment previewFemalePositiveFragment;
-	
-	private PreviewFemaleNegativeFragment previewFemaleNegativeFragment;
-	
-	private File saveFileDir = new File(Constant.DIY_CLOTH_PICTURE_PATH);
 	
 	@AfterViews
 	void initData() {
@@ -168,15 +139,12 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 			design_couple_cloth_direction_rl.setVisibility(View.GONE);
 		}
 
-		initFragmentAdapter();
-		// adjustViewForScreen();
-
-		setPreviewBitmap();				
+		initFragmentAdapter();		
 	}
 
 	@Click
 	void preview_to_clothset() {
-		Intent intent = new Intent(getApplicationContext(),DisplayGarderobeActivity.class);
+		Intent intent = new Intent(this,DisplayGarderobeActivity.class);
 		startActivity(intent);
 	}
 	
@@ -198,6 +166,7 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 		
 		if(isSaved){
 			Toast.makeText(this, "衣服已经保存！", Toast.LENGTH_SHORT).show();
+			return;
 		}
 		
 		Intent intent = new Intent(this , SaveTrywearClothService.class);
@@ -229,11 +198,13 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	 * @date 2014年11月1日 下午1:37:20
 	 */
 	@Click
-	void preview_bottom_buy_iv() {
-		Intent intent = new Intent();
-		intent.putExtra("isLovers", isPreviewCoupleCloth());
-		intent.setClass(PreViewActivity.this,ToBuyActivity_.class);
-		startActivity(intent);
+	void preview_bottom_buy_iv() {		
+		Toast.makeText(this, "功能开发中，敬请期待！", Toast.LENGTH_SHORT).show();
+		
+//		Intent intent = new Intent();
+//		intent.putExtra("isLovers", isPreviewCoupleCloth());
+//		intent.setClass(PreViewActivity.this,ToBuyActivity_.class);
+//		startActivity(intent);
 	}
 	
 	@Click
@@ -242,25 +213,16 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	}
 
 	public void initFragmentAdapter() {
-		preview_cloth_detail_viewpager.setOffscreenPageLimit(4);
-		preview_cloth_detail_viewpager.setAdapter(new PreviewDetailPagerAdapter(getSupportFragmentManager() , designStyle));
+		if(isPreviewCoupleCloth()){
+			preview_cloth_detail_viewpager.setOffscreenPageLimit(4);
+		}else{
+			preview_cloth_detail_viewpager.setOffscreenPageLimit(2);
+		}
+		
+		PreviewDetailPagerAdapter dapter = new PreviewDetailPagerAdapter(getSupportFragmentManager() , designStyle);
+		preview_cloth_detail_viewpager.setAdapter(dapter);
 		preview_cloth_detail_viewpager.setOnPageChangeListener(this);
 	}
-	
-	/**
-	 * 设置预览的view
-	 * 
-	 * @author chengang
-	 * @date 2014-11-13 上午9:06:10
-	 */
-	public void setPreviewBitmap(){
-		
-	}
-	
-//	@Click
-//	public void design_title_back_iv(){
-//		backImageClicked();
-//	}
 
 	@Click
 	void design_title_forward_iv() {
@@ -304,12 +266,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	public void setCoupleTitleSexBtn(boolean isBack){		
 		if(StringUtil.isEmpty(designStyle)){
 			return;
-		}
-		
-		if(isChooseFemale){
-			isChooseFemale = true;
-		}else{
-			isChooseFemale = false;
 		}
 	}
 
@@ -460,15 +416,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	@Override
 	public void onPageSelected(int arg0) {
 		
-	}
-	
-	public void getFragmentObject(){
-		if(isPreviewCoupleCloth()){
-			previewFemalePositiveFragment = (PreviewFemalePositiveFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.preview_cloth_detail_viewpager + ":2");
-			previewFemaleNegativeFragment = (PreviewFemaleNegativeFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.preview_cloth_detail_viewpager + ":3");
-		}
-		previewPositiveFragment = (PreviewPositiveFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.preview_cloth_detail_viewpager + ":0");
-		previewNegativeFragment = (PreviewNegativeFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.preview_cloth_detail_viewpager + ":1");
 	}
 	
 	@Override

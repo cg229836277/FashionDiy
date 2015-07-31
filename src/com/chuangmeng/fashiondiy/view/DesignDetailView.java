@@ -1,6 +1,5 @@
 package com.chuangmeng.fashiondiy.view;
 
-import org.androidannotations.annotations.EView;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -74,7 +73,6 @@ public class DesignDetailView extends RelativeLayout {
 
 	private AutoResizeTextView clickButton;
 	private final String Tag = "DesignDetailView";
-	public MyToastDialog toastDialog;
 
 	private SingleFingerView currentView = null;// 记录每一次点击的图案
 
@@ -105,8 +103,6 @@ public class DesignDetailView extends RelativeLayout {
 		design_model_operate_text_color_listview = (HorizontalListView) detailView.findViewById(R.id.design_model_operate_text_color_listview);
 
 		initListener();
-		
-		toastDialog = new MyToastDialog(context);
 
 		setPaintingRegion(1, true);
 	}
@@ -136,29 +132,34 @@ public class DesignDetailView extends RelativeLayout {
 			
 			@Override
 			public void onClick(View arg0) {
-				
+				if(clickButton != null && !StringUtil.isEmpty(clickButton.getText().toString())){
+					clickButton.setGravity(Gravity.LEFT);
+				}
 			}
 		});
 		design_model_operate_text_for_center_bt.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				
+				if(clickButton != null && !StringUtil.isEmpty(clickButton.getText().toString())){
+					clickButton.setGravity(Gravity.CENTER);
+				}
 			}
 		});
 		design_model_operate_text_for_right_bt.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				
+				if(clickButton != null && !StringUtil.isEmpty(clickButton.getText().toString())){
+					clickButton.setGravity(Gravity.RIGHT);
+				}
 			}
 		});
 		design_model_operate_add_text_bt.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				addTextOnCloth("全民DIY");
-				
+				addTextOnCloth("全民DIY");				
 			}
 		});
 		design_model_operate_text_style_listview.setOnItemClickListener(new OnItemClickListener() {
@@ -210,7 +211,7 @@ public class DesignDetailView extends RelativeLayout {
 	public void setDesignTemplateBackground(int thisSVG) {
 		if(design_detail_design_template_cssiv.getVisibility()==View.GONE){
 			
-			toastDialog.show("请先选择图片再选择图片模板！！！");
+			Toast.makeText(getContext(), "请先选择图片再选择图片模板!", Toast.LENGTH_SHORT).show();
 		}else{
 			design_detail_design_template_cssiv.sharedConstructor(thisSVG);
 		}
@@ -640,26 +641,17 @@ public class DesignDetailView extends RelativeLayout {
 
 		@Override
 		public int getCount() {
-
-			// TODO Auto-generated method stub
 			return textColors.length;
-
 		}
 
 		@Override
 		public Object getItem(int position) {
-
-			// TODO Auto-generated method stub
 			return textColors[position];
-
 		}
 
 		@Override
 		public long getItemId(int position) {
-
-			// TODO Auto-generated method stub
 			return position;
-
 		}
 
 		@Override

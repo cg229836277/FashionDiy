@@ -20,12 +20,10 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -46,6 +44,7 @@ import com.chuangmeng.fashiondiy.view.DesignDetailPagerAdapter;
 import com.chuangmeng.fashiondiy.view.HorizontalListView;
 import com.chuangmeng.fashiondiy.view.NOScrollViewPager;
 import com.chuangmeng.fashiondiy.view.RecyclingImageView;
+import com.squareup.picasso.Picasso;
 
 /**
  * ClassName:DesignActivity Function: TODO ADD FUNCTION Reason: TODO ADD REASON
@@ -161,8 +160,6 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	Button design_couple_title_female_back_iv;
 
 	private int textSize = 20;
-	
-	BitmapUtil loadUtils;
 
 	@AfterViews
 	void initData() {				
@@ -732,7 +729,8 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 				imageView = (RecyclingImageView) convertView;
 			}
 
-			BitmapUtil.loadResourceImage(DesignActivity.this , imageView,mSourceDrawable.get(position),imageWidth, imageHeight);
+			//BitmapUtil.loadResourceImage(DesignActivity.this , imageView,mSourceDrawable.get(position),imageWidth, imageHeight);
+			Picasso.with(DesignActivity.this).load(mSourceDrawable.get(position)).resize(imageWidth, imageHeight).into(imageView);
 
 			return imageView;
 		}
