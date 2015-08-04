@@ -124,6 +124,10 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		
 		setPageCount(0);
 	}
+	
+	public void initClothData(){
+		
+	}
 
 	private void initView() {
 		clothContainerView = (RelativeLayout) findViewById(R.id.activity_garderobe_container);
