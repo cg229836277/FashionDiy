@@ -47,6 +47,7 @@
 	<style name="ButtonTextStyle">
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:textColor">@color/color_white</item>
+        <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 </resources>

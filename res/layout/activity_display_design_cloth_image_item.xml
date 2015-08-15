@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/display_first_cloth_image"
+        android:id="@+id/display_cloth_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="2dp"
@@ -15,7 +15,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:visibility="gone"
         android:layout_margin="4dp" >
 
         <CheckBox
@@ -27,7 +26,7 @@
             android:layout_centerVertical="true" />
 
         <Button
-            android:id="@+id/delete_cloth_checkbox"
+            android:id="@+id/delete_cloth_btn"
             android:layout_width="@dimen/display_cloth_size_64dp"
             android:layout_height="@dimen/display_cloth_size_64dp"
             android:layout_alignParentRight="true"

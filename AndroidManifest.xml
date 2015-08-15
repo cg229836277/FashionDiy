@@ -53,9 +53,7 @@
             android:name="com.umeng.update.net.DownloadingService"
             android:process=":DownloadingService" >
         </service>
-        
-        <service 
-            android:name=".service.SaveTrywearClothService">            
+        <service android:name=".service.SaveTrywearClothService" >
         </service>
 
         <activity
@@ -114,7 +112,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name=".preview.trywear.WaterCameraActivity_"
+            android:name=".preview.trywear.WaterCameraActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
@@ -136,6 +134,11 @@
             android:name=".ConfirmDialog"
             android:screenOrientation="portrait"
             android:theme="@style/CustomDialog" >
+        </activity>
+        <activity
+            android:name=".DisplayDesignClothActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
     </application>
 

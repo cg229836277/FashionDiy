@@ -4,17 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
+
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.Size;
-import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -23,14 +22,17 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.chuangmeng.fashiondiy.DisplayDesignClothActivity;
 import com.chuangmeng.fashiondiy.R;
+import com.chuangmeng.fashiondiy.R.id;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.service.SaveTrywearClothService;
@@ -41,26 +43,13 @@ import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.jni.bitmap.operations.JniBitmapHolder;
 import com.squareup.picasso.Picasso;
 
-@EActivity(R.layout.activity_preview_trywear_camera)
-public class WaterCameraActivity extends BaseFragmentActivity{
+public class WaterCameraActivity extends BaseFragmentActivity implements OnClickListener{
 
-	@ViewById
-	Button preview_trywear_camear_back_iv;
-
-	@ViewById
-	SurfaceView preview_trywear_camear_surfaceView_sv;
-
-	@ViewById
-	ImageView preview_trywear_camear_camera_reset_iv;
-
-	@ViewById
-	ImageView preview_trywear_camear_tack_pic_iv;
-
-	@ViewById
-	TextView preview_trywear_camear_camera_save_tv; 
-
-	@ViewById
-	ViewPager preview_trywear_camear_viewPager_vp;
+	Button backBtn;
+	SurfaceView surfaceView;
+	ImageView saveImageView;
+	ImageView takePicImageView;
+	ViewPager viewPager;
 
 	private Camera camera;
 	private Camera.Parameters parameters = null;
@@ -81,9 +70,28 @@ public class WaterCameraActivity extends BaseFragmentActivity{
 	private SavePictureBean currentBeanData;
 	
 	private FashionDiyApplication appInstance = FashionDiyApplication.getApplicationInstance();
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_preview_trywear_camera);
+		bindEvent();
+		initData();
+	}
+	
+	private void bindEvent(){
+		saveImageView = (ImageView)findViewById(id.preview_trywear_camear_camera_reset_iv);
+        surfaceView = (SurfaceView)findViewById(id.preview_trywear_camear_surfaceView_sv);
+        backBtn = (Button)findViewById(id.preview_trywear_camear_back_iv);
+        viewPager = (ViewPager)findViewById(id.preview_trywear_camear_viewPager_vp);
+        takePicImageView = (ImageView)findViewById(id.preview_trywear_camear_take_pic_iv);
+        
+        saveImageView.setOnClickListener(this);
+        backBtn.setOnClickListener(this);
+        takePicImageView.setOnClickListener(this);
+	}
 
-	@AfterViews
-	void initData() {			
+	private void initData() {			
 		choosedList = getIntent().getStringArrayListExtra(CHOOSED_CLOTH_LIST);
 		String chooseDesignCloth = getIntent().getStringExtra(CHOOSED_DESIGN_CLOTH_LIST);
 		if(!StringUtil.isEmpty(chooseDesignCloth)){
@@ -92,8 +100,7 @@ public class WaterCameraActivity extends BaseFragmentActivity{
 		init();
 	}
 
-	@Click
-	void preview_trywear_camear_tack_pic_iv() {
+	private void preview_trywear_camear_take_pic_iv() {
 		if(isSave){
 			if (camera != null) {
 				camera.takePicture(null, null, new MyPictureCallback());
@@ -102,24 +109,21 @@ public class WaterCameraActivity extends BaseFragmentActivity{
 		}
 	}
 
-	@Click
-	void preview_trywear_camear_camera_reset_iv() {
-		Intent intent = new Intent();
-		intent.setType("image/*");
-		intent.setAction(Intent.ACTION_GET_CONTENT);
+	private void preview_trywear_camear_camera_reset_iv() {
+		Intent intent = new Intent(this , DisplayDesignClothActivity.class);
+//		intent.setType("image/*");
+//		intent.setAction(Intent.ACTION_GET_CONTENT);
 		startActivity(intent);
-
 	}
 
-	@Click
-	public void preview_trywear_camear_back_iv() {
+	private void preview_trywear_camear_back_iv() {
 		finish();
 	}
 
 	private void init() {
-		preview_trywear_camear_surfaceView_sv.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-		preview_trywear_camear_surfaceView_sv.getHolder().setKeepScreenOn(true);
-		preview_trywear_camear_surfaceView_sv.getHolder().addCallback(new MySurfaceViewCallback());
+		surfaceView.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		surfaceView.getHolder().setKeepScreenOn(true);
+		surfaceView.getHolder().addCallback(new MySurfaceViewCallback());
 
 		RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		parms.topMargin = (int) (100 * screenMetric.density);
@@ -147,8 +151,8 @@ public class WaterCameraActivity extends BaseFragmentActivity{
 			}
 		}
 
-		preview_trywear_camear_viewPager_vp.setAdapter(new MyViewPagerAdapter());
-		preview_trywear_camear_viewPager_vp.setOnPageChangeListener(new MyOnPagerChangeListener());
+		viewPager.setAdapter(new MyViewPagerAdapter());
+		viewPager.setOnPageChangeListener(new MyOnPagerChangeListener());
 
 	}
 
@@ -321,5 +325,22 @@ public class WaterCameraActivity extends BaseFragmentActivity{
 				Toast.makeText(WaterCameraActivity.this, detail, Toast.LENGTH_LONG).show();
 			}
 		});
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		switch (arg0.getId()) {
+		case R.id.preview_trywear_camear_camera_reset_iv:
+			preview_trywear_camear_camera_reset_iv();
+			break;
+		case R.id.preview_trywear_camear_back_iv:
+			preview_trywear_camear_back_iv();
+			break;
+		case R.id.preview_trywear_camear_take_pic_iv:
+			preview_trywear_camear_take_pic_iv();
+			break;
+		default:
+			break;
+		}
 	}
 }

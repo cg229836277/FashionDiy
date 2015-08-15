@@ -33,7 +33,6 @@ import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity;
-import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity_;
 import com.chuangmeng.fashiondiy.service.SaveTrywearClothService;
 import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.StringUtil;
@@ -186,7 +185,7 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	 */
 	@Click
 	void preview_bottom_try_iv() {
-		Intent intent = new Intent(this , WaterCameraActivity_.class);
+		Intent intent = new Intent(this , WaterCameraActivity.class);
 		intent.putExtra(WaterCameraActivity.CHOOSED_DESIGN_CLOTH_LIST, "design");
 		startActivity(intent);
 	}

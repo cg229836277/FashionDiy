@@ -5,6 +5,7 @@
     android:orientation="horizontal" >
 
     <include
+        android:id="@+id/first_image_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
@@ -12,6 +13,7 @@
         layout="@layout/activity_display_design_cloth_image_item" />
 
     <include
+        android:id="@+id/second_image_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"

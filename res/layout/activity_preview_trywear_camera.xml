@@ -12,78 +12,51 @@
 
         <Button
             android:id="@+id/preview_trywear_camear_back_iv"
-         	android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            android:background="@drawable/back_btn_selected"/>
+            android:background="@drawable/back_btn_selected" />
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
             android:text="衣服试穿"
-            android:textColor="@color/color_white"
-            android:textSize="16sp" />
+            style="@style/ButtonTextStyle" />
+
+        <ImageView
+            android:id="@+id/preview_trywear_camear_camera_reset_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:scaleType="center"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/preview_trywear_picture_look" />
     </LinearLayout>
 
     <SurfaceView
         android:id="@+id/preview_trywear_camear_surfaceView_sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_title"
-        android:layout_marginBottom="40dp" />
+        android:layout_below="@id/ll_title" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/preview_trywear_camear_viewPager_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="50dp" />
+        android:layout_below="@id/ll_title"
+        android:layout_centerHorizontal="true" />
 
-    <RelativeLayout
-        android:id="@+id/camera_buttom"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
+    <ImageView
+        android:id="@+id/preview_trywear_camear_take_pic_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/preview_trywear_picture_bg" >
-
-        <ImageView
-            android:id="@+id/preview_trywear_camear_camera_reset_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:contentDescription="@string/app_name"
-            android:scaleType="fitXY"
-            android:src="@drawable/preview_trywear_picture_look" />
-
-        <ImageView
-            android:id="@+id/preview_trywear_camear_tack_pic_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:contentDescription="@string/app_name"
-            android:scaleType="fitXY"
-            android:src="@drawable/preview_trywear_picture_taken" />
-
-        <TextView
-            android:id="@+id/preview_trywear_camear_camera_save_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/preview_trywear_picture_save"
-            android:visibility="gone"
-            android:textSize="20sp" />
-    </RelativeLayout>
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/preview_trywear_picture_taken" />
 
 </RelativeLayout>

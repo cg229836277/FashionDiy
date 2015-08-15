@@ -3,6 +3,7 @@ package com.chuangmeng.fashiondiy;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -32,9 +33,8 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
-import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity_;
+import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity;
 import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.IsListNotNull;
 import com.chuangmeng.fashiondiy.util.ShareAppUtil;
@@ -213,8 +213,8 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 				}				
 
 				isTryWear = true;
-				Intent intent = new Intent(DisplayGarderobeActivity.this, WaterCameraActivity_.class);			
-				intent.putStringArrayListExtra(WaterCameraActivity_.CHOOSED_CLOTH_LIST, choosedClothPathArray);
+				Intent intent = new Intent(DisplayGarderobeActivity.this, WaterCameraActivity.class);			
+				intent.putStringArrayListExtra(WaterCameraActivity.CHOOSED_CLOTH_LIST, choosedClothPathArray);
 				startActivity(intent);
 			}
 		});
