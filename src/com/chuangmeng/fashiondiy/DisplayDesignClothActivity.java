@@ -10,18 +10,27 @@ import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.squareup.picasso.Picasso;
 
+import de.greenrobot.event.EventBus;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Event;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.animation.DecelerateInterpolator;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -33,7 +42,8 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class DisplayDesignClothActivity extends Activity {
+//SimpleOnGestureListener
+public class DisplayDesignClothActivity extends Activity implements OnTouchListener , OnGestureListener{
 	private ListView showPictureListView;
 	private ImageView expandImageView;
 	
@@ -52,10 +62,22 @@ public class DisplayDesignClothActivity extends Activity {
 	private ImageView expandedImageView;
 	private int mShortAnimationDuration;	
 	
+	private GestureDetector mGestureDetector;
+	
+	private View currentClickView = null;
+	
+	private String TAG = "DisplayDesignClothActivity";
+	private String currentDeleteCloth = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_design_cloth);
+		
+		EventBus.getDefault().register(this);
+		
+		mGestureDetector = new GestureDetector(this); 
+		mGestureDetector.setIsLongpressEnabled(true);
 		
 		bindEvent();
 		findLocalCloth();
@@ -201,21 +223,22 @@ public class DisplayDesignClothActivity extends Activity {
 				secondImageLayout.setVisibility(View.INVISIBLE);
 			}
 			
-			showFirstImage.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					zoomImageFromThumb(showFirstImage , (String)(arg0.getTag()));
-				}
-			});			
-			showSecondImage.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					zoomImageFromThumb(showSecondImage , (String)(arg0.getTag()));
-				}
-			});
-			
+//			showFirstImage.setOnClickListener(new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View arg0) {
+//					zoomImageFromThumb(showFirstImage , (String)(arg0.getTag()));
+//				}
+//			});			
+//			showSecondImage.setOnClickListener(new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View arg0) {
+//					zoomImageFromThumb(showSecondImage , (String)(arg0.getTag()));
+//				}
+//			});
+			showFirstImage.setOnTouchListener(DisplayDesignClothActivity.this);
+			showSecondImage.setOnTouchListener(DisplayDesignClothActivity.this);
 			return arg1;
 		}	
 	}
@@ -331,5 +354,80 @@ public class DisplayDesignClothActivity extends Activity {
 				mCurrentAnimator = set;
 			}
 		});
+	}
+
+	@Override
+	public boolean onDown(MotionEvent arg0) {
+		Log.e(TAG, "单击");
+		return true;
+	}
+
+	@Override
+	public boolean onFling(MotionEvent arg0, MotionEvent arg1, float arg2,float arg3) {
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent arg0) {
+		Log.e(TAG, "长按");
+		String clothPath = (String)currentClickView.getTag();
+		if(!StringUtil.isEmpty(clothPath)){
+			currentDeleteCloth = clothPath;				
+			Intent intent = new Intent(DisplayDesignClothActivity.this , ConfirmDialog.class);
+			intent.putExtra(ConfirmDialog.DETAIL_MESSAGE, "确认删除？");
+			startActivity(intent);
+		}
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent arg0, MotionEvent arg1, float arg2,float arg3) {
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent arg0) {
+		
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent arg0) {
+		Log.e(TAG, "弹起");
+		return false;
+	}
+
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		currentClickView = arg0;
+		return mGestureDetector.onTouchEvent(arg1);  
+	}
+	
+	public void onEventMainThread(String tag){
+		if(!StringUtil.isEmpty(tag)){					
+			if(tag.equals("delete")){
+				dealwithDeleteCloth();
+				return;
+			}
+		}
+	}
+	
+	private void dealwithDeleteCloth(){
+		if(!StringUtil.isEmpty(currentDeleteCloth)){
+			int index1 = designClothList.indexOf(currentDeleteCloth);
+			int index2 = tryWearClothList.indexOf(currentDeleteCloth);
+			if(index1 >= 0){
+				designClothList.remove(index1);
+			}else if(index2 >= 0){
+				tryWearClothList.remove(index2);
+			}
+			if(adapter != null){
+				adapter.notifyDataSetChanged();
+			}
+		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		EventBus.getDefault().unregister(this);
+		super.onDestroy();
 	}
 }

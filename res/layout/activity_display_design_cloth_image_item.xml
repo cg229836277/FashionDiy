@@ -22,15 +22,15 @@
             style="@style/CustomCheckboxTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true" />
 
-        <Button
+        <!-- <Button
             android:id="@+id/delete_cloth_btn"
             android:layout_width="@dimen/display_cloth_size_64dp"
             android:layout_height="@dimen/display_cloth_size_64dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/design_display_delete_cloth_selected" />
+            android:background="@drawable/design_display_delete_cloth_selected" />  -->
     </RelativeLayout>
 
 </FrameLayout>
