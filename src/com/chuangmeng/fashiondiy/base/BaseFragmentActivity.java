@@ -1,16 +1,10 @@
 package com.chuangmeng.fashiondiy.base;
 
-import java.io.IOException;
-
 import com.chuangmeng.fashiondiy.view.MyProgressDialog;
 import com.chuangmeng.fashiondiy.view.MyToastDialog;
-import com.umeng.analytics.MobclickAgent;
-
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
-import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -69,12 +63,10 @@ public class BaseFragmentActivity extends FragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		MobclickAgent.onResume(this);
 	}
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		MobclickAgent.onPause(this);
 	}
 	
 	/**

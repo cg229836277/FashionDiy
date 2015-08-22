@@ -15,24 +15,10 @@ package com.chuangmeng.fashiondiy.util;
 
 import java.io.File;
 import java.util.ArrayList;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
-
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.QQShareContent;
-import com.umeng.socialize.media.QZoneShareContent;
-import com.umeng.socialize.media.SmsShareContent;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.sso.QZoneSsoHandler;
-import com.umeng.socialize.sso.SmsHandler;
-import com.umeng.socialize.sso.UMQQSsoHandler;
-import com.umeng.socialize.weixin.controller.UMWXHandler;
-import com.umeng.socialize.weixin.media.CircleShareContent;
-import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
 /**
  * ClassName:ShareAppUtil Function: 应用分享工具 Reason: TODO ADD REASON

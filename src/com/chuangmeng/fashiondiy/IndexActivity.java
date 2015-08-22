@@ -2,19 +2,12 @@ package com.chuangmeng.fashiondiy;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
 import android.content.Intent;
-import android.os.Bundle;
-import android.widget.ImageView;
-
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.guide.GuideActivity;
 import com.chuangmeng.fashiondiy.util.SimpleSharedPreferences;
-import com.umeng.update.UmengUpdateAgent;
 
 /**
  * 程序启动之后的介绍及过渡页面
@@ -40,8 +33,6 @@ public class IndexActivity extends BaseFragmentActivity {
 		if(!isFirstIn){//默认返回的是true
 			goGuide();
 			return;
-		}else{
-			UmengUpdateAgent.update(this);
 		}
 
 		splashTimer = new Timer();

@@ -10,10 +10,7 @@ import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.ShareAppUtil;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.squareup.picasso.Picasso;
-import com.tencent.mm.sdk.constants.Build;
-
 import de.greenrobot.event.EventBus;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -24,10 +21,8 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;

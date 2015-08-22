@@ -11,6 +11,10 @@
             backward-compatibility can go here.
         -->
     </style>
+    <style name="Theme.UMDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
