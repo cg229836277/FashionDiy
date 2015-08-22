@@ -7,8 +7,10 @@ import java.util.List;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
+import com.chuangmeng.fashiondiy.util.ShareAppUtil;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.squareup.picasso.Picasso;
+import com.tencent.mm.sdk.constants.Build;
 
 import de.greenrobot.event.EventBus;
 
@@ -25,7 +27,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
+import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,25 +37,30 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import 	android.view.GestureDetector.SimpleOnGestureListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
 //SimpleOnGestureListener
-public class DisplayDesignClothActivity extends Activity implements OnTouchListener , OnGestureListener{
+public class DisplayDesignClothActivity extends Activity implements OnTouchListener{
 	private ListView showPictureListView;
 	private ImageView expandImageView;
 	
 	private Button dsignClothBtn;
 	private Button tryWearClothBtn;
 	
+	private Button backBtn , shareBtn;
+	
 	private ShowClothAdapter adapter;
 	
 	private List<String> designClothList;
 	private List<String> tryWearClothList;
+	private ArrayList<String> shareClothList;
 	
 	private int screenWidth = 0;
 	
@@ -69,16 +76,18 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 	private String TAG = "DisplayDesignClothActivity";
 	private String currentDeleteCloth = null;
 	
+	private ShareAppUtil shareAppUtil;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_design_cloth);
 		
-		EventBus.getDefault().register(this);
-		
-		mGestureDetector = new GestureDetector(this); 
+		mGestureDetector = new GestureDetector(this, new MygestureDector());
 		mGestureDetector.setIsLongpressEnabled(true);
 		
+		shareAppUtil = new ShareAppUtil(DisplayDesignClothActivity.this);
+		EventBus.getDefault().register(this);	
 		bindEvent();
 		findLocalCloth();
 	}
@@ -89,6 +98,9 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 				
 		dsignClothBtn = (Button)findViewById(R.id.show_design_cloth_btn);
 		tryWearClothBtn = (Button)findViewById(R.id.show_trywear_cloth_btn);
+		
+		backBtn = (Button)findViewById(R.id.design_show_back_iv);
+		shareBtn = (Button)findViewById(R.id.design_show_share_iv);
 		
 		expandedImageView = (ImageView)findViewById(R.id.expanded_image);
 		
@@ -104,6 +116,23 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 			@Override
 			public void onClick(View arg0) {
 				updateShowList(false);
+			}
+		});		
+		backBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				finish();
+			}
+		});
+		shareBtn.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View arg0) {
+				if(CollectionUtil.isArrayListNull(shareClothList)){
+					Toast.makeText(DisplayDesignClothActivity.this,"请先选择图片！",Toast.LENGTH_LONG).show();
+				}else{
+					shareAppUtil.shareAppForManyImage(shareClothList);
+				}
 			}
 		});
 		
@@ -131,16 +160,17 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 	private void findLocalCloth(){
 		
 		screenWidth = FashionDiyApplication.getApplicationInstance().getScreenSize().widthPixels;
+		shareClothList = new ArrayList<String>();
 		
 		File[] designClothFiles = new File(Constant.DIY_CLOTH_PICTURE_PATH).listFiles();
 		File[] tryWearFiles = new File(Constant.DIY_TRYWARE_PICTURE_PATH).listFiles();
-		if(designClothFiles.length > 0 ){
+		if(designClothFiles != null && designClothFiles.length > 0 ){
 			designClothList = new ArrayList<String>();
 			for(File tempFile : designClothFiles){
 				designClothList.add(tempFile.getAbsolutePath());
 			}
 		}
-		if(tryWearFiles.length > 0 ){
+		if(tryWearFiles != null && tryWearFiles.length > 0 ){
 			tryWearClothList = new ArrayList<String>();
 			for(File tempFile : tryWearFiles){
 				tryWearClothList.add(tempFile.getAbsolutePath());
@@ -164,13 +194,13 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 		private LayoutInflater  inflater;
 		private FrameLayout firstImageLayout;
 		private FrameLayout secondImageLayout;
-		LinearLayout.LayoutParams params;
+		private LinearLayout.LayoutParams params;
 		private int destWidth = screenWidth / 2;
 		
 		@SuppressLint("NewApi") 
 		public ShowClothAdapter(){
 			inflater = LayoutInflater.from(DisplayDesignClothActivity.this);
-			params = new LayoutParams(new LayoutParams(destWidth, destWidth));
+			params = new LayoutParams((ViewGroup.MarginLayoutParams)(new LayoutParams(destWidth, destWidth)));			
 		}
 		
 		public void setList(List<String> showList){
@@ -222,21 +252,6 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 			}else{
 				secondImageLayout.setVisibility(View.INVISIBLE);
 			}
-			
-//			showFirstImage.setOnClickListener(new OnClickListener() {
-//				
-//				@Override
-//				public void onClick(View arg0) {
-//					zoomImageFromThumb(showFirstImage , (String)(arg0.getTag()));
-//				}
-//			});			
-//			showSecondImage.setOnClickListener(new OnClickListener() {
-//				
-//				@Override
-//				public void onClick(View arg0) {
-//					zoomImageFromThumb(showSecondImage , (String)(arg0.getTag()));
-//				}
-//			});
 			showFirstImage.setOnTouchListener(DisplayDesignClothActivity.this);
 			showSecondImage.setOnTouchListener(DisplayDesignClothActivity.this);
 			return arg1;
@@ -357,47 +372,12 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 	}
 
 	@Override
-	public boolean onDown(MotionEvent arg0) {
-		Log.e(TAG, "单击");
-		return true;
-	}
-
-	@Override
-	public boolean onFling(MotionEvent arg0, MotionEvent arg1, float arg2,float arg3) {
-		return false;
-	}
-
-	@Override
-	public void onLongPress(MotionEvent arg0) {
-		Log.e(TAG, "长按");
-		String clothPath = (String)currentClickView.getTag();
-		if(!StringUtil.isEmpty(clothPath)){
-			currentDeleteCloth = clothPath;				
-			Intent intent = new Intent(DisplayDesignClothActivity.this , ConfirmDialog.class);
-			intent.putExtra(ConfirmDialog.DETAIL_MESSAGE, "确认删除？");
-			startActivity(intent);
-		}
-	}
-
-	@Override
-	public boolean onScroll(MotionEvent arg0, MotionEvent arg1, float arg2,float arg3) {
-		return false;
-	}
-
-	@Override
-	public void onShowPress(MotionEvent arg0) {
-		
-	}
-
-	@Override
-	public boolean onSingleTapUp(MotionEvent arg0) {
-		Log.e(TAG, "弹起");
-		return false;
-	}
-
-	@Override
 	public boolean onTouch(View arg0, MotionEvent arg1) {
-		currentClickView = arg0;
+		if(arg0 instanceof ImageView){
+			currentClickView = arg0;
+		}else{
+			return false;
+		}
 		return mGestureDetector.onTouchEvent(arg1);  
 	}
 	
@@ -412,8 +392,14 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 	
 	private void dealwithDeleteCloth(){
 		if(!StringUtil.isEmpty(currentDeleteCloth)){
-			int index1 = designClothList.indexOf(currentDeleteCloth);
-			int index2 = tryWearClothList.indexOf(currentDeleteCloth);
+			int index1 = -1;
+			int index2 = -1;
+			if(!CollectionUtil.isListNull(designClothList)){
+				index1 = designClothList.indexOf(currentDeleteCloth);
+			}
+			if(!CollectionUtil.isListNull(tryWearClothList)){
+				index2 = tryWearClothList.indexOf(currentDeleteCloth);
+			}
 			if(index1 >= 0){
 				designClothList.remove(index1);
 			}else if(index2 >= 0){
@@ -423,11 +409,99 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 				adapter.notifyDataSetChanged();
 			}
 		}
-	}
+	}	
 	
 	@Override
 	protected void onDestroy() {
 		EventBus.getDefault().unregister(this);
+		if(!CollectionUtil.isListNull(shareClothList)){
+			shareClothList.clear();
+			shareClothList = null;
+		}
+		if(!CollectionUtil.isListNull(designClothList)){
+			designClothList.clear();
+			designClothList = null;
+		}
+		if(!CollectionUtil.isListNull(tryWearClothList)){
+			tryWearClothList.clear();
+			tryWearClothList = null;
+		}
 		super.onDestroy();
+	}
+	
+	private class MygestureDector extends SimpleOnGestureListener{
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			Log.e(TAG, "a双击");
+			dealWithDoubleClick();
+			return true;
+		}
+		@Override
+		public boolean onDown(MotionEvent e) {
+			Log.e(TAG, "单击");
+			return true;
+		}
+		@Override
+		public void onLongPress(MotionEvent e) {
+			Log.e(TAG, "a长按");
+			dealWithLongClick();
+			super.onLongPress(e);
+		}
+		@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			dealWithSimpleClick();
+			return super.onSingleTapConfirmed(e);
+		}
+		@Override
+		public boolean onDoubleTapEvent(MotionEvent e) {
+			Log.e(TAG, "双击1");
+			return true;
+		}
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			Log.e(TAG, "单击1");
+			return false;
+		}
+	}
+	
+	private void dealWithLongClick(){
+		if(currentClickView == null){
+			return;
+		}
+		String clothPath = (String)currentClickView.getTag();
+		if(!StringUtil.isEmpty(clothPath)){
+			currentDeleteCloth = clothPath;				
+			Intent intent = new Intent(DisplayDesignClothActivity.this , ConfirmDialog.class);
+			intent.putExtra(ConfirmDialog.DETAIL_MESSAGE, "确认删除？");
+			startActivity(intent);
+		}
+	}
+	
+	private void dealWithSimpleClick(){
+		if(currentClickView == null){
+			return;
+		}
+		if(currentClickView instanceof ImageView){
+			View view = (View)currentClickView.getParent();
+			CheckBox chooseStateBox = (CheckBox)view.findViewById(R.id.choose_state_checkbox);
+			if(chooseStateBox != null){
+				if(chooseStateBox.isChecked()){
+					chooseStateBox.setChecked(false);
+					shareClothList.remove((String)currentClickView.getTag());
+				}else{
+					chooseStateBox.setChecked(true);
+					shareClothList.add((String)currentClickView.getTag());
+				}
+			}
+		}
+	}
+	
+	private void dealWithDoubleClick(){
+		if(currentClickView == null){
+			return;
+		}
+		if(currentClickView instanceof ImageView){
+			zoomImageFromThumb(currentClickView , (String)(currentClickView.getTag()));
+		}
 	}
 }

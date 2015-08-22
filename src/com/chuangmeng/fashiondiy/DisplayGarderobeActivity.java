@@ -15,10 +15,14 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.BaseAdapter;
@@ -32,7 +36,6 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.preview.trywear.WaterCameraActivity;
 import com.chuangmeng.fashiondiy.util.CollectionUtil;
@@ -54,7 +57,7 @@ import de.greenrobot.event.EventBus;
  * @version 1.0
  */
 
-public class DisplayGarderobeActivity extends BaseFragmentActivity {
+public class DisplayGarderobeActivity extends BaseFragmentActivity implements OnTouchListener{
 	private DisplayClothImageAdapter clothAdapter;
 	private FlipViewController flipView;
 	private int mShortAnimationDuration;
@@ -91,6 +94,11 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 	public final static String PAGE_FORWARD = "forward";
 	public final static String PAGE_BACKWARD = "back";
 	
+	private GestureDetector mGestureDetector;	
+	private View currentClickView = null;
+	
+	private String TAG = "DisplayGarderobeActivity";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,6 +106,9 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		setContentView(R.layout.activity_display_garderobe);
 		
 		EventBus.getDefault().register(this);
+		
+		mGestureDetector = new GestureDetector(this, new MygestureDector());
+		mGestureDetector.setIsLongpressEnabled(true);
 		
 		initView();
 		bindEventForView();
@@ -266,7 +277,6 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		private List<ImageView> imageViews = new ArrayList<ImageView>();
 		private List<LinearLayout> parenntViews = new ArrayList<LinearLayout>();
 		private List<CheckBox> checkBoxs = new ArrayList<CheckBox>();
-		private List<Button> buttons = new ArrayList<Button>();
 
 		public DisplayClothImageAdapter() {
 			inflater = LayoutInflater.from(getApplicationContext());
@@ -327,8 +337,6 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 				imageViews.add((ImageView) currentLayout.findViewById(R.id.display_cloth_image));
 				CheckBox currentCheckBox = (CheckBox)currentLayout.findViewById(R.id.choose_state_checkbox);
 				checkBoxs.add(currentCheckBox);
-				Button deleteClothBtn = (Button)currentLayout.findViewById(R.id.delete_cloth_checkbox);
-				buttons.add(deleteClothBtn);
 				if(mAllCheck){
 					currentCheckBox.setChecked(true);
 				}else{
@@ -339,7 +347,6 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			for (int i = flag; i < (flag + 4); i++) {
 				final ImageView currentImageView = imageViews.get(i % 4);
 				final CheckBox currentCheckBox = checkBoxs.get(i % 4);
-				final Button currentButton = buttons.get(i % 4);
 				if (i < allClothPathArray.size()) {
 					String currentFilePath = allClothPathArray.get(i);
 					if (!StringUtil.isEmpty(currentFilePath)) {
@@ -348,47 +355,8 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 						parentView.setVisibility(View.VISIBLE);
 						
 						Picasso.with(getApplicationContext()).load(new File(currentFilePath)).resize(resWidth, resHeight).into(currentImageView);
-//						BitmapUtil.loadLocalImage(DisplayGarderobeActivity.this, currentImageView, filePath, resWidth, resHeight);
 						currentImageView.setTag(currentFilePath);
-
-						currentImageView.setOnClickListener(new OnClickListener() {
-
-							@Override
-							public void onClick(View arg0) {
-								zoomImageFromThumb(currentImageView, (String) (currentImageView.getTag()));
-							}
-						});
-												
-						currentCheckBox.setTag(currentFilePath);
-						currentCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-							@Override
-							public void onCheckedChanged(CompoundButton button, boolean isCheck) {
-								if(mAllCheck || isTryWear){
-									return;
-								}
-								if (isCheck) {
-									choosedClothPathArray.add((String)currentCheckBox.getTag());
-								} else {
-									choosedClothPathArray.remove((String)currentCheckBox.getTag());
-								}
-							}
-						});
-						currentButton.setTag(currentFilePath);
-						currentButton.setOnClickListener(new OnClickListener() {
-							
-							@Override
-							public void onClick(View v) {
-								String clothPath = (String)currentButton.getTag();
-								if(!StringUtil.isEmpty(clothPath)){
-									currentDeleteCloth = clothPath;	
-									
-									Intent intent = new Intent(DisplayGarderobeActivity.this , ConfirmDialog.class);
-									intent.putExtra(ConfirmDialog.DETAIL_MESSAGE, "确认删除？");
-									startActivity(intent);
-								}
-							}
-						});
+						currentImageView.setOnTouchListener(DisplayGarderobeActivity.this);
 					}
 				}else{
 					View parentView = (View)currentImageView.getParent();
@@ -415,10 +383,6 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 			
 			if (IsListNotNull.isListNotNull(checkBoxs)) {
 				checkBoxs.clear();
-			}
-			
-			if (IsListNotNull.isListNotNull(buttons)) {
-				buttons.clear();
 			}
 		}
 	}
@@ -641,5 +605,94 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity {
 		EventBus.getDefault().unregister(this);
 		clearBitmapArray();
 		super.onDestroy();
+	}
+
+	@Override
+	public boolean onTouch(View arg0, MotionEvent arg1) {
+		if(arg0 instanceof ImageView){
+			currentClickView = arg0;
+		}else{
+			return false;
+		}
+		return mGestureDetector.onTouchEvent(arg1);  
+	}
+	
+	private class MygestureDector extends SimpleOnGestureListener{
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			Log.e(TAG, "a双击");
+			dealWithDoubleClick();
+			return true;
+		}
+		@Override
+		public boolean onDown(MotionEvent e) {
+			Log.e(TAG, "单击");
+			return true;
+		}
+		@Override
+		public void onLongPress(MotionEvent e) {
+			Log.e(TAG, "a长按");
+			dealWithLongClick();
+			super.onLongPress(e);
+		}
+		@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			dealWithSimpleClick();
+			return super.onSingleTapConfirmed(e);
+		}
+		@Override
+		public boolean onDoubleTapEvent(MotionEvent e) {
+			Log.e(TAG, "双击1");
+			return true;
+		}
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			Log.e(TAG, "单击1");
+			return false;
+		}
+	}
+	
+	private void dealWithLongClick(){
+		if(currentClickView == null){
+			return;
+		}
+		if(currentClickView instanceof ImageView){
+			String clothPath = (String)currentClickView.getTag();
+			if(!StringUtil.isEmpty(clothPath)){
+				currentDeleteCloth = clothPath;	
+				
+				Intent intent = new Intent(DisplayGarderobeActivity.this , ConfirmDialog.class);
+				intent.putExtra(ConfirmDialog.DETAIL_MESSAGE, "确认删除？");
+				startActivity(intent);
+			}
+		}
+	}
+	
+	private void dealWithSimpleClick(){
+		if(currentClickView == null){
+			return;
+		}
+		if(currentClickView instanceof ImageView){
+			View view = (View)currentClickView.getParent();
+			CheckBox chooseStateBox = (CheckBox)view.findViewById(R.id.choose_state_checkbox);
+			if(chooseStateBox != null){
+				if(chooseStateBox.isChecked()){
+					chooseStateBox.setChecked(false);
+					choosedClothPathArray.remove((String)currentClickView.getTag());
+				}else{
+					chooseStateBox.setChecked(true);
+					choosedClothPathArray.add((String)currentClickView.getTag());
+				}
+			}
+		}
+	}
+	
+	private void dealWithDoubleClick(){
+		if(currentClickView == null){
+			return;
+		}
+		if(currentClickView instanceof ImageView){
+			zoomImageFromThumb(currentClickView , (String)(currentClickView.getTag()));
+		}
 	}
 }
