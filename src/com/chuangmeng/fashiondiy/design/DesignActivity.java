@@ -48,12 +48,11 @@ import com.squareup.picasso.Picasso;
 
 /**
  * ClassName:DesignActivity Function: TODO ADD FUNCTION Reason: TODO ADD REASON
- * 
  * @author hch
  * @version
  * @since Ver 1.1
  * @Date 2014年10月23日 下午9:34:36
- */
+ */ 
 @EActivity(R.layout.activity_design_main)
 public class DesignActivity extends BaseFragmentActivity implements OnItemClickListener {
 	private DisplayMetrics screenSize; // 获取设备尺寸

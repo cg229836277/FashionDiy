@@ -65,7 +65,7 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 
 	@ViewById
 	LinearLayout design_cloth_direction_rl;
-	
+	 
 	@ViewById
 	LinearLayout design_couple_cloth_direction_rl;
 
@@ -122,10 +122,12 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	@ViewById
 	ViewPager preview_cloth_detail_viewpager;
 
+//	private UMSocialService mController;
 	//private UMSocialService mController;
 	
 	@AfterViews
 	void initData() {
+//		mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 		//mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 		
 		designStyle = getIntent().getStringExtra(PREVIEW_COUPLE);
@@ -141,12 +143,16 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 		initFragmentAdapter();		
 	}
 
-	@Click
+//	@Click
+//	void preview_title_share_iv() {
+//		//shareApp("test", "test", "test", "test");
+//		String shareImageUrl = "http://d.hiphotos.baidu.com/image/pic/item/b3fb43166d224f4ae33532120bf790529822d107.jpg";
+////		shareApp(Constant.shareContent, Constant.shareClickUrl, shareImageUrl, Constant.shareTitle);
+//	}
 	void preview_to_clothset() {
 		Intent intent = new Intent(this,DisplayGarderobeActivity.class);
 		startActivity(intent);
 	}
-	
 	public boolean isPreviewCoupleCloth(){
 		if(!StringUtil.isEmpty(designStyle) && designStyle.equals(PREVIEW_COUPLE)){
 			return true;
@@ -304,6 +310,102 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 		ft.addToBackStack(null);
 		ft.commit();
 	}
+
+	/**
+	 * 
+	 * @author hch
+	 * @date 2014年10月30日 上午12:37:25
+	 * @param shareContent
+	 *            分享文案
+	 * @param shareClickUrl
+	 *            分享点击跳转url
+	 * @param shareImageUrl
+	 *            分享图片url
+	 * @param shareMessage
+	 *            分享title提示信息
+	 */
+
+//	private void shareApp(String shareContent, String shareClickUrl, String shareImageUrl, String shareMessage) {
+//
+//		 mController.setShareContent(shareContent);
+//
+//		 UMQQSsoHandler qqSsoHandler = new
+//		 UMQQSsoHandler(PreViewActivity.this, Constant.QQ_APPID,
+//		 Constant.QQ_APPKEY);
+//		 qqSsoHandler.addToSocialSDK();
+//		 QQShareContent qqShareContent = new QQShareContent();
+//		
+//		 qqShareContent.setShareContent(shareContent);
+////		
+//		 qqShareContent.setTitle(shareMessage);
+//		
+//		 qqShareContent.setShareImage(new UMImage(PreViewActivity.this,
+//		 shareImageUrl));
+//		
+//		 qqShareContent.setTargetUrl(shareClickUrl);
+//		
+//		 mController.setShareMedia(qqShareContent);
+//		
+//		 QZoneSsoHandler qZoneSsoHandler = new
+//		 QZoneSsoHandler(PreViewActivity.this, Constant.QQ_APPID,
+//		 Constant.QQ_APPKEY);
+//		 qZoneSsoHandler.addToSocialSDK();
+//		
+//		 QZoneShareContent qZoneShareContent = new QZoneShareContent();
+//		
+//		 qZoneShareContent.setShareContent(shareContent);
+//		
+//		 qZoneShareContent.setTitle(shareMessage);
+//		
+//		 qZoneShareContent.setTargetUrl(shareClickUrl);
+//		
+//		 mController.setShareMedia(qZoneShareContent);
+//
+//		// ---------------------QQ------------
+//
+//		// ---------------------微信------------
+//
+//		 UMImage urlImage = new UMImage(PreViewActivity.this, shareImageUrl);
+//		 // wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
+//		
+//		 // 微信图文分享必须设置一个url
+//		 // 添加微信平台，参数1为当前Activity, 参数2为用户申请的AppID, 参数3为点击分享内容跳转到的目标url
+//		 UMWXHandler wxHandler = new UMWXHandler(PreViewActivity.this,
+//		 Constant.WX_APPID, Constant.WX_APPKEY);
+//		 wxHandler.addToSocialSDK();
+//		 WeiXinShareContent weixinContent = new WeiXinShareContent();
+//		 weixinContent.setShareContent(shareContent);
+//		 weixinContent.setTitle(shareMessage);
+//		 weixinContent.setTargetUrl(shareClickUrl);
+//		 weixinContent.setShareImage(urlImage);
+//		 mController.setShareMedia(weixinContent);
+//		 // 支持微信朋友圈
+//		 // 设置朋友圈分享的内容
+//		 //
+////		 mController.getConfig().supportWXCirclePlatform(PreViewActivity.this,
+////		 WX_APPID,
+//		 // messages.get("url"));
+//		 UMWXHandler wxCircleHandler = new UMWXHandler(PreViewActivity.this,
+//		 Constant.WX_APPID, Constant.WX_APPKEY);
+//		 wxCircleHandler.setToCircle(true);
+//		 wxCircleHandler.addToSocialSDK();
+//		 CircleShareContent circleMedia = new CircleShareContent();
+//		 circleMedia.setShareContent(shareContent);
+//		 circleMedia.setTitle(shareMessage);
+//		 circleMedia.setShareImage(urlImage);
+//		 mController.setShareMedia(circleMedia);
+//		
+//		 // ---------------------微信  end------------
+//		 //短信 
+//		 SmsHandler smsHandler = new SmsHandler();
+//		 smsHandler.addToSocialSDK();
+//		 SmsShareContent smsShareContent = new SmsShareContent();
+//		 smsShareContent.setShareContent(shareContent + shareClickUrl);
+//		 mController.setShareMedia(smsShareContent);
+//		mController.getConfig().setPlatforms(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.SINA, SHARE_MEDIA.TENCENT, SHARE_MEDIA.YIXIN_CIRCLE,
+//				SHARE_MEDIA.RENREN);
+//		mController.openShare(PreViewActivity.this, false);
+//	}
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {

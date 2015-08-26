@@ -4,19 +4,22 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageView;
 
 public class AboutUsActivity extends Activity {
 
-	private Button click_back_iv;
+	private ImageView click_back_iv;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_about_me);
-		click_back_iv = (Button)findViewById(R.id.click_back_iv);
-		click_back_iv.setOnClickListener(new OnClickListener() {			
+		click_back_iv = (ImageView)findViewById(R.id.click_back_iv);
+		click_back_iv.setOnClickListener(new OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
+				// TODO Auto-generated method stub
 				finish();
 			}
 		});

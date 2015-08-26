@@ -33,6 +33,8 @@ public class IndexActivity extends BaseFragmentActivity {
 		if(!isFirstIn){//默认返回的是true
 			goGuide();
 			return;
+		}else{
+//			UmengUpdateAgent.update(this);
 		}
 
 		splashTimer = new Timer();

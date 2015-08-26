@@ -159,7 +159,8 @@ public class DesignDetailView extends RelativeLayout {
 			
 			@Override
 			public void onClick(View arg0) {
-				addTextOnCloth("全民DIY");				
+				
+				addTextOnCloth("全民DIY");
 			}
 		});
 		design_model_operate_text_style_listview.setOnItemClickListener(new OnItemClickListener() {
@@ -238,7 +239,7 @@ public class DesignDetailView extends RelativeLayout {
 	}
 	
 	/**
-	 * @Title: setPaintingRegion
+	 * @Title: setPaintingRegion   
 	 * @Description: TODO 设置绘画区域大小
 	 * @author hechuang
 	 * @date 2015-6-9
@@ -270,19 +271,21 @@ public class DesignDetailView extends RelativeLayout {
 			if (boyOrGirl) {
 				// 添加图案和文字的边界长度是屏幕的二分之一
 				clothBorderHeight = (int) (screenSize.heightPixels* 3 / 7);
-				// 添加图案和文字的边界宽度是屏幕的五分之二
+				// 添加图案和文字的边界宽度是屏幕的五分之二     
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+				designDetailRl.setMargins(0, 0, 0, 150);
 			} else {
 				// 添加图案和文字的边界长度是屏幕的三分之一
 				clothBorderHeight = (int) (screenSize.heightPixels * 2 / 5);
 				// 添加图案和文字的边界宽度是屏幕的五分之二
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+				designDetailRl.setMargins(0, 0, 0, 150);
 			}
 			borderWidth = clothBorderWidth;
 			borderHeight = clothBorderHeight;
 			designDetailRl.height = clothBorderHeight;
 			designDetailRl.width = clothBorderWidth;
-			designDetailRl.setMargins(0, 0, 0, 150);
+			
 			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
 			break;
 		case 2:
@@ -291,17 +294,19 @@ public class DesignDetailView extends RelativeLayout {
 				clothBorderHeight = (int) (screenSize.heightPixels * 2 / 5);
 				// 添加图案和文字的边界宽度是屏幕的五分之二
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+				designDetailRl.setMargins(0, 0, 0, 150);
 			} else {
 				// 添加图案和文字的边界长度是屏幕的三分之一
 				clothBorderHeight = (int) (screenSize.heightPixels * 2 / 5);
 				// 添加图案和文字的边界宽度是屏幕的五分之二
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+				designDetailRl.setMargins(0, 0, 0, 150);
 			}
 			borderWidth = clothBorderWidth;
 			borderHeight = clothBorderHeight;
 			designDetailRl.height = clothBorderHeight;
 			designDetailRl.width = clothBorderWidth;
-			designDetailRl.setMargins(0, 0, 0, 150);
+			
 			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
 			break;
 		case 3:
@@ -310,17 +315,18 @@ public class DesignDetailView extends RelativeLayout {
 				clothBorderHeight = (int) (screenSize.heightPixels / 3);
 				// 添加图案和文字的边界宽度是屏幕的五分之二
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+				designDetailRl.setMargins(0, 0, 0, 120);
 			} else {
 				// 添加图案和文字的边界长度是屏幕的三分之一
 				clothBorderHeight = (int) (screenSize.heightPixels / 3);
 				// 添加图案和文字的边界宽度是屏幕的五分之二
 				clothBorderWidth = (int) (screenSize.widthPixels * 2 / 5);
+				designDetailRl.setMargins(0, 0, 0, 120);
 			}
 			borderWidth = clothBorderWidth;
 			borderHeight = clothBorderHeight;
 			designDetailRl.height = clothBorderHeight;
 			designDetailRl.width = clothBorderWidth;
-			designDetailRl.setMargins(0, 0, 0, 120);
 			design_detail_cloth_border_rl.setLayoutParams(designDetailRl);
 			break;
 
@@ -559,7 +565,6 @@ public class DesignDetailView extends RelativeLayout {
 	/**
 	 * ClassName:TextStyleAdapter 
 	 * Function: 字体样式adapter
-	 * 
 	 * @author hch
 	 * @version DesignActivity
 	 * @since Ver 1.1

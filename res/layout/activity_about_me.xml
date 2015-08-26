@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@drawable/view_home_background" >
-     <RelativeLayout
+    android:background="@drawable/view_home_background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/design_top_background">
+        android:background="@drawable/design_top_background" >
 
         <TextView
             android:layout_width="match_parent"
@@ -21,54 +22,57 @@
             android:text="关于我们"
             android:textColor="@color/color_white"
             android:textSize="16sp" />
-        <Button
+
+        <ImageView
             android:id="@+id/click_back_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
             android:background="@drawable/back_btn_selected" />
     </RelativeLayout>
-    
-    <TextView 
+
+    <TextView
         android:id="@+id/about2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:layout_below="@id/ll_title"
         android:layout_marginTop="50dp"
         android:gravity="center"
+        android:text="如遇到什么问题请与我们联系"
         android:textColor="@color/color_333333"
-        android:text="如遇到什么问题请与我们联系"/>
-    <TextView 
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/about4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-         android:layout_below="@id/about2"
+        android:layout_below="@id/about2"
         android:layout_marginTop="24dp"
         android:gravity="center"
+        android:text="QQ:763121443\nQQ:229836277"
         android:textColor="@color/color_333333"
-        android:text="QQ:763121443\nQQ:229836277"/>
-    <TextView 
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/about5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:layout_below="@id/about4"
         android:layout_marginTop="30dp"
         android:gravity="center"
+        android:text="或发邮件至邮箱:\n763121443@qq.com\n229836277@qq.com"
         android:textColor="@color/color_333333"
-        android:text="或发邮件至邮箱:\n763121443@qq.com\n229836277@qq.com"/>
-    <TextView 
+        android:textSize="20sp" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:gravity="center"
         android:layout_below="@id/about5"
         android:layout_marginTop="30dp"
+        android:gravity="center"
         android:text="谢谢！"
-        android:textColor="@color/color_333333"/>
+        android:textColor="@color/color_333333"
+        android:textSize="20sp" />
 
 </RelativeLayout>

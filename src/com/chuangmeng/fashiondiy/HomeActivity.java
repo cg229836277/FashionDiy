@@ -20,7 +20,7 @@ public class HomeActivity extends BaseFragmentActivity {
 
 	@ViewById
 	ImageView view_home_couple_iv;
-	
+	 
 	@ViewById
 	ImageView view_home_male_iv;
 
