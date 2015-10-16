@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.widget.ImageView;
 
 import com.chuangmeng.fashiondiy.R;
@@ -163,15 +164,22 @@ public class BitmapUtil {
 		if (sourceView == null) {
 			return null;
 		}
-		Bitmap returnedBitmap = Bitmap.createBitmap(sourceView.getWidth(),sourceView.getHeight(), Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas(returnedBitmap);
-		Drawable bgDrawable = sourceView.getBackground();
-		if (bgDrawable != null) {
-			bgDrawable.draw(canvas);
-		} else {
-			canvas.drawColor(Color.TRANSPARENT);
-		}
-		sourceView.draw(canvas);
-		return returnedBitmap;
+//		Bitmap returnedBitmap = Bitmap.createBitmap(sourceView.getWidth(),sourceView.getHeight(), Bitmap.Config.ARGB_8888);
+//		Canvas canvas = new Canvas(returnedBitmap);
+//		Drawable bgDrawable = sourceView.getBackground();
+//		if (bgDrawable != null) {
+//			bgDrawable.draw(canvas);
+//		} else {
+//			canvas.drawColor(Color.TRANSPARENT);
+//		}
+//		sourceView.draw(canvas);
+//		return returnedBitmap;
+		
+		sourceView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+		sourceView.layout(0, 0, sourceView.getMeasuredWidth(), sourceView.getMeasuredHeight());
+		sourceView.buildDrawingCache();
+        Bitmap bitmap = sourceView.getDrawingCache();
+
+        return bitmap;
 	}
 }

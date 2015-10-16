@@ -163,21 +163,23 @@ public class SaveTrywearClothService extends IntentService {
 			saveFileDir.mkdirs();
 		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
-		for(Bitmap currentBitmap : bitmapList){
-			String fileName = dateFormat.format(new Date()) + ".png";
-			try{
-				File diyClothImage = new File(saveFileDir + "/" + fileName);
-				if(diyClothImage.exists()){
-					diyClothImage.delete();
+		synchronized (bitmapList) {					
+			for(Bitmap currentBitmap : bitmapList){
+				String fileName = dateFormat.format(new Date()) + ".png";
+				try{
+					File diyClothImage = new File(saveFileDir + "/" + fileName);
+					if(diyClothImage.exists()){
+						diyClothImage.delete();
+					}
+					FileOutputStream out = new FileOutputStream(diyClothImage);
+					currentBitmap.compress(CompressFormat.PNG, 100, out);
+					out.flush();
+					out.close();
+				}catch(IOException e){
+					e.printStackTrace();
 				}
-				FileOutputStream out = new FileOutputStream(diyClothImage);
-				currentBitmap.compress(CompressFormat.PNG, 100, out);
-				out.flush();
-				out.close();
-			}catch(IOException e){
-				e.printStackTrace();
-			}
-		}	
+			}	
+		}
 		
 		appInstance.clearBitmapArray();
 	}
