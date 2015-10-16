@@ -37,10 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            android:background="@drawable/preview_bottom_share_selected"
+            android:background="@drawable/chuck"
             android:scaleType="fitCenter" />
     </LinearLayout>
-
+<!-- android:background="@drawable/preview_bottom_share_selected" -->
     <LinearLayout android:id="@+id/choose_show_picture_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -72,6 +72,8 @@
         android:id="@+id/show_design_cloth"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
+        android:divider="@color/color_white"
+        android:dividerHeight="8dp"
         android:layout_weight="1" />
 
     <ImageView

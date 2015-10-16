@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.util.CollectionUtil;
@@ -163,23 +164,26 @@ public class SaveTrywearClothService extends IntentService {
 			saveFileDir.mkdirs();
 		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
-		synchronized (bitmapList) {					
-			for(Bitmap currentBitmap : bitmapList){
+			
+		Iterator<Bitmap> iterator = bitmapList.iterator();
+		synchronized (saveFileDir) {
+			while (iterator.hasNext()) {
+				Bitmap currentBitmap = iterator.next();
 				String fileName = dateFormat.format(new Date()) + ".png";
-				try{
+				try {
 					File diyClothImage = new File(saveFileDir + "/" + fileName);
-					if(diyClothImage.exists()){
+					if (diyClothImage.exists()) {
 						diyClothImage.delete();
 					}
 					FileOutputStream out = new FileOutputStream(diyClothImage);
 					currentBitmap.compress(CompressFormat.PNG, 100, out);
 					out.flush();
 					out.close();
-				}catch(IOException e){
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}	
-		}
+			}
+		}	
 		
 		appInstance.clearBitmapArray();
 	}

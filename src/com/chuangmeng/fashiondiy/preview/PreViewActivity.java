@@ -37,19 +37,19 @@ import com.chuangmeng.fashiondiy.service.SaveTrywearClothService;
 import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.chuangmeng.fashiondiy.view.PreviewDetailPagerAdapter;
-//import com.umeng.socialize.bean.SHARE_MEDIA;
-//import com.umeng.socialize.controller.UMServiceFactory;
-//import com.umeng.socialize.controller.UMSocialService;
-//import com.umeng.socialize.media.QQShareContent;
-//import com.umeng.socialize.media.QZoneShareContent;
-//import com.umeng.socialize.media.SmsShareContent;
-//import com.umeng.socialize.media.UMImage;
-//import com.umeng.socialize.sso.QZoneSsoHandler;
-//import com.umeng.socialize.sso.SmsHandler;
-//import com.umeng.socialize.sso.UMQQSsoHandler;
-//import com.umeng.socialize.weixin.controller.UMWXHandler;
-//import com.umeng.socialize.weixin.media.CircleShareContent;
-//import com.umeng.socialize.weixin.media.WeiXinShareContent;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.media.QQShareContent;
+import com.umeng.socialize.media.QZoneShareContent;
+import com.umeng.socialize.media.SmsShareContent;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.QZoneSsoHandler;
+import com.umeng.socialize.sso.SmsHandler;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
+import com.umeng.socialize.weixin.media.CircleShareContent;
+import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
 /**
  * ClassName:PreViewActivity Function: TODO ADD FUNCTION Reason: TODO ADD REASON
@@ -122,13 +122,12 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	@ViewById
 	ViewPager preview_cloth_detail_viewpager;
 
-//	private UMSocialService mController;
-	//private UMSocialService mController;
+	private UMSocialService mController;
 	
 	@AfterViews
 	void initData() {
-//		mController = UMServiceFactory.getUMSocialService("com.umeng.share");
-		//mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+		mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+		mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 		
 		designStyle = getIntent().getStringExtra(PREVIEW_COUPLE);
 		
@@ -149,7 +148,8 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 //		String shareImageUrl = "http://d.hiphotos.baidu.com/image/pic/item/b3fb43166d224f4ae33532120bf790529822d107.jpg";
 ////		shareApp(Constant.shareContent, Constant.shareClickUrl, shareImageUrl, Constant.shareTitle);
 //	}
-	void preview_to_clothset() {
+	@Click
+	public void preview_to_clothset() {
 		Intent intent = new Intent(this,DisplayGarderobeActivity.class);
 		startActivity(intent);
 	}

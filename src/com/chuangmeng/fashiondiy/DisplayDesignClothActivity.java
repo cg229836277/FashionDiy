@@ -191,6 +191,7 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 		private FrameLayout secondImageLayout;
 		private LinearLayout.LayoutParams params;
 		private int destWidth = screenWidth / 2;
+		String fileTag = null;
 		
 		@SuppressLint("NewApi") 
 		public ShowClothAdapter(){
@@ -235,15 +236,24 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 			
 			final ImageView showFirstImage = (ImageView)firstImageLayout.findViewById(R.id.display_cloth_image);
 			final ImageView showSecondImage = (ImageView)secondImageLayout.findViewById(R.id.display_cloth_image);
+			
 			if(arg0 * 2 < mShowList.size()){
-				showFirstImage.setTag(mShowList.get(arg0 * 2));
-				Picasso.with(DisplayDesignClothActivity.this).load(new File(mShowList.get(arg0 * 2))).resize(destWidth, destWidth).into(showFirstImage);
+				fileTag = mShowList.get(arg0 * 2);
+				File tempFile = new File(fileTag);
+				if(tempFile.exists()){
+					showFirstImage.setTag(fileTag);
+					Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showFirstImage);
+				}			
 			}else{
 				firstImageLayout.setVisibility(View.INVISIBLE);
 			}
 			if(arg0 * 2 + 1 < mShowList.size()){
-				showSecondImage.setTag(mShowList.get(arg0 * 2 + 1));
-				Picasso.with(DisplayDesignClothActivity.this).load(new File(mShowList.get(arg0 * 2 + 1))).resize(destWidth, destWidth).into(showSecondImage);			
+				fileTag = mShowList.get(arg0 * 2 + 1);
+				File tempFile = new File(fileTag);
+				if(tempFile.exists()){
+					showSecondImage.setTag(fileTag);
+					Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showSecondImage);			
+				}
 			}else{
 				secondImageLayout.setVisibility(View.INVISIBLE);
 			}
