@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            android:background="@drawable/chuck"
+            android:background="@drawable/design_title_menu_selected"
             android:scaleType="fitCenter" />
     </LinearLayout>
 <!-- android:background="@drawable/preview_bottom_share_selected" -->
