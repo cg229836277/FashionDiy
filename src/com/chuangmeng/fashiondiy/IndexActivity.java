@@ -29,26 +29,30 @@ public class IndexActivity extends BaseFragmentActivity {
 	@AfterViews
 	void initData() {
 		
-		boolean isFirstIn = SimpleSharedPreferences.getBoolean("bisFirstIn", IndexActivity.this);
-		if(!isFirstIn){//默认返回的是true
-			goGuide();
-			return;
-		}else{
+		Intent intent = new Intent(IndexActivity.this,HomeActivity_.class);
+		startActivity(intent);
+		return;
+		
+//		boolean isFirstIn = SimpleSharedPreferences.getBoolean("bisFirstIn", IndexActivity.this);
+//		if(!isFirstIn){//默认返回的是true
+//			goGuide();
+//			return;
+//		}else{
 //			UmengUpdateAgent.update(this);
-		}
+//		}
 
-		splashTimer = new Timer();
-		splashTimer.schedule(new TimerTask() {
-			@Override
-			public void run() {				
-				Intent intent = new Intent(IndexActivity.this,HomeActivity_.class);
-				startActivity(intent);
-				overridePendingTransition(R.anim.view_in_top,R.anim.view_out_bottom);	
-				
-				IndexActivity.this.finish();
-			}
-		}, DELAY);
-		scheduled = true;
+//		splashTimer = new Timer();
+//		splashTimer.schedule(new TimerTask() {
+//			@Override
+//			public void run() {				
+//				Intent intent = new Intent(IndexActivity.this,HomeActivity_.class);
+//				startActivity(intent);
+//				overridePendingTransition(R.anim.view_in_top,R.anim.view_out_bottom);	
+//				
+//				IndexActivity.this.finish();
+//			}
+//		}, DELAY);
+//		scheduled = true;
 	}
 	
 	public void goGuide(){		
