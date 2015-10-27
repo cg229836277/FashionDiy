@@ -32,7 +32,7 @@
             android:textSize="@dimen/text_size_18" />
 
         <Button
-            android:id="@+id/design_show_share_iv"
+            android:id="@+id/design_show_menu_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -40,7 +40,7 @@
             android:background="@drawable/design_title_menu_selected"
             android:scaleType="fitCenter" />
     </LinearLayout>
-<!-- android:background="@drawable/preview_bottom_share_selected" -->
+<!-- android:background="@drawable/preview_bottom_share_selected" 
     <LinearLayout android:id="@+id/choose_show_picture_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_weight="0.5"
             android:layout_margin="2dp"
             android:text="我的试穿" />
-    </LinearLayout>
+    </LinearLayout>   -->
 
     <ListView
         android:id="@+id/show_design_cloth"

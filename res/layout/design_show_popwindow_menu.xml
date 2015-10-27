@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_bg_normal_all"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/share"
+        style="@style/ButtonTextStyle"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="分享" />
+
+    <TextView
+        android:id="@+id/my_design"
+        style="@style/ButtonTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="我的设计" />
+
+    <TextView
+        android:id="@+id/my_trywear"
+        style="@style/ButtonTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="我的试穿" />
+
+</LinearLayout>

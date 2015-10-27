@@ -127,6 +127,7 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 
 		RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		parms.topMargin = (int) (100 * screenMetric.density);
+		parms.addRule(RelativeLayout.CENTER_IN_PARENT);
 		// viewPager
 		LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
 		

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
@@ -20,9 +21,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,20 +39,19 @@ import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 import 	android.view.GestureDetector.SimpleOnGestureListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
 //SimpleOnGestureListener
-public class DisplayDesignClothActivity extends Activity implements OnTouchListener{
+public class DisplayDesignClothActivity extends BaseFragmentActivity implements OnTouchListener{
 	private ListView showPictureListView;
 	private ImageView expandImageView;
 	
-	private Button dsignClothBtn;
-	private Button tryWearClothBtn;
-	
-	private Button backBtn , shareBtn;
+	private Button backBtn , menuBtn;
 	
 	private ShowClothAdapter adapter;
 	
@@ -73,6 +75,12 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 	
 	private ShareAppUtil shareAppUtil;
 	
+	private PopupWindow popupWindow;
+	private View popView;
+	private TextView shareText;
+	private TextView myDesignText;
+	private TextView myTryWearText;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,6 +88,15 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 		
 		mGestureDetector = new GestureDetector(this, new MygestureDector());
 		mGestureDetector.setIsLongpressEnabled(true);
+		
+		popupWindow = new PopupWindow(this);
+		popView = LayoutInflater.from(this).inflate(R.layout.design_show_popwindow_menu, null);
+		popupWindow.setContentView(popView);
+		popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);  
+		popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+		ColorDrawable dw = new ColorDrawable(-00000);
+		popupWindow.setBackgroundDrawable(dw);
+		popupWindow.setOutsideTouchable(true);
 		
 		shareAppUtil = new ShareAppUtil(DisplayDesignClothActivity.this);
 		EventBus.getDefault().register(this);	
@@ -90,29 +107,16 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 	private void bindEvent(){
 		showPictureListView = (ListView)findViewById(R.id.show_design_cloth);
 		expandImageView = (ImageView)findViewById(R.id.expanded_image);
-				
-		dsignClothBtn = (Button)findViewById(R.id.show_design_cloth_btn);
-		tryWearClothBtn = (Button)findViewById(R.id.show_trywear_cloth_btn);
 		
 		backBtn = (Button)findViewById(R.id.design_show_back_iv);
-		shareBtn = (Button)findViewById(R.id.design_show_share_iv);
+		menuBtn = (Button)findViewById(R.id.design_show_menu_iv);
+		
+		shareText = (TextView)popView.findViewById(R.id.share);
+		myDesignText = (TextView)popView.findViewById(R.id.my_design);
+		myTryWearText = (TextView)popView.findViewById(R.id.my_trywear);
 		
 		expandedImageView = (ImageView)findViewById(R.id.expanded_image);
-		
-		dsignClothBtn.setOnClickListener(new OnClickListener() {
 			
-			@Override
-			public void onClick(View arg0) {
-				updateShowList(true);
-			}
-		});
-		tryWearClothBtn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				updateShowList(false);
-			}
-		});		
 		backBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -120,18 +124,53 @@ public class DisplayDesignClothActivity extends Activity implements OnTouchListe
 				finish();
 			}
 		});
-		shareBtn.setOnClickListener(new OnClickListener() {			
+		menuBtn.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View arg0) {
+				showPopupWindow(arg0);				
+			}
+		});
+		
+		shareText.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 				if(CollectionUtil.isArrayListNull(shareClothList)){
 					Toast.makeText(DisplayDesignClothActivity.this,"请先选择图片！",Toast.LENGTH_LONG).show();
 				}else{
 					shareAppUtil.shareAppForManyImage(shareClothList);
+					popupWindow.dismiss();
 				}
 			}
 		});
 		
+		myDesignText.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				updateShowList(true);
+				popupWindow.dismiss();
+			}
+		});
+		
+		myTryWearText.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				updateShowList(false);
+				popupWindow.dismiss();
+			}
+		});
+		
 		mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
+	}
+	
+	private void showPopupWindow(View anchorView){
+		if(popupWindow.isShowing()){
+			popupWindow.dismiss();
+			return;
+		}
+		popupWindow.showAsDropDown(anchorView, 6, 6);
 	}
 	
 	private void updateShowList(boolean isDesignCloth){

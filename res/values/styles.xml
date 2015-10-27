@@ -2,15 +2,16 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
+
     <style name="Theme.UMDialog" parent="android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -29,29 +30,46 @@
     <style name="ImageViewStyle">
         <item name="android:scaleType">fitCenter</item>
     </style>
-    
-	<style name="CustomDialog" parent="android:style/Theme.Dialog">  
-        <!--背景颜色及透明程度--> 
-        <item name="android:windowBackground">@android:color/transparent</item>  
-        <!--是否有标题 --> 
-        <item name="android:windowNoTitle">true</item>  
-        <!--是否浮现在activity之上--> 
-        <item name="android:windowIsFloating">true</item>  
-        <!--是否模糊--> 
-        <item name="android:backgroundDimEnabled">false</item>  
+
+    <style name="CustomDialog" parent="android:style/Theme.Dialog">
+
+        <!-- 背景颜色及透明程度 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否模糊 -->
+        <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowFrame">@null</item>
     </style>
-    
-	<style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
-		<item name="android:button">@drawable/design_display_choose_state</item>
-	</style>	
-		<style name="CustomChooseAllTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
-		<item name="android:button">@drawable/design_display_choose_all_cloth</item>
-	</style>
-	<style name="ButtonTextStyle">
+
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/design_display_choose_state</item>
+    </style>
+
+    <style name="CustomChooseAllTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/design_display_choose_all_cloth</item>
+    </style>
+
+    <style name="ButtonTextStyle">
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:textColor">@color/color_white</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
+
+    <style name="ButtonTextStyleBlack">
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    
+    <style name="PopwindowStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@drawable/btn_bg_normal_all</item>
+        <item name="android:windowFrame">@color/color_white</item>
+    </style>
+
 </resources>
