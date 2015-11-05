@@ -8,4 +8,5 @@
     <dimen name="title_height_42">48dp</dimen>
     <dimen name="style_height_36">42dp</dimen>
 	<dimen name="display_cloth_size_64dp">44dp</dimen>
+	<dimen name="try_wear_cloth_margin_top">150dp</dimen>
 </resources>

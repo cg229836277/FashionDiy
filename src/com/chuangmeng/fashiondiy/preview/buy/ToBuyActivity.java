@@ -66,14 +66,14 @@ public class ToBuyActivity extends BaseFragmentActivity {
 	void initData(){
 		Boolean isLovers = getIntent().getBooleanExtra("isLovers",false);
 		ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
-		bitmapArray.add(FashionDiyApplication.getApplicationInstance()
+		bitmapArray.add(FashionDiyApplication.getInstance()
 				.getPositiveViewBitmap());
-		bitmapArray.add(FashionDiyApplication.getApplicationInstance()
+		bitmapArray.add(FashionDiyApplication.getInstance()
 				.getNegativeViewBitmap());
 		if (isLovers) {
-			bitmapArray.add(FashionDiyApplication.getApplicationInstance()
+			bitmapArray.add(FashionDiyApplication.getInstance()
 					.getFemalePositiveBitmap());
-			bitmapArray.add(FashionDiyApplication.getApplicationInstance()
+			bitmapArray.add(FashionDiyApplication.getInstance()
 					.getFemaleNegativeBitmap());
 		}
 		design_preview_buy_show_vf.setAdapter(new ImageAdapter(this , bitmapArray), 0);	

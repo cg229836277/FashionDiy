@@ -426,6 +426,6 @@ public class PreViewActivity extends BaseFragmentActivity implements OnPageChang
 	protected void onDestroy() {
 		super.onDestroy();	
 		isSaved = false;
-		FashionDiyApplication.getApplicationInstance().clearBitmapArray();
+		FashionDiyApplication.getInstance().clearBitmapArray();
 	}
 }

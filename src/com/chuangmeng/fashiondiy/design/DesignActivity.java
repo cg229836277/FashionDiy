@@ -44,7 +44,7 @@ import com.chuangmeng.fashiondiy.view.DesignDetailPagerAdapter;
 import com.chuangmeng.fashiondiy.view.HorizontalListView;
 import com.chuangmeng.fashiondiy.view.NOScrollViewPager;
 import com.chuangmeng.fashiondiy.view.RecyclingImageView;
-import com.squareup.picasso.Picasso;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
 
 /**
  * ClassName:DesignActivity Function: TODO ADD FUNCTION Reason: TODO ADD REASON
@@ -81,7 +81,7 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 	
 	private boolean isChooseFemale = false; //是否是选择了情侣的女装，默认不是
 	
-	private FashionDiyApplication appInstance = FashionDiyApplication.getApplicationInstance();
+	private FashionDiyApplication appInstance = FashionDiyApplication.getInstance();
 
 	@ViewById
 	LinearLayout design_bottom_detail_ll;// 页面底部五个功能按钮视图父类
@@ -162,7 +162,7 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 
 	@AfterViews
 	void initData() {				
-		screenSize = FashionDiyApplication.getApplicationInstance().getScreenSize();
+		screenSize = FashionDiyApplication.getInstance().getScreenSize();
 		
 		DESIGN_STYLE = getIntent().getStringExtra(Constant.STYLE);
 		
@@ -729,8 +729,11 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 			}
 
 			//BitmapUtil.loadResourceImage(DesignActivity.this , imageView,mSourceDrawable.get(position),imageWidth, imageHeight);
-			Picasso.with(DesignActivity.this).load(mSourceDrawable.get(position)).resize(imageWidth, imageHeight).into(imageView);
-
+			//Picasso.with(DesignActivity.this).load(mSourceDrawable.get(position)).resize(imageWidth, imageHeight).into(imageView);
+			Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync("drawable://" + mSourceDrawable.get(position), new ImageSize(imageWidth, imageHeight));
+			if(currentBitmap != null){
+				imageView.setImageBitmap(currentBitmap);
+			}
 			return imageView;
 		}
 

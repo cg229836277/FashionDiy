@@ -5,23 +5,13 @@ import java.io.InputStream;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.widget.ImageView;
-
-import com.chuangmeng.fashiondiy.R;
-import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.view.svg.SvgImageView;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-import com.squareup.picasso.Picasso.LoadedFrom;
 
 /**
  * @Title：FashionDIY
@@ -85,66 +75,66 @@ public class BitmapUtil {
 		return inSampleSize;
 	}
 	
-	public static void loadLocalImage(Context context ,ImageView view , String localPath , int width , int height){
-		if(!StringUtil.isEmpty(localPath)){
-			Picasso.with(context).load(new File(localPath)).resize(width, height).into(view);
-		}
-	}
-	
-	public static void loadNetImage(Context context ,ImageView view , String imageUrl , int width , int height){
-		if(!StringUtil.isEmpty(imageUrl)){
-			Picasso.with(context).load(imageUrl).resize(width, height).placeholder(R.drawable.app_icon).into(view);
-		}
-	}
-	
-	public static void loadResourceImage(Context context ,ImageView view , int resourceId , int width , int height){
-		if(resourceId != 0){
-			Picasso.with(context).load(resourceId).placeholder(R.drawable.app_icon).resize(width, height).into(view);
-		}
-	}
-	
-	public static void loadFileImage(Context context ,ImageView view , File imageFile , int width , int height){
-		if(imageFile != null && imageFile.exists()){
-			Picasso.with(context).load(imageFile).placeholder(R.drawable.app_icon).resize(width, height).into(view);
-		}
-	}
-	
-	public static void loadLocalImage(Context context ,ImageView view , String localPath){
-		if(!StringUtil.isEmpty(localPath)){
-			Picasso.with(context).load(localPath).into(view);
-		}
-	}
-	
+//	public static void loadLocalImage(Context context ,ImageView view , String localPath , int width , int height){
+//		if(!StringUtil.isEmpty(localPath)){
+//			//Picasso.with(context).load(new File(localPath)).resize(width, height).into(view);
+//		}
+//	}
+//	
+//	public static void loadNetImage(Context context ,ImageView view , String imageUrl , int width , int height){
+//		if(!StringUtil.isEmpty(imageUrl)){
+//			//Picasso.with(context).load(imageUrl).resize(width, height).placeholder(R.drawable.app_icon).into(view);
+//		}
+//	}
+//	
+//	public static void loadResourceImage(Context context ,ImageView view , int resourceId , int width , int height){
+//		if(resourceId != 0){
+//			//Picasso.with(context).load(resourceId).placeholder(R.drawable.app_icon).resize(width, height).into(view);
+//		}
+//	}
+//	
+//	public static void loadFileImage(Context context ,ImageView view , File imageFile , int width , int height){
+//		if(imageFile != null && imageFile.exists()){
+//			//Picasso.with(context).load(imageFile).placeholder(R.drawable.app_icon).resize(width, height).into(view);
+//		}
+//	}
+//	
+//	public static void loadLocalImage(Context context ,ImageView view , String localPath){
+//		if(!StringUtil.isEmpty(localPath)){
+//			//Picasso.with(context).load(localPath).into(view);
+//		}
+//	}
+//	
 	public static void loadPhotoPath(Context context ,SvgImageView view , String localPath){
 		if(!StringUtil.isEmpty(localPath)){
 			Drawable drawable = BitmapDrawable.createFromPath(localPath);
 			view.setImageDrawable(drawable);
 		}
 	}
-	
-	public static void loadLocalImage(Context context ,SvgImageView view , String localPath){
-		if(!StringUtil.isEmpty(localPath)){
-			Picasso.with(context).load(new File(localPath)).into	(view);
-		}
-	}
-	
-	public static void loadNetImage(Context context ,ImageView view , String imageUrl){
-		if(!StringUtil.isEmpty(imageUrl)){
-			Picasso.with(context).load(imageUrl).placeholder(R.drawable.app_icon).into(view);
-		}
-	}
-	
-	public static void loadResourceImage(Context context ,ImageView view , int resourceId){
-		if(resourceId != 0){
-			Picasso.with(context).load(resourceId).placeholder(R.drawable.app_icon).into(view);
-		}
-	}
-	
-	public static void loadFileImage(Context context ,ImageView view , File imageFile){
-		if(imageFile != null && imageFile.exists()){
-			Picasso.with(context).load(imageFile).placeholder(R.drawable.app_icon).into(view);			
-		}
-	}
+//	
+//	public static void loadLocalImage(Context context ,SvgImageView view , String localPath){
+//		if(!StringUtil.isEmpty(localPath)){
+//			//Picasso.with(context).load(new File(localPath)).into	(view);
+//		}
+//	}
+//	
+//	public static void loadNetImage(Context context ,ImageView view , String imageUrl){
+//		if(!StringUtil.isEmpty(imageUrl)){
+//			//Picasso.with(context).load(imageUrl).placeholder(R.drawable.app_icon).into(view);
+//		}
+//	}
+//	
+//	public static void loadResourceImage(Context context ,ImageView view , int resourceId){
+//		if(resourceId != 0){
+//			//Picasso.with(context).load(resourceId).placeholder(R.drawable.app_icon).into(view);
+//		}
+//	}
+//	
+//	public static void loadFileImage(Context context ,ImageView view , File imageFile){
+//		if(imageFile != null && imageFile.exists()){
+//			//Picasso.with(context).load(imageFile).placeholder(R.drawable.app_icon).into(view);			
+//		}
+//	}
 	
 	public static void loadUriImageView(final Context context ,final SvgImageView view, Uri uri){
 		if(uri != null){

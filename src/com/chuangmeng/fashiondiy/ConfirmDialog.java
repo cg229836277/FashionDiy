@@ -26,8 +26,8 @@ public class ConfirmDialog extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_confirm_delete_cloth);
 		
-		detailMesage = getIntent().getStringExtra(DETAIL_MESSAGE);
-		
+		//detailMesage = getIntent().getStringExtra(DETAIL_MESSAGE);
+		detailMesage = "确认删除？";
 		bindEvent();
 		
 		setDataToView(detailMesage);

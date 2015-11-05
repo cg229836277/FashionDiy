@@ -104,7 +104,7 @@ public class LoadTextStyleUtil {
 	    public TypefaceWorkerTask(TextView textView) {
 	        // Use a WeakReference to ensure the ImageView can be garbage collected
 	        textViewReference = new WeakReference<TextView>(textView);
-	        context = FashionDiyApplication.getApplicationInstance().getApplicationContext();
+	        context = FashionDiyApplication.getInstance().getApplicationContext();
 	    }
         @Override
         protected void onPostExecute(Typeface typeFace) {

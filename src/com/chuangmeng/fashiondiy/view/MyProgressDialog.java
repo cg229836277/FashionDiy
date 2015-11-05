@@ -58,8 +58,8 @@ public class MyProgressDialog extends Dialog {
 		
 		setContentView(R.layout.fashiondiy_progress_dialog);
 		
-		int dialogWidth = FashionDiyApplication.getApplicationInstance().screenSize.widthPixels / 3;
-		int dialogHeight = FashionDiyApplication.getApplicationInstance().screenSize.widthPixels / 3;
+		int dialogWidth = FashionDiyApplication.getInstance().screenSize.widthPixels / 3;
+		int dialogHeight = FashionDiyApplication.getInstance().screenSize.widthPixels / 3;
 		
 		getWindow().setLayout(dialogWidth, dialogHeight);
 		

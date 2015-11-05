@@ -34,7 +34,7 @@ public class PreviewPositiveFragment extends Fragment {
 	}
 	
 	public void setPositivePreview(){
-		FashionDiyApplication appInstace = FashionDiyApplication.getApplicationInstance();
+		FashionDiyApplication appInstace = FashionDiyApplication.getInstance();
 		if(!CollectionUtil.isArrayListNull(appInstace.getBitmaps())){
 			ArrayList<Bitmap> tempList = appInstace.getBitmaps();
 			if(previewPositiveIv != null && tempList.size() >= 2){

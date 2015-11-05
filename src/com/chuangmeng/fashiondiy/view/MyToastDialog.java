@@ -3,6 +3,8 @@ package com.chuangmeng.fashiondiy.view;
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -40,7 +42,7 @@ public class MyToastDialog extends Toast{
 	
 	private static Context mContext;
 	
-	private static DisplayMetrics screenMetrics = FashionDiyApplication.getApplicationInstance().getScreenSize();
+	private static DisplayMetrics screenMetrics = FashionDiyApplication.getInstance().getScreenSize();
 		
 	 /**
 	 * @param context
@@ -62,7 +64,7 @@ public class MyToastDialog extends Toast{
 	};
 
 	//显示图片
-	public static void showPhotoDialog(String path) {
+	public static void showPhotoDialog(String imagePath) {
 		
 		int width = screenMetrics.widthPixels / 2;
 		int height = screenMetrics.heightPixels / 4;
@@ -74,7 +76,9 @@ public class MyToastDialog extends Toast{
 	    view.setMaxHeight(height);
 	    view.setMaxWidth(width);
 	    view.setScaleType(ScaleType.FIT_XY);
-		BitmapUtil.loadLocalImage(mContext, view, path, width, height);
+		//BitmapUtil.loadLocalImage(mContext, view, path, width, height);
+	    Bitmap bitmap = FashionDiyApplication.getInstance().getImageLoader().loadImageSync(imagePath, new ImageSize(width, height));
+	    view.setImageBitmap(bitmap);
 		view.setLayoutParams(params);
 		WindowManager.LayoutParams lp=dialog.getWindow().getAttributes();
 		lp.width=width;
@@ -88,7 +92,7 @@ public class MyToastDialog extends Toast{
 		mHandler.removeCallbacks(r);
 		View view = ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.fashiondiy_toast_dialog, null);
 		TextView txt = (TextView) view.findViewById(R.id.toast_dialog_content);
-		int width = FashionDiyApplication.getApplicationInstance().getScreenSize().widthPixels;
+		int width = FashionDiyApplication.getInstance().getScreenSize().widthPixels;
 		txt.setWidth(width / 3);
 		txt.setHeight(width / 3);
 		txt.setText(toastContent);

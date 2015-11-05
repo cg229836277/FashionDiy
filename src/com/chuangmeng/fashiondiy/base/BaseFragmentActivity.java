@@ -24,6 +24,8 @@ public class BaseFragmentActivity extends FragmentActivity {
 	public static DisplayMetrics screenMetric; 
 	public MyProgressDialog progressDialog;
 	public MyToastDialog toastDialog;
+	
+	public FashionDiyApplication appInstance;
 	/*
 	 * private Button back_bt; private Button back_nav_bt; private LinearLayout
 	 * float1_lv; private LinearLayout float2_lv; private LinearLayout
@@ -36,6 +38,8 @@ public class BaseFragmentActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		initScreenSize();
+		
+		appInstance = FashionDiyApplication.getInstance();
 		
 		progressDialog = MyProgressDialog.createDialog(BaseFragmentActivity.this);
 		toastDialog = new MyToastDialog(BaseFragmentActivity.this);
@@ -83,7 +87,7 @@ public class BaseFragmentActivity extends FragmentActivity {
 		screenMetric = new DisplayMetrics();   
         getWindowManager().getDefaultDisplay().getMetrics(screenMetric);
         if(screenMetric != null){
-        	FashionDiyApplication.getApplicationInstance().setScreenSize(screenMetric);  
+        	FashionDiyApplication.getInstance().setScreenSize(screenMetric);  
         }
 	}
 }

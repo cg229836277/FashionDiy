@@ -43,7 +43,7 @@ private ImageView previewNegativeIv;
 	}
 	
 	public void setPositivePreview(){
-		FashionDiyApplication appInstace = FashionDiyApplication.getApplicationInstance();
+		FashionDiyApplication appInstace = FashionDiyApplication.getInstance();
 		if(!CollectionUtil.isArrayListNull(appInstace.getBitmaps())){
 			ArrayList<Bitmap> tempList = appInstace.getBitmaps();
 			if(previewNegativeIv != null && tempList.size() == 4){

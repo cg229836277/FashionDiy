@@ -10,7 +10,8 @@ import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.ShareAppUtil;
 import com.chuangmeng.fashiondiy.util.StringUtil;
-import com.squareup.picasso.Picasso;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
+
 import de.greenrobot.event.EventBus;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -19,6 +20,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
@@ -60,6 +62,10 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 	private ArrayList<String> shareClothList;
 	
 	private int screenWidth = 0;
+	private int screenHeight = 0;
+	
+	private int destWidth = 0;
+	private int destHeight = 0;
 	
 	private Animator mCurrentAnimator;
 	// 加载放大之后视图的控件
@@ -80,6 +86,7 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 	private TextView shareText;
 	private TextView myDesignText;
 	private TextView myTryWearText;
+	private TextView showTitleText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +121,8 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 		shareText = (TextView)popView.findViewById(R.id.share);
 		myDesignText = (TextView)popView.findViewById(R.id.my_design);
 		myTryWearText = (TextView)popView.findViewById(R.id.my_trywear);
+		
+		showTitleText = (TextView)findViewById(R.id.show_title);
 		
 		expandedImageView = (ImageView)findViewById(R.id.expanded_image);
 			
@@ -150,6 +159,7 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 			public void onClick(View v) {
 				updateShowList(true);
 				popupWindow.dismiss();
+				showTitleText.setText("我的设计");
 			}
 		});
 		
@@ -159,6 +169,7 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 			public void onClick(View v) {
 				updateShowList(false);
 				popupWindow.dismiss();
+				showTitleText.setText("我的试穿");
 			}
 		});
 		
@@ -174,6 +185,7 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 	}
 	
 	private void updateShowList(boolean isDesignCloth){
+		setDestviewSize(isDesignCloth);
 		if(isDesignCloth){
 			if(!CollectionUtil.isListNull(designClothList)){
 				adapter.setList(designClothList);
@@ -191,9 +203,9 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 		}
 	}
 	
-	private void findLocalCloth(){
-		
-		screenWidth = FashionDiyApplication.getApplicationInstance().getScreenSize().widthPixels;
+	private void findLocalCloth(){		
+		screenWidth = FashionDiyApplication.getInstance().getScreenSize().widthPixels;
+		screenHeight = FashionDiyApplication.getInstance().getScreenSize().heightPixels;
 		shareClothList = new ArrayList<String>();
 		
 		File[] designClothFiles = new File(Constant.DIY_CLOTH_PICTURE_PATH).listFiles();
@@ -210,17 +222,31 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 				tryWearClothList.add(tempFile.getAbsolutePath());
 			}
 		}
-		
-		adapter = new ShowClothAdapter();
-		if(!CollectionUtil.isListNull(designClothList)){		
-			adapter.setList(designClothList);
+			
+		List<String> tempList = new ArrayList<String>();
+		if(!CollectionUtil.isListNull(designClothList)){	
+			setDestviewSize(true);
+			tempList.addAll(designClothList);			
 		}else if(!CollectionUtil.isListNull(tryWearClothList)){
-			adapter.setList(tryWearClothList);
+			setDestviewSize(false);
+			tempList.addAll(tryWearClothList);
 		}else{
 			Toast.makeText(DisplayDesignClothActivity.this, "您暂时还没有可以展示的图片哟", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		adapter = new ShowClothAdapter();
+		adapter.setList(tempList);
 		showPictureListView.setAdapter(adapter);
+	}
+	
+	private void setDestviewSize(boolean isDesign){
+		if(isDesign){
+			destWidth = screenWidth / 2;
+			destHeight = screenHeight / 4;
+		}else{
+			destWidth = screenWidth / 2;
+			destHeight = screenHeight / 3;
+		}
 	}
 	
 	private class ShowClothAdapter extends BaseAdapter{
@@ -229,13 +255,12 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 		private FrameLayout firstImageLayout;
 		private FrameLayout secondImageLayout;
 		private LinearLayout.LayoutParams params;
-		private int destWidth = screenWidth / 2;
 		String fileTag = null;
 		
 		@SuppressLint("NewApi") 
 		public ShowClothAdapter(){
 			inflater = LayoutInflater.from(DisplayDesignClothActivity.this);
-			params = new LayoutParams((ViewGroup.MarginLayoutParams)(new LayoutParams(destWidth, destWidth)));			
+			params = new LayoutParams((ViewGroup.MarginLayoutParams)(new LayoutParams(destWidth, destHeight)));			
 		}
 		
 		public void setList(List<String> showList){
@@ -281,7 +306,12 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 				File tempFile = new File(fileTag);
 				if(tempFile.exists()){
 					showFirstImage.setTag(fileTag);
-					Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showFirstImage);
+					//Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showFirstImage);
+					//Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync(tempFile.getAbsolutePath(), new ImageSize(destWidth, destWidth));
+					Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync("file://" + tempFile.getAbsolutePath(), new ImageSize(destWidth, destHeight));
+					if(currentBitmap != null){
+						showFirstImage.setImageBitmap(currentBitmap);
+					}
 				}			
 			}else{
 				firstImageLayout.setVisibility(View.INVISIBLE);
@@ -291,7 +321,11 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 				File tempFile = new File(fileTag);
 				if(tempFile.exists()){
 					showSecondImage.setTag(fileTag);
-					Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showSecondImage);			
+					//Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showSecondImage);			
+					Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync("file://" + tempFile.getAbsolutePath(), new ImageSize(destWidth, destHeight));
+					if(currentBitmap != null){
+						showSecondImage.setImageBitmap(currentBitmap);
+					}
 				}
 			}else{
 				secondImageLayout.setVisibility(View.INVISIBLE);
@@ -318,7 +352,8 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 //		int resWid = (int)(screenMetric.widthPixels);
 //		int resHei = (int)(screenMetric.heightPixels * 0.9);
 		//BitmapUtil.loadLocalImage(this, expandedImageView, imageResPath, resWid, resHei);
-		Picasso.with(this).load(new File(imageResPath)).into(expandedImageView);
+		//Picasso.with(this).load(new File(imageResPath)).into(expandedImageView);
+		appInstance.getImageLoader().displayImage("file://" + imageResPath, expandedImageView);
 		// 开始略缩图的开始边界和放大视图的结束边界
 		final Rect startBounds = new Rect();
 		final Rect finalBounds = new Rect();
@@ -516,7 +551,7 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 		if(!StringUtil.isEmpty(clothPath)){
 			currentDeleteCloth = clothPath;				
 			Intent intent = new Intent(DisplayDesignClothActivity.this , ConfirmDialog.class);
-			intent.putExtra(ConfirmDialog.DETAIL_MESSAGE, "确认删除？");
+			//intent.putExtra(ConfirmDialog.DETAIL_MESSAGE, "确认删除？");
 			startActivity(intent);
 		}
 	}

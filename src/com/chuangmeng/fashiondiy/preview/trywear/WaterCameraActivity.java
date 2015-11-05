@@ -1,12 +1,8 @@
 package com.chuangmeng.fashiondiy.preview.trywear;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.androidannotations.annotations.EActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
@@ -17,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -26,30 +23,25 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
-
 import com.chuangmeng.fashiondiy.DisplayDesignClothActivity;
 import com.chuangmeng.fashiondiy.R;
 import com.chuangmeng.fashiondiy.R.id;
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
-import com.chuangmeng.fashiondiy.base.FashionDiyApplication;
 import com.chuangmeng.fashiondiy.service.SaveTrywearClothService;
 import com.chuangmeng.fashiondiy.util.BitmapUtil;
 import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.SavePictureBean;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.jni.bitmap.operations.JniBitmapHolder;
-import com.squareup.picasso.Picasso;
 
 public class WaterCameraActivity extends BaseFragmentActivity implements OnClickListener{
 
-	Button backBtn;
-	SurfaceView surfaceView;
-	ImageView saveImageView;
-	ImageView takePicImageView;
-	ViewPager viewPager;
+	private Button backBtn;
+	private SurfaceView surfaceView;
+	private ImageView saveImageView;
+	private ImageView takePicImageView;
+	private ViewPager viewPager;
 
 	private Camera camera;
 	private Camera.Parameters parameters = null;
@@ -69,7 +61,9 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 	
 	private SavePictureBean currentBeanData;
 	
-	private FashionDiyApplication appInstance = FashionDiyApplication.getApplicationInstance();
+	private final String TAG = "WaterCameraActivity";
+	
+	private MyViewPagerAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +85,7 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
         takePicImageView.setOnClickListener(this);
 	}
 
-	private void initData() {			
+	private void initData() {
 		choosedList = getIntent().getStringArrayListExtra(CHOOSED_CLOTH_LIST);
 		String chooseDesignCloth = getIntent().getStringExtra(CHOOSED_DESIGN_CLOTH_LIST);
 		if(!StringUtil.isEmpty(chooseDesignCloth)){
@@ -125,9 +119,6 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 		surfaceView.getHolder().setKeepScreenOn(true);
 		surfaceView.getHolder().addCallback(new MySurfaceViewCallback());
 
-		RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		parms.topMargin = (int) (100 * screenMetric.density);
-		parms.addRule(RelativeLayout.CENTER_IN_PARENT);
 		// viewPager
 		LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
 		
@@ -137,7 +128,6 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 				View view = inflater.inflate(R.layout.preview_trywear_water_forward_camera, null);
 				ImageView clothWaterPicture = (ImageView) view.findViewById(R.id.two_photo);
 				clothWaterPicture.setImageBitmap(tempData);
-				clothWaterPicture.setLayoutParams(parms);
 				views.add(view);
 			}
 		}
@@ -146,13 +136,13 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 			for (int i = 0; i < choosedList.size(); i++) {
 				View view = inflater.inflate(R.layout.preview_trywear_water_forward_camera, null);
 				ImageView clothWaterPicture = (ImageView) view.findViewById(R.id.two_photo);
-				Picasso.with(this).load(new File(choosedList.get(i))).into(clothWaterPicture);
-				clothWaterPicture.setLayoutParams(parms);
+				//Picasso.with(this).load(new File(choosedList.get(i))).into(clothWaterPicture);
+				appInstance.getImageLoader().displayImage("file://" + choosedList.get(i), clothWaterPicture);
 				views.add(view);
 			}
 		}
-
-		viewPager.setAdapter(new MyViewPagerAdapter());
+		adapter = new MyViewPagerAdapter();
+		viewPager.setAdapter(adapter);
 		viewPager.setOnPageChangeListener(new MyOnPagerChangeListener());
 
 	}
@@ -160,7 +150,10 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 	private class MyPictureCallback implements PictureCallback {
 
 		@Override
-		public void onPictureTaken(byte[] data, Camera camera) {									
+		public void onPictureTaken(byte[] data, Camera camera) {
+			
+			adapter.notifyDataSetChanged();
+			
 			Bitmap viewBitmap = BitmapUtil.getBitmapFromView(views.get(waterType));
 			if(viewBitmap != null && surfaceH != 0f && surfaceW != 0f){
 				currentBeanData = new SavePictureBean(data , viewBitmap, surfaceW, surfaceH);
@@ -176,8 +169,10 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 				camera.startPreview();
 			}
 			
-			showToast("衣服图片保存在sd卡fashion/tryware文件夹中");	
+			showToast("衣服图片保存在sd卡fashion/tryware文件夹中");				
 		}
+		
+		
 	}
 
 	private class MySurfaceViewCallback implements Callback {
@@ -304,19 +299,18 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
-
+			Log.w(TAG, "onPageScrollStateChanged");
 		}
 
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
-
+			Log.w(TAG, "onPageScrolled");
 		}
 
 		@Override
 		public void onPageSelected(int arg0) {
 			waterType = arg0;
 		}
-
 	}
 	
 	public void showToast(final String detail){

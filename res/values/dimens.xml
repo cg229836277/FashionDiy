@@ -53,5 +53,6 @@
     <dimen name="title_height_42">42dp</dimen>
     <dimen name="style_height_36">36dp</dimen>
     <dimen name="display_cloth_size_64dp">28dp</dimen>
+    <dimen name="try_wear_cloth_margin_top">100dp</dimen>
 
 </resources>

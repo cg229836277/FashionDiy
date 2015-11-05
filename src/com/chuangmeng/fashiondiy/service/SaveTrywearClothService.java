@@ -32,7 +32,7 @@ public class SaveTrywearClothService extends IntentService {
 	private boolean isStart = false;
 	private File saveFileDir = new File(Constant.DIY_CLOTH_PICTURE_PATH);
 	
-	private FashionDiyApplication appInstance = FashionDiyApplication.getApplicationInstance();
+	private FashionDiyApplication appInstance;
 	
 	public SaveTrywearClothService() {
 		super("savePicture");
@@ -42,6 +42,7 @@ public class SaveTrywearClothService extends IntentService {
 	public void onCreate() {
 		super.onCreate();		
 		bitmapHolder = new JniBitmapHolder();
+		appInstance = FashionDiyApplication.getInstance();
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class SaveTrywearClothService extends IntentService {
 		}
 	}
 	
-	public void processBitmapAsync(final byte[] data) {					
+	public void processBitmapAsync(final byte[] data) {		
 		// 根据surfaceview的宽和高为标准获取到bitmap，作为照片的尺寸
 		Bitmap cameraBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 		

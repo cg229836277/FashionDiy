@@ -1,5 +1,6 @@
 package com.chuangmeng.fashiondiy.base;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,12 @@ import java.util.List;
 import com.chuangmeng.fashiondiy.CrashHandler;
 import com.chuangmeng.fashiondiy.util.IsListNotNull;
 import com.chuangmeng.fashiondiy.util.SavePictureBean;
+import com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import android.app.Application;
 import android.graphics.Bitmap;
@@ -31,6 +38,8 @@ public class FashionDiyApplication extends Application {
 	private ArrayList<Bitmap> bitmaplist;
 	
 	private SavePictureBean tryWearBeanData;
+	
+	ImageLoader imageLoader;	
 
 	@Override
 	public void onCreate() {
@@ -38,10 +47,30 @@ public class FashionDiyApplication extends Application {
 		instance = this;
 		CrashHandler crashHandler = CrashHandler.getInstance(); 
         crashHandler.init(getApplicationContext()); 
+        
+        initImageLoader();
 	}
 
-	public static FashionDiyApplication getApplicationInstance() {
-		return instance;
+	public static FashionDiyApplication getInstance() {
+		synchronized (instance) {
+			return instance;
+		}		
+	}
+	
+	private void initImageLoader(){
+		File cacheDir = StorageUtils.getOwnCacheDirectory(getBaseContext(), "fashiondiy/cache");
+		ImageLoaderConfiguration options = new ImageLoaderConfiguration.Builder(getBaseContext())
+		.memoryCacheSize(4 * 1024 * 1024)
+		//.imageDownloader(new BaseImageDownloader(getContext(),5 * 1000,30 * 1000))
+		.memoryCache(new LruMemoryCache(4 * 1024 * 1024))
+		.threadPoolSize(5)                         // default  
+		.threadPriority(Thread.NORM_PRIORITY - 1)   // default  
+		.tasksProcessingOrder(QueueProcessingType.FIFO) // default 
+		//.defaultDisplayImageOptions(displayOptions)
+		.diskCache(new LimitedAgeDiskCache(cacheDir , 7 * 24 * 60 * 60))
+		.build();
+		imageLoader = ImageLoader.getInstance();
+		imageLoader.init(options);
 	}
 
 	/**
@@ -122,5 +151,9 @@ public class FashionDiyApplication extends Application {
 
 	public void setTryWearBeanData(SavePictureBean tryWearBeanData) {
 		this.tryWearBeanData = tryWearBeanData;
+	}
+
+	public ImageLoader getImageLoader() {
+		return imageLoader;
 	}
 }

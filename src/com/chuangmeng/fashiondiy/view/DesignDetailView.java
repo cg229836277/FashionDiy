@@ -249,8 +249,7 @@ public class DesignDetailView extends RelativeLayout {
 	 */
 	public void setPaintingRegion(int selectPos, boolean boyOrGirl) {
 		int mode = 1;
-		DisplayMetrics screenSize = FashionDiyApplication
-				.getApplicationInstance().getScreenSize();
+		DisplayMetrics screenSize = FashionDiyApplication.getInstance().getScreenSize();
 //		ViewGroup.LayoutParams designDetailRl = design_detail_cloth_border_rl
 //				.getLayoutParams();
 		RelativeLayout.LayoutParams designDetailRl = (LayoutParams)design_detail_cloth_border_rl
