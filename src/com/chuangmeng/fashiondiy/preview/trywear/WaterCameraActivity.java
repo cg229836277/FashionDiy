@@ -1,5 +1,6 @@
 package com.chuangmeng.fashiondiy.preview.trywear;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.SavePictureBean;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.jni.bitmap.operations.JniBitmapHolder;
+import com.squareup.picasso.Picasso;
 
 public class WaterCameraActivity extends BaseFragmentActivity implements OnClickListener{
 
@@ -56,8 +58,6 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 	private boolean isSave = true;
 	
 	private boolean isDesignCloth = false;
-	
-	JniBitmapHolder bitmapHolder = new JniBitmapHolder();
 	
 	private SavePictureBean currentBeanData;
 	
@@ -105,8 +105,8 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 
 	private void preview_trywear_camear_camera_reset_iv() {
 		Intent intent = new Intent(this , DisplayDesignClothActivity.class);
-//		intent.setType("image/*");
-//		intent.setAction(Intent.ACTION_GET_CONTENT);
+		intent.setType("image/*");
+		intent.setAction(Intent.ACTION_GET_CONTENT);
 		startActivity(intent);
 	}
 
@@ -136,8 +136,8 @@ public class WaterCameraActivity extends BaseFragmentActivity implements OnClick
 			for (int i = 0; i < choosedList.size(); i++) {
 				View view = inflater.inflate(R.layout.preview_trywear_water_forward_camera, null);
 				ImageView clothWaterPicture = (ImageView) view.findViewById(R.id.two_photo);
-				//Picasso.with(this).load(new File(choosedList.get(i))).into(clothWaterPicture);
-				appInstance.getImageLoader().displayImage("file://" + choosedList.get(i), clothWaterPicture);
+				Picasso.with(this).load(new File(choosedList.get(i))).into(clothWaterPicture);
+				//appInstance.getImageLoader().displayImage("file://" + choosedList.get(i), clothWaterPicture);
 				views.add(view);
 			}
 		}

@@ -10,24 +10,20 @@ import com.chuangmeng.fashiondiy.util.CollectionUtil;
 import com.chuangmeng.fashiondiy.util.Constant;
 import com.chuangmeng.fashiondiy.util.ShareAppUtil;
 import com.chuangmeng.fashiondiy.util.StringUtil;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
-
+import com.squareup.picasso.Picasso;
 import de.greenrobot.event.EventBus;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -242,10 +238,10 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 	private void setDestviewSize(boolean isDesign){
 		if(isDesign){
 			destWidth = screenWidth / 2;
-			destHeight = screenHeight / 4;
+			destHeight = screenHeight / 5;
 		}else{
 			destWidth = screenWidth / 2;
-			destHeight = screenHeight / 3;
+			destHeight = screenHeight / 2;
 		}
 	}
 	
@@ -260,7 +256,11 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 		@SuppressLint("NewApi") 
 		public ShowClothAdapter(){
 			inflater = LayoutInflater.from(DisplayDesignClothActivity.this);
-			params = new LayoutParams((ViewGroup.MarginLayoutParams)(new LayoutParams(destWidth, destHeight)));			
+			params = new LayoutParams((ViewGroup.MarginLayoutParams)(new LayoutParams(screenWidth / 2, screenHeight / 2)));			
+			params.leftMargin = 4;
+			params.rightMargin = 4;
+			params.topMargin = 2;
+			params.bottomMargin = 2;
 		}
 		
 		public void setList(List<String> showList){
@@ -306,12 +306,7 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 				File tempFile = new File(fileTag);
 				if(tempFile.exists()){
 					showFirstImage.setTag(fileTag);
-					//Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showFirstImage);
-					//Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync(tempFile.getAbsolutePath(), new ImageSize(destWidth, destWidth));
-					Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync("file://" + tempFile.getAbsolutePath(), new ImageSize(destWidth, destHeight));
-					if(currentBitmap != null){
-						showFirstImage.setImageBitmap(currentBitmap);
-					}
+					Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showFirstImage);
 				}			
 			}else{
 				firstImageLayout.setVisibility(View.INVISIBLE);
@@ -321,11 +316,7 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 				File tempFile = new File(fileTag);
 				if(tempFile.exists()){
 					showSecondImage.setTag(fileTag);
-					//Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showSecondImage);			
-					Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync("file://" + tempFile.getAbsolutePath(), new ImageSize(destWidth, destHeight));
-					if(currentBitmap != null){
-						showSecondImage.setImageBitmap(currentBitmap);
-					}
+					Picasso.with(DisplayDesignClothActivity.this).load(tempFile).resize(destWidth, destWidth).into(showSecondImage);			
 				}
 			}else{
 				secondImageLayout.setVisibility(View.INVISIBLE);
@@ -349,11 +340,8 @@ public class DisplayDesignClothActivity extends BaseFragmentActivity implements 
 		}
 
 		parentView = (View) thumbView.getParent().getParent().getParent().getParent();		
-//		int resWid = (int)(screenMetric.widthPixels);
-//		int resHei = (int)(screenMetric.heightPixels * 0.9);
-		//BitmapUtil.loadLocalImage(this, expandedImageView, imageResPath, resWid, resHei);
-		//Picasso.with(this).load(new File(imageResPath)).into(expandedImageView);
-		appInstance.getImageLoader().displayImage("file://" + imageResPath, expandedImageView);
+		Picasso.with(this).load(new File(imageResPath)).into(expandedImageView);
+		//appInstance.getImageLoader().displayImage("file://" + imageResPath, expandedImageView);
 		// 开始略缩图的开始边界和放大视图的结束边界
 		final Rect startBounds = new Rect();
 		final Rect finalBounds = new Rect();

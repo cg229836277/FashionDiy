@@ -192,5 +192,9 @@ public class SaveTrywearClothService extends IntentService {
 	@Override
 	public void onDestroy() {		
 		super.onDestroy();
+		if(bitmapHolder != null){
+			bitmapHolder.freeBitmap();
+			bitmapHolder = null;
+		}
 	}
 }

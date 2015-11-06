@@ -44,7 +44,7 @@ import com.chuangmeng.fashiondiy.view.DesignDetailPagerAdapter;
 import com.chuangmeng.fashiondiy.view.HorizontalListView;
 import com.chuangmeng.fashiondiy.view.NOScrollViewPager;
 import com.chuangmeng.fashiondiy.view.RecyclingImageView;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.squareup.picasso.Picasso;
 
 /**
  * ClassName:DesignActivity Function: TODO ADD FUNCTION Reason: TODO ADD REASON
@@ -729,11 +729,7 @@ public class DesignActivity extends BaseFragmentActivity implements OnItemClickL
 			}
 
 			//BitmapUtil.loadResourceImage(DesignActivity.this , imageView,mSourceDrawable.get(position),imageWidth, imageHeight);
-			//Picasso.with(DesignActivity.this).load(mSourceDrawable.get(position)).resize(imageWidth, imageHeight).into(imageView);
-			Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync("drawable://" + mSourceDrawable.get(position), new ImageSize(imageWidth, imageHeight));
-			if(currentBitmap != null){
-				imageView.setImageBitmap(currentBitmap);
-			}
+			Picasso.with(DesignActivity.this).load(mSourceDrawable.get(position)).resize(imageWidth, imageHeight).into(imageView);
 			return imageView;
 		}
 

@@ -44,7 +44,8 @@ import com.chuangmeng.fashiondiy.util.IsListNotNull;
 import com.chuangmeng.fashiondiy.util.ShareAppUtil;
 import com.chuangmeng.fashiondiy.util.StringUtil;
 import com.chuangmeng.fashiondiy.view.flip.FlipViewController;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.squareup.picasso.Picasso;
+
 import de.greenrobot.event.EventBus;
 
 /**
@@ -354,11 +355,11 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity implements On
 						View parentView = (View)currentImageView.getParent();
 						parentView.setVisibility(View.VISIBLE);
 						
-						//Picasso.with(getApplicationContext()).load(new File(currentFilePath)).resize(resWidth, resHeight).into(currentImageView);
-						Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync("file://" + currentFilePath, new ImageSize(resWidth, resHeight));
-						if(currentBitmap != null){
-							currentImageView.setImageBitmap(currentBitmap);
-						}
+						Picasso.with(getApplicationContext()).load(new File(currentFilePath)).resize(resWidth, resHeight).into(currentImageView);
+//						Bitmap currentBitmap = appInstance.getImageLoader().loadImageSync("file://" + currentFilePath, new ImageSize(resWidth, resHeight));
+//						if(currentBitmap != null){
+//							currentImageView.setImageBitmap(currentBitmap);
+//						}
 						currentImageView.setTag(currentFilePath);
 						currentImageView.setOnTouchListener(DisplayGarderobeActivity.this);
 					}
@@ -420,8 +421,8 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity implements On
 //		int resWid = (int)(screenMetric.widthPixels);
 //		int resHei = (int)(screenMetric.heightPixels * 0.9);
 		//BitmapUtil.loadLocalImage(this, expandedImageView, imageResPath, resWid, resHei);
-		//Picasso.with(this).load(new File(imageResPath)).into(expandedImageView);
-		appInstance.getImageLoader().displayImage("file://" + imageResPath, expandedImageView);
+		Picasso.with(this).load(new File(imageResPath)).into(expandedImageView);
+//		appInstance.getImageLoader().displayImage("file://" + imageResPath, expandedImageView);
 		// 开始略缩图的开始边界和放大视图的结束边界
 		final Rect startBounds = new Rect();
 		final Rect finalBounds = new Rect();
