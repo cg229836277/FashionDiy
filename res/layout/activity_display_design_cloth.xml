@@ -40,33 +40,6 @@
             android:background="@drawable/design_title_menu_selected"
             android:scaleType="fitCenter" />
     </LinearLayout>
-<!-- android:background="@drawable/preview_bottom_share_selected" 
-    <LinearLayout android:id="@+id/choose_show_picture_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/show_design_cloth_btn"
-            style="@style/ButtonTextStyle"
-            android:layout_width="0dp"
-            android:background="@drawable/design_title_middle_pressed"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:layout_margin="2dp"
-            android:text="我的设计" />
-
-        <Button
-            android:id="@+id/show_trywear_cloth_btn"
-            style="@style/ButtonTextStyle"
-            android:layout_width="0dp"
-            android:background="@drawable/design_title_middle_pressed"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:layout_margin="2dp"
-            android:text="我的试穿" />
-    </LinearLayout>   -->
 
     <ListView
         android:id="@+id/show_design_cloth"
