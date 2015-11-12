@@ -2,6 +2,9 @@ package com.chuangmeng.fashiondiy;
 
 import com.chuangmeng.fashiondiy.base.BaseFragmentActivity;
 import com.chuangmeng.fashiondiy.design.DesignActivity_;
+import com.chuangmeng.fashiondiy.login.UserLoginActivity_;
+import com.chuangmeng.fashiondiy.login.UserRegistActivity;
+import com.chuangmeng.fashiondiy.login.UserRegistActivity_;
 import com.chuangmeng.fashiondiy.util.Constant;
 import android.content.Intent;
 import android.view.ViewGroup;
@@ -107,7 +110,8 @@ public class HomeActivity extends BaseFragmentActivity {
 	 */
 	@Click
 	void view_home_help_iv() {
-
+		Intent intent = new Intent(this , UserLoginActivity_.class);
+		startActivity(intent);
 	}
 
 	/**

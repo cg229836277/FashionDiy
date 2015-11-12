@@ -1,6 +1,8 @@
 package com.chuangmeng.fashiondiy.base;
 
 import java.util.ArrayList;
+
+import com.avos.avoscloud.AVOSCloud;
 import com.chuangmeng.fashiondiy.CrashHandler;
 import com.chuangmeng.fashiondiy.util.IsListNotNull;
 import com.chuangmeng.fashiondiy.util.SavePictureBean;
@@ -32,6 +34,9 @@ public class FashionDiyApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		instance = this;
+		
+		AVOSCloud.initialize(this, "EMWVMF6YrlQlPmb0n6SbvSNA", "ysR3rMpC1gKj3ycEWdebL3cT");
+		
 		CrashHandler crashHandler = CrashHandler.getInstance(); 
         crashHandler.init(getApplicationContext()); 
 	}

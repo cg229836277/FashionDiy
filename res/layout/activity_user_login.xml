@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/user_name_parent_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/login_user_name"
+            style="@style/ButtonTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:text="用户名:" />
+
+        <EditText
+            android:id="@+id/login_user_name_input"
+            style="@style/ButtonTextStyleBlack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/user_passwd_parent_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_name_parent_view"
+        android:layout_margin="16dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/login_user_passwd"
+            style="@style/ButtonTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:text="密    码:" />
+
+        <EditText
+            android:id="@+id/login_user_passwd_input"
+            style="@style/ButtonTextStyleBlack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login_start_login_btn"
+        style="@style/ButtonTextStyleBlack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/user_passwd_parent_view"
+        android:layout_alignRight="@id/user_passwd_parent_view"
+        android:layout_below="@id/user_passwd_parent_view"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="登    陆" />
+
+    <Button
+        android:id="@+id/login_meet_error"
+        style="@style/ButtonTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/login_start_login_btn"
+        android:layout_below="@id/login_start_login_btn"
+        android:layout_marginTop="12dp"
+        android:background="@null"
+        android:text="登陆遇到问题？"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/login_regist_first"
+        style="@style/ButtonTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/login_start_login_btn"
+        android:layout_below="@id/login_start_login_btn"
+        android:layout_marginTop="12dp"
+        android:background="@null"
+        android:text="注册"
+        android:textSize="12sp" />
+
+</RelativeLayout>
