@@ -72,27 +72,12 @@ public final class UserRegistActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        user_regist_password_et = ((EditText) hasViews.findViewById(id.user_regist_password_et));
         user_regist_username_et = ((EditText) hasViews.findViewById(id.user_regist_username_et));
-        user_regist_phonenum_et = ((EditText) hasViews.findViewById(id.user_regist_phonenum_et));
-        user_regist_validatedcode_et = ((EditText) hasViews.findViewById(id.user_regist_validatedcode_et));
         user_regist_get_validatedcode_bt = ((Button) hasViews.findViewById(id.user_regist_get_validatedcode_bt));
         user_regist_regist_bt = ((Button) hasViews.findViewById(id.user_regist_regist_bt));
-        {
-            View view = hasViews.findViewById(id.user_regist_regist_bt);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        UserRegistActivity_.this.user_regist_regist_bt();
-                    }
-
-                }
-                );
-            }
-        }
+        user_regist_password_et = ((EditText) hasViews.findViewById(id.user_regist_password_et));
+        user_regist_validatedcode_et = ((EditText) hasViews.findViewById(id.user_regist_validatedcode_et));
+        user_regist_phonenum_et = ((EditText) hasViews.findViewById(id.user_regist_phonenum_et));
         {
             View view = hasViews.findViewById(id.user_regist_get_validatedcode_bt);
             if (view!= null) {
@@ -102,6 +87,21 @@ public final class UserRegistActivity_
                     @Override
                     public void onClick(View view) {
                         UserRegistActivity_.this.user_regist_get_validatedcode_bt();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.user_regist_regist_bt);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        UserRegistActivity_.this.user_regist_regist_bt();
                     }
 
                 }

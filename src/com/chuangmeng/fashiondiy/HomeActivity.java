@@ -58,7 +58,7 @@ public class HomeActivity extends BaseFragmentActivity {
 		intent.putExtra(Constant.STYLE, Constant.COUPLE_STYLE);
 		startActivity(intent);
 	}
-
+ 
 	/**
 	 * 男装入口
 	 * 

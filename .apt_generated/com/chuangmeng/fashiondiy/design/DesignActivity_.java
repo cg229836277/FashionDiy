@@ -85,77 +85,32 @@ public final class DesignActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        design_take_select_photo_rl = ((LinearLayout) hasViews.findViewById(id.design_take_select_photo_rl));
         design_cloth_child_title = ((LinearLayout) hasViews.findViewById(id.design_cloth_child_title));
         design_bottom_operate_hide_iv = ((ImageView) hasViews.findViewById(id.design_bottom_operate_hide_iv));
         design_couple_title_female_back_iv = ((Button) hasViews.findViewById(id.design_couple_title_female_back_iv));
-        design_title_couple_include = ((LinearLayout) hasViews.findViewById(id.design_title_couple_include));
-        design_model_operate_text_color_listview = ((HorizontalListView) hasViews.findViewById(id.design_model_operate_text_color_listview));
-        design_cloth_detail_viewpager = ((NOScrollViewPager) hasViews.findViewById(id.design_cloth_detail_viewpager));
+        design_bottom_detail_ll = ((LinearLayout) hasViews.findViewById(id.design_bottom_detail_ll));
+        design_bottom_word_iv = ((ImageView) hasViews.findViewById(id.design_bottom_word_iv));
         design_couple_title_male_back_iv = ((Button) hasViews.findViewById(id.design_couple_title_male_back_iv));
-        design_title_preview_iv = ((Button) hasViews.findViewById(id.design_title_preview_iv));
+        design_title_couple_include = ((LinearLayout) hasViews.findViewById(id.design_title_couple_include));
+        design_couple_title_male_front_iv = ((Button) hasViews.findViewById(id.design_couple_title_male_front_iv));
         design_couple_title_back_iv = ((Button) hasViews.findViewById(id.design_couple_title_back_iv));
         design_bottom_pattern_iv = ((ImageView) hasViews.findViewById(id.design_bottom_pattern_iv));
         design_couple_title_female_front_iv = ((Button) hasViews.findViewById(id.design_couple_title_female_front_iv));
-        design_bottom_camera_iv = ((ImageView) hasViews.findViewById(id.design_bottom_camera_iv));
-        design_couple_title_male_front_iv = ((Button) hasViews.findViewById(id.design_couple_title_male_front_iv));
-        design_bottom_detail_ll = ((LinearLayout) hasViews.findViewById(id.design_bottom_detail_ll));
+        design_cloth_detail_viewpager = ((NOScrollViewPager) hasViews.findViewById(id.design_cloth_detail_viewpager));
+        design_title_preview_iv = ((Button) hasViews.findViewById(id.design_title_preview_iv));
+        design_model_operate_text_color_listview = ((HorizontalListView) hasViews.findViewById(id.design_model_operate_text_color_listview));
         design_bottom_model_iv = ((ImageView) hasViews.findViewById(id.design_bottom_model_iv));
-        design_bottom_word_iv = ((ImageView) hasViews.findViewById(id.design_bottom_word_iv));
+        design_bottom_camera_iv = ((ImageView) hasViews.findViewById(id.design_bottom_camera_iv));
+        design_take_select_photo_rl = ((LinearLayout) hasViews.findViewById(id.design_take_select_photo_rl));
         {
-            View view = hasViews.findViewById(id.design_couple_title_male_back_iv);
+            View view = hasViews.findViewById(id.design_title_backward_iv);
             if (view!= null) {
                 view.setOnClickListener(new OnClickListener() {
 
 
                     @Override
                     public void onClick(View view) {
-                        DesignActivity_.this.design_couple_title_male_back_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_couple_title_female_front_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        DesignActivity_.this.design_couple_title_female_front_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_couple_title_female_back_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        DesignActivity_.this.design_couple_title_female_back_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_couple_title_male_front_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        DesignActivity_.this.design_couple_title_male_front_iv();
+                        DesignActivity_.this.design_title_backward_iv();
                     }
 
                 }
@@ -208,14 +163,14 @@ public final class DesignActivity_
             }
         }
         {
-            View view = hasViews.findViewById(id.design_title_preview_iv);
+            View view = hasViews.findViewById(id.design_bottom_background_iv);
             if (view!= null) {
                 view.setOnClickListener(new OnClickListener() {
 
 
                     @Override
                     public void onClick(View view) {
-                        DesignActivity_.this.design_title_preview_iv();
+                        DesignActivity_.this.design_bottom_background_iv();
                     }
 
                 }
@@ -223,89 +178,14 @@ public final class DesignActivity_
             }
         }
         {
-            View view = hasViews.findViewById(id.design_title_backward_iv);
+            View view = hasViews.findViewById(id.design_couple_title_male_back_iv);
             if (view!= null) {
                 view.setOnClickListener(new OnClickListener() {
 
 
                     @Override
                     public void onClick(View view) {
-                        DesignActivity_.this.design_title_backward_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_bottom_camera_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        DesignActivity_.this.design_bottom_camera_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_title_forward_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        DesignActivity_.this.design_title_forward_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_take_photo_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        DesignActivity_.this.design_take_photo_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_select_local_photo_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        DesignActivity_.this.design_select_local_photo_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_bottom_word_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        DesignActivity_.this.design_bottom_word_iv();
+                        DesignActivity_.this.design_couple_title_male_back_iv();
                     }
 
                 }
@@ -321,21 +201,6 @@ public final class DesignActivity_
                     @Override
                     public void onClick(View view) {
                         DesignActivity_.this.design_title_back_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_bottom_background_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        DesignActivity_.this.design_bottom_background_iv();
                     }
 
                 }
@@ -366,6 +231,141 @@ public final class DesignActivity_
                     @Override
                     public void onClick(View view) {
                         DesignActivity_.this.design_bottom_pattern_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_couple_title_female_front_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        DesignActivity_.this.design_couple_title_female_front_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_bottom_word_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        DesignActivity_.this.design_bottom_word_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_select_local_photo_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        DesignActivity_.this.design_select_local_photo_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_title_forward_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        DesignActivity_.this.design_title_forward_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_title_preview_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        DesignActivity_.this.design_title_preview_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_couple_title_female_back_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        DesignActivity_.this.design_couple_title_female_back_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_bottom_camera_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        DesignActivity_.this.design_bottom_camera_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_take_photo_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        DesignActivity_.this.design_take_photo_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_couple_title_male_front_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        DesignActivity_.this.design_couple_title_male_front_iv();
                     }
 
                 }

@@ -83,19 +83,19 @@ public final class ToBuyActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        design_buy_cloth_no_xxxl_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_xxxl_bt));
-        design_buy_cloth_no_xl_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_xl_bt));
+        design_buy_cloth_no_xxl_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_xxl_bt));
         design_buy_cloth_ok_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_ok_bt));
-        design_buy_cloth_money_tv = ((TextView) hasViews.findViewById(id.design_buy_cloth_money_tv));
-        design_buy_cloth_num_add_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_num_add_bt));
         design_buy_cloth_num_tv = ((TextView) hasViews.findViewById(id.design_buy_cloth_num_tv));
-        design_preview_buy_show_cfi = ((CircleFlowIndicator) hasViews.findViewById(id.design_preview_buy_show_cfi));
         design_buy_cloth_no_l_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_l_bt));
+        design_buy_cloth_no_xl_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_xl_bt));
+        design_buy_cloth_no_m_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_m_bt));
+        design_buy_cloth_no_xxxl_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_xxxl_bt));
+        design_buy_cloth_money_tv = ((TextView) hasViews.findViewById(id.design_buy_cloth_money_tv));
+        design_buy_cloth_no_s_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_s_bt));
+        design_preview_buy_show_cfi = ((CircleFlowIndicator) hasViews.findViewById(id.design_preview_buy_show_cfi));
         design_preview_buy_show_vf = ((ViewFlow) hasViews.findViewById(id.design_preview_buy_show_vf));
         design_buy_cloth_num_sub_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_num_sub_bt));
-        design_buy_cloth_no_s_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_s_bt));
-        design_buy_cloth_no_m_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_m_bt));
-        design_buy_cloth_no_xxl_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_no_xxl_bt));
+        design_buy_cloth_num_add_bt = ((Button) hasViews.findViewById(id.design_buy_cloth_num_add_bt));
         initData();
     }
 

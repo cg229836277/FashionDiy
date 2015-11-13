@@ -677,20 +677,41 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_menu_normal=0x7f02018c;
         public static final int title_menu_pressed=0x7f02018d;
         public static final int toast=0x7f02018e;
-        public static final int view_home_about_us_normal=0x7f02018f;
-        public static final int view_home_about_us_pressed=0x7f020190;
-        public static final int view_home_all_diy_normal=0x7f020191;
-        public static final int view_home_background=0x7f020192;
-        public static final int view_home_clothespress_normal=0x7f020193;
-        public static final int view_home_couple_normal=0x7f020194;
-        public static final int view_home_female_normal=0x7f020195;
-        public static final int view_home_help_normal=0x7f020196;
-        public static final int view_home_help_pressed=0x7f020197;
-        public static final int view_home_line=0x7f020198;
-        public static final int view_home_male_normal=0x7f020199;
-        public static final int welcome_icon=0x7f02019a;
-        public static final int zebra_ic_album=0x7f02019b;
-        public static final int zebra_ic_bt_normal=0x7f02019c;
+        public static final int umeng_update_btn_check_off_focused_holo_light=0x7f02018f;
+        public static final int umeng_update_btn_check_off_holo_light=0x7f020190;
+        public static final int umeng_update_btn_check_off_pressed_holo_light=0x7f020191;
+        public static final int umeng_update_btn_check_on_focused_holo_light=0x7f020192;
+        public static final int umeng_update_btn_check_on_holo_light=0x7f020193;
+        public static final int umeng_update_btn_check_on_pressed_holo_light=0x7f020194;
+        public static final int umeng_update_button_cancel_bg_focused=0x7f020195;
+        public static final int umeng_update_button_cancel_bg_normal=0x7f020196;
+        public static final int umeng_update_button_cancel_bg_selector=0x7f020197;
+        public static final int umeng_update_button_cancel_bg_tap=0x7f020198;
+        public static final int umeng_update_button_check_selector=0x7f020199;
+        public static final int umeng_update_button_close_bg_selector=0x7f02019a;
+        public static final int umeng_update_button_ok_bg_focused=0x7f02019b;
+        public static final int umeng_update_button_ok_bg_normal=0x7f02019c;
+        public static final int umeng_update_button_ok_bg_selector=0x7f02019d;
+        public static final int umeng_update_button_ok_bg_tap=0x7f02019e;
+        public static final int umeng_update_close_bg_normal=0x7f02019f;
+        public static final int umeng_update_close_bg_tap=0x7f0201a0;
+        public static final int umeng_update_dialog_bg=0x7f0201a1;
+        public static final int umeng_update_title_bg=0x7f0201a2;
+        public static final int umeng_update_wifi_disable=0x7f0201a3;
+        public static final int view_home_about_us_normal=0x7f0201a4;
+        public static final int view_home_about_us_pressed=0x7f0201a5;
+        public static final int view_home_all_diy_normal=0x7f0201a6;
+        public static final int view_home_background=0x7f0201a7;
+        public static final int view_home_clothespress_normal=0x7f0201a8;
+        public static final int view_home_couple_normal=0x7f0201a9;
+        public static final int view_home_female_normal=0x7f0201aa;
+        public static final int view_home_help_normal=0x7f0201ab;
+        public static final int view_home_help_pressed=0x7f0201ac;
+        public static final int view_home_line=0x7f0201ad;
+        public static final int view_home_male_normal=0x7f0201ae;
+        public static final int welcome_icon=0x7f0201af;
+        public static final int zebra_ic_album=0x7f0201b0;
+        public static final int zebra_ic_bt_normal=0x7f0201b1;
     }
     public static final class id {
         public static final int ARGB_4444=0x7f060006;
@@ -844,6 +865,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int toast_dialog_content=0x7f0600ae;
         public static final int toast_dialog_parent=0x7f0600ad;
         public static final int two_photo=0x7f0600b4;
+        public static final int umeng_update_content=0x7f0600b7;
+        public static final int umeng_update_id_cancel=0x7f0600ba;
+        public static final int umeng_update_id_check=0x7f0600b8;
+        public static final int umeng_update_id_close=0x7f0600b6;
+        public static final int umeng_update_id_ignore=0x7f0600bb;
+        public static final int umeng_update_id_ok=0x7f0600b9;
+        public static final int umeng_update_wifi_indicator=0x7f0600b5;
         public static final int user_name_parent_view=0x7f060090;
         public static final int user_passwd_parent_view=0x7f060093;
         public static final int user_regist_get_validatedcode_bt=0x7f06009c;
@@ -923,6 +951,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int item_text_type_item=0x7f03002c;
         public static final int preview_trywear_water_behind_camera=0x7f03002d;
         public static final int preview_trywear_water_forward_camera=0x7f03002e;
+        public static final int umeng_update_dialog=0x7f03002f;
     }
     public static final class raw {
         public static final int design_model_butterfly=0x7f050000;
@@ -961,6 +990,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int design_model_wifi=0x7f050021;
     }
     public static final class string {
+        public static final int UMAppUpdate=0x7f090015;
+        public static final int UMBreak_Network=0x7f09000d;
+        public static final int UMDialog_InstallAPK=0x7f090019;
+        public static final int UMGprsCondition=0x7f090013;
+        public static final int UMIgnore=0x7f090017;
+        public static final int UMNewVersion=0x7f09000f;
+        public static final int UMNotNow=0x7f090016;
+        public static final int UMTargetSize=0x7f090012;
+        public static final int UMToast_IsUpdating=0x7f090018;
+        public static final int UMUpdateContent=0x7f090010;
+        public static final int UMUpdateNow=0x7f090014;
+        public static final int UMUpdateSize=0x7f090011;
+        public static final int UMUpdateTitle=0x7f09000e;
         public static final int action_settings=0x7f09000c;
         public static final int app_name=0x7f090000;
         public static final int back=0x7f090007;

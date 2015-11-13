@@ -81,13 +81,13 @@ public final class HomeActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        view_home_all_diy_iv = ((ImageView) hasViews.findViewById(id.view_home_all_diy_iv));
-        view_home_male_iv = ((ImageView) hasViews.findViewById(id.view_home_male_iv));
         view_home_female_iv = ((ImageView) hasViews.findViewById(id.view_home_female_iv));
-        view_home_clothespress_iv = ((ImageView) hasViews.findViewById(id.view_home_clothespress_iv));
-        view_home_couple_iv = ((ImageView) hasViews.findViewById(id.view_home_couple_iv));
-        view_home_about_us_iv = ((ImageView) hasViews.findViewById(id.view_home_about_us_iv));
         view_home_help_iv = ((ImageView) hasViews.findViewById(id.view_home_help_iv));
+        view_home_couple_iv = ((ImageView) hasViews.findViewById(id.view_home_couple_iv));
+        view_home_male_iv = ((ImageView) hasViews.findViewById(id.view_home_male_iv));
+        view_home_about_us_iv = ((ImageView) hasViews.findViewById(id.view_home_about_us_iv));
+        view_home_all_diy_iv = ((ImageView) hasViews.findViewById(id.view_home_all_diy_iv));
+        view_home_clothespress_iv = ((ImageView) hasViews.findViewById(id.view_home_clothespress_iv));
         {
             View view = hasViews.findViewById(id.view_home_clothespress_iv);
             if (view!= null) {
@@ -97,36 +97,6 @@ public final class HomeActivity_
                     @Override
                     public void onClick(View view) {
                         HomeActivity_.this.view_home_clothespress_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.view_home_about_us_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        HomeActivity_.this.view_home_about_us_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.view_home_couple_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        HomeActivity_.this.view_home_couple_iv();
                     }
 
                 }
@@ -149,6 +119,21 @@ public final class HomeActivity_
             }
         }
         {
+            View view = hasViews.findViewById(id.view_home_couple_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        HomeActivity_.this.view_home_couple_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
             View view = hasViews.findViewById(id.view_home_male_iv);
             if (view!= null) {
                 view.setOnClickListener(new OnClickListener() {
@@ -157,6 +142,21 @@ public final class HomeActivity_
                     @Override
                     public void onClick(View view) {
                         HomeActivity_.this.view_home_male_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.view_home_about_us_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        HomeActivity_.this.view_home_about_us_iv();
                     }
 
                 }
