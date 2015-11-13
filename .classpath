@@ -10,14 +10,5 @@
 	</classpathentry>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry exported="true" kind="lib" path="E:/android-workspace/DIY-master/Android/Mydream/trunk/libs/androidannotations-api-3.0.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/android-workspace/DIY-master/Android/Mydream/trunk/libs/android-support-v4.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/android-workspace/DIY-master/Android/Mydream/trunk/libs/avoscloud-sdk-v3.10.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/android-workspace/DIY-master/Android/Mydream/trunk/libs/avoscloud-statistics-v3.10.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/android-workspace/DIY-master/Android/Mydream/trunk/libs/eventbus-2.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/android-workspace/DIY-master/Android/Mydream/trunk/libs/jnibitmapoperatelib.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/android-workspace/DIY-master/Android/Mydream/trunk/libs/okhttp-2.5.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/android-workspace/DIY-master/Android/Mydream/trunk/libs/okio-1.6.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/android-workspace/DIY-master/Android/Mydream/trunk/libs/picasso-2.5.2.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

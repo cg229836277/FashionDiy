@@ -40,16 +40,6 @@ import com.chuangmeng.fashiondiy.view.PreviewDetailPagerAdapter;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.media.QQShareContent;
-import com.umeng.socialize.media.QZoneShareContent;
-import com.umeng.socialize.media.SmsShareContent;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.sso.QZoneSsoHandler;
-import com.umeng.socialize.sso.SmsHandler;
-import com.umeng.socialize.sso.UMQQSsoHandler;
-import com.umeng.socialize.weixin.controller.UMWXHandler;
-import com.umeng.socialize.weixin.media.CircleShareContent;
-import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
 /**
  * ClassName:PreViewActivity Function: TODO ADD FUNCTION Reason: TODO ADD REASON
