@@ -151,7 +151,22 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.chuangmeng.fashiondiy.forum.ForumActivity"
+            android:name="com.chuangmeng.fashiondiy.home.EntryActivity_"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.chuangmeng.fashiondiy.my.UserActivity_"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.chuangmeng.fashiondiy.forum.ForumActivity_"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.chuangmeng.fashiondiy.setting.SettingActivity_"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>

@@ -72,11 +72,26 @@ public final class UserLoginActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        login_user_name_input = ((EditText) hasViews.findViewById(id.login_user_name_input));
-        login_regist_first = ((Button) hasViews.findViewById(id.login_regist_first));
+        login_user_passwd_input = ((EditText) hasViews.findViewById(id.login_user_passwd_input));
         login_start_login_btn = ((Button) hasViews.findViewById(id.login_start_login_btn));
         login_meet_error = ((Button) hasViews.findViewById(id.login_meet_error));
-        login_user_passwd_input = ((EditText) hasViews.findViewById(id.login_user_passwd_input));
+        login_user_name_input = ((EditText) hasViews.findViewById(id.login_user_name_input));
+        login_regist_first = ((Button) hasViews.findViewById(id.login_regist_first));
+        {
+            View view = hasViews.findViewById(id.login_regist_first);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        UserLoginActivity_.this.login_regist_first();
+                    }
+
+                }
+                );
+            }
+        }
         {
             View view = hasViews.findViewById(id.login_start_login_btn);
             if (view!= null) {
@@ -101,21 +116,6 @@ public final class UserLoginActivity_
                     @Override
                     public void onClick(View view) {
                         UserLoginActivity_.this.login_meet_error();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.login_regist_first);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        UserLoginActivity_.this.login_regist_first();
                     }
 
                 }

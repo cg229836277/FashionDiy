@@ -84,120 +84,30 @@ public final class PreViewActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        design_couple_title_male_front_iv = ((Button) hasViews.findViewById(id.design_couple_title_male_front_iv));
-        design_couple_title_female_front_iv = ((Button) hasViews.findViewById(id.design_couple_title_female_front_iv));
-        design_cloth_direction_rl = ((LinearLayout) hasViews.findViewById(id.design_cloth_direction_rl));
-        design_couple_title_female_back_iv = ((Button) hasViews.findViewById(id.design_couple_title_female_back_iv));
+        preview_cloth_detail_viewpager = ((ViewPager) hasViews.findViewById(id.preview_cloth_detail_viewpager));
+        design_title_forward_iv = ((Button) hasViews.findViewById(id.design_title_forward_iv));
+        design_couple_title_male_back_iv = ((Button) hasViews.findViewById(id.design_couple_title_male_back_iv));
+        design_couple_cloth_direction_rl = ((LinearLayout) hasViews.findViewById(id.design_couple_cloth_direction_rl));
         preview_title_back_iv = ((Button) hasViews.findViewById(id.preview_title_back_iv));
-        preview_to_clothset = ((Button) hasViews.findViewById(id.preview_to_clothset));
+        design_couple_title_male_front_iv = ((Button) hasViews.findViewById(id.design_couple_title_male_front_iv));
         preview_bottom_save_iv = ((ImageView) hasViews.findViewById(id.preview_bottom_save_iv));
         preview_bottom_detail_ll = ((LinearLayout) hasViews.findViewById(id.preview_bottom_detail_ll));
-        preview_cloth_detail_viewpager = ((ViewPager) hasViews.findViewById(id.preview_cloth_detail_viewpager));
-        design_couple_title_male_back_iv = ((Button) hasViews.findViewById(id.design_couple_title_male_back_iv));
-        design_title_backward_iv = ((Button) hasViews.findViewById(id.design_title_backward_iv));
-        design_couple_cloth_direction_rl = ((LinearLayout) hasViews.findViewById(id.design_couple_cloth_direction_rl));
-        preview_bottom_buy_iv = ((ImageView) hasViews.findViewById(id.preview_bottom_buy_iv));
-        design_title_forward_iv = ((Button) hasViews.findViewById(id.design_title_forward_iv));
+        design_couple_title_female_back_iv = ((Button) hasViews.findViewById(id.design_couple_title_female_back_iv));
         preview_bottom_try_iv = ((ImageView) hasViews.findViewById(id.preview_bottom_try_iv));
+        design_couple_title_female_front_iv = ((Button) hasViews.findViewById(id.design_couple_title_female_front_iv));
+        preview_to_clothset = ((Button) hasViews.findViewById(id.preview_to_clothset));
+        design_cloth_direction_rl = ((LinearLayout) hasViews.findViewById(id.design_cloth_direction_rl));
+        design_title_backward_iv = ((Button) hasViews.findViewById(id.design_title_backward_iv));
+        preview_bottom_buy_iv = ((ImageView) hasViews.findViewById(id.preview_bottom_buy_iv));
         {
-            View view = hasViews.findViewById(id.design_title_forward_iv);
+            View view = hasViews.findViewById(id.design_couple_title_female_front_iv);
             if (view!= null) {
                 view.setOnClickListener(new OnClickListener() {
 
 
                     @Override
                     public void onClick(View view) {
-                        PreViewActivity_.this.design_title_forward_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.preview_to_clothset);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        PreViewActivity_.this.preview_to_clothset();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.preview_bottom_buy_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        PreViewActivity_.this.preview_bottom_buy_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.preview_title_back_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        PreViewActivity_.this.preview_title_back_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_couple_title_male_front_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        PreViewActivity_.this.design_couple_title_male_front_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.preview_bottom_save_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        PreViewActivity_.this.preview_bottom_save_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.design_title_backward_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        PreViewActivity_.this.design_title_backward_iv();
+                        PreViewActivity_.this.design_couple_title_female_front_iv();
                     }
 
                 }
@@ -220,21 +130,6 @@ public final class PreViewActivity_
             }
         }
         {
-            View view = hasViews.findViewById(id.design_couple_title_female_front_iv);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        PreViewActivity_.this.design_couple_title_female_front_iv();
-                    }
-
-                }
-                );
-            }
-        }
-        {
             View view = hasViews.findViewById(id.design_couple_title_male_back_iv);
             if (view!= null) {
                 view.setOnClickListener(new OnClickListener() {
@@ -250,6 +145,51 @@ public final class PreViewActivity_
             }
         }
         {
+            View view = hasViews.findViewById(id.preview_bottom_save_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        PreViewActivity_.this.preview_bottom_save_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_title_forward_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        PreViewActivity_.this.design_title_forward_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_couple_title_male_front_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        PreViewActivity_.this.design_couple_title_male_front_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
             View view = hasViews.findViewById(id.preview_bottom_try_iv);
             if (view!= null) {
                 view.setOnClickListener(new OnClickListener() {
@@ -258,6 +198,66 @@ public final class PreViewActivity_
                     @Override
                     public void onClick(View view) {
                         PreViewActivity_.this.preview_bottom_try_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.preview_to_clothset);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        PreViewActivity_.this.preview_to_clothset();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.preview_title_back_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        PreViewActivity_.this.preview_title_back_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.design_title_backward_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        PreViewActivity_.this.design_title_backward_iv();
+                    }
+
+                }
+                );
+            }
+        }
+        {
+            View view = hasViews.findViewById(id.preview_bottom_buy_iv);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        PreViewActivity_.this.preview_bottom_buy_iv();
                     }
 
                 }
