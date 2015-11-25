@@ -204,11 +204,12 @@ public class DisplayGarderobeActivity extends BaseFragmentActivity implements On
 			
 			@Override
 			public void onClick(View v) {
-				if(choosedClothPathArray.size() <= 0){
-					Toast.makeText(DisplayGarderobeActivity.this,"请先选择图片！",Toast.LENGTH_LONG).show();
-				}else{
-					shareAppUtil.shareAppForManyImage(choosedClothPathArray);
-				}
+//				if(choosedClothPathArray.size() <= 0){
+//					Toast.makeText(DisplayGarderobeActivity.this,"请先选择图片！",Toast.LENGTH_LONG).show();
+//				}else{
+//					shareAppUtil.shareAppForManyImage(choosedClothPathArray);
+//				}
+				shareAppUtil.shareAppForText("qqqqqqqqqqqqqq");
 			}
 		});
 

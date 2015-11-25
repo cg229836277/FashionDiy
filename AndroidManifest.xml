@@ -102,6 +102,11 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
+         <activity
+            android:name=".design.DesignSelectActivity_"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
         <activity
             android:name=".guide.GuideActivity"
             android:screenOrientation="portrait"
