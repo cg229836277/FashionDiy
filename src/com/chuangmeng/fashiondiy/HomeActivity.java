@@ -6,8 +6,15 @@ import com.chuangmeng.fashiondiy.login.UserLoginActivity_;
 import com.chuangmeng.fashiondiy.login.UserRegistActivity;
 import com.chuangmeng.fashiondiy.login.UserRegistActivity_;
 import com.chuangmeng.fashiondiy.util.Constant;
+import com.chuangmeng.fashiondiy.viewmanager.SystemBarTintManager;
+
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import org.androidannotations.annotations.AfterViews;
@@ -42,8 +49,32 @@ public class HomeActivity extends BaseFragmentActivity {
 	private TranslateAnimation dragMoveAnimation;
 	
 	@AfterViews
-	void initView() {						
+	void initView() {	
+		initSystemBar(this);
 		adjustTitleViewForScreen();
+	}
+	
+	public static void initSystemBar(Activity activity) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			setTranslucentStatus(activity, true);
+		}
+		SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+		tintManager.setStatusBarTintEnabled(true);
+		// 使用颜色资源
+		tintManager.setStatusBarTintResource(R.color.toolbar_color);
+	}
+
+	@TargetApi(19)
+	private static void setTranslucentStatus(Activity activity, boolean on) {
+		Window win = activity.getWindow();
+		WindowManager.LayoutParams winParams = win.getAttributes();
+		final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+		if (on) {
+			winParams.flags |= bits;
+		} else {
+			winParams.flags &= ~bits;
+		}
+		win.setAttributes(winParams);
 	}
 
 	/**
